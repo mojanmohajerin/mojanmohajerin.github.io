@@ -1,5 +1,10 @@
+import { Box } from "@mui/material";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+
+import { Footer } from "@/home/footer";
+import { Header } from "@/home/header";
+import { colors } from "@/styles/colors";
 import "../styles/globals.css";
 
 const geistSans = Geist({
@@ -25,7 +30,17 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        {children}
+        <Header />
+        <Box
+          sx={{
+            backgroundColor: colors.base.dark,
+            color: colors.chalk,
+            padding: "5rem",
+          }}
+        >
+          {children}
+        </Box>
+        <Footer />
       </body>
     </html>
   );

@@ -1,10 +1,11 @@
-import { Box, Stack, Typography } from "@mui/material";
+import { Stack, Typography } from "@mui/material";
 import Image from "next/image";
+import Link from "next/link";
 
+import { NavLink } from "@/components/nav-link";
+import { paths } from "@/paths";
 import { colors } from "@/styles/colors";
 import cartoonImage from "../assets/cartoon-image.png";
-import { NavLink } from "@/components/nav-link";
-import Link from "next/link";
 
 export const Header = () => {
   const cartoonImageSize = 100;
@@ -21,7 +22,7 @@ export const Header = () => {
         paddingY: "1rem",
       }}
     >
-      <Link href="/">
+      <Link href={paths.home}>
         <Stack
           direction="row"
           spacing={4}
@@ -39,7 +40,7 @@ export const Header = () => {
             }}
           />
           <Typography variant="h4" sx={{ color: colors.chalk }}>
-            My Website
+            Mojan Mohajerin
           </Typography>
         </Stack>
       </Link>
@@ -49,10 +50,11 @@ export const Header = () => {
         justifyContent="center"
         alignItems="center"
       >
-        <NavLink title="Home" href="/" />
-        <NavLink title="Experience" href="/" />
-        <NavLink title="Projects" href="/" />
-        <NavLink title="Photo Gallery" href="/" />
+        <NavLink title="Home" href={paths.home} />
+        <NavLink title="Experience" href={paths.experience} />
+        <NavLink title="Projects" href={paths.projects} />
+        <NavLink title="Photo Gallery" href={paths.photo_gallery} />
+        <NavLink title="Contact" href={paths.contact} />
       </Stack>
     </Stack>
   );
