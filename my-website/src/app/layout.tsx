@@ -1,5 +1,6 @@
-import { Box } from "@mui/material";
 import type { Metadata } from "next";
+
+import { Box } from "@mui/material";
 import { Geist, Geist_Mono } from "next/font/google";
 
 import { Footer } from "@/home/footer";
@@ -31,14 +32,16 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <Header />
-        <Box
-          sx={{
-            backgroundColor: colors.base.dark,
-            color: colors.chalk,
-            padding: "5rem",
-          }}
-        >
-          {children}
+        <Box sx={{ height: "100%", position: "relative" }}>
+          <Box className="background-image" />
+          <Box
+            sx={{
+              color: colors.chalk,
+              padding: "5rem",
+            }}
+          >
+            {children}
+          </Box>
         </Box>
         <Footer />
       </body>

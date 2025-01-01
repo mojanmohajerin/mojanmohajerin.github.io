@@ -40,3 +40,15 @@ a {
     color-scheme: dark;
   }
 }
+
+.background-image {
+  background-image: url("../assets/photos/snowboard-scene-cropped.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 100%;
+  opacity: 0.5;
+  position: absolute;
+  z-index: -1;
+}
