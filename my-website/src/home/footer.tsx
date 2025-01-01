@@ -17,7 +17,7 @@ export const Footer = () => {
       sx={{
         backgroundColor: colors.base.darkest,
         color: colors.chalk,
-        paddingTop: "2rem",
+        paddingTop: "4rem",
         paddingBottom: "1rem",
         marginTop: "auto",
       }}
@@ -38,7 +38,7 @@ export const Footer = () => {
       </Stack>
       <Stack direction="row" justifyContent="center">
         <Typography variant="body2">
-          © 2024 Mo's Website. All rights reserved.
+          {`© 2024 Mo's Website. All rights reserved.`}
         </Typography>
       </Stack>
     </Stack>

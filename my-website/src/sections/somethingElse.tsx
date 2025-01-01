@@ -48,8 +48,10 @@ export const SomethingElse = () => {
         }}
       />
       <Stack direction="column" spacing={5} sx={{ zIndex: 1 }}>
-        <Typography variant="h2">Something Else...</Typography>
-        <Typography variant="h4">
+        <Typography variant="h2" sx={{ textShadow: "2px 2px 4px #000000" }}>
+          Something Else...
+        </Typography>
+        <Typography variant="h4" sx={{ textShadow: "2px 2px 4px #000000" }}>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
           minim veniam, quis nostrud exercitation ullamco laboris nisi ut
