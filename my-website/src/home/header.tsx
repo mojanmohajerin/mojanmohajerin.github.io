@@ -1,6 +1,9 @@
+"use client";
+
 import { Box, Stack, Typography } from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
 import { NavLink } from "@/components/nav-link";
 import { paths } from "@/paths";
@@ -8,22 +11,34 @@ import { colors } from "@/styles/colors";
 import cartoonImage from "../assets/cartoon-image.png";
 
 export const Header = () => {
-  const cartoonImageSize = 100;
+  const [scrollPosition, setScrollPosition] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrollPosition(window.scrollY);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  const cartoonImageSize = scrollPosition < 50 ? 100 : 50;
 
   return (
     <Box sx={{ position: "relative" }}>
-      <Box className="header-image" />
       <Stack
-        className="header"
+        className="header-background"
         direction="row"
         justifyContent="space-between"
         alignItems="center"
         sx={{
-          backgroundColor: colors.base.darkest,
-          opacity: 0.9,
           paddingLeft: "2rem",
           paddingRight: "5rem",
           paddingY: "1rem",
+          height: 130,
         }}
       >
         <Link href={paths.home}>
@@ -32,18 +47,32 @@ export const Header = () => {
             spacing={4}
             justifyContent="center"
             alignItems="center"
+            sx={{ paddingLeft: "5rem" }}
           >
-            <Image
-              src={cartoonImage}
-              alt="cartoon image"
-              width={cartoonImageSize}
-              height={cartoonImageSize}
-              style={{
-                border: `2px solid ${colors.base.lightest}`,
-                borderRadius: "15%",
+            <Box
+              sx={{
+                position: "fixed",
+                top: 10,
+                left: 10,
+                zIndex: 1000,
               }}
-            />
-            <Typography variant="h4" sx={{ color: colors.chalk }}>
+            >
+              <Image
+                src={cartoonImage}
+                alt="cartoon image"
+                width={cartoonImageSize}
+                height={cartoonImageSize}
+                style={{
+                  border: `2px solid ${colors.base.lightest}`,
+                  borderRadius: "15%",
+                  transition: "width 0.3s, height 0.3s", // Smooth transition
+                }}
+              />
+            </Box>
+            <Typography
+              variant="h4"
+              sx={{ color: colors.chalk, textShadow: "1px 1px 1px #000000" }}
+            >
               Mojan Mohajerin
             </Typography>
           </Stack>

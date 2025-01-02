@@ -12,7 +12,11 @@ export const NavLink = ({ title, href }: NavLinkProps) => {
     <Link href={href}>
       <Typography
         variant="h6"
-        sx={{ color: colors.chalk, textDecoration: "underline" }}
+        sx={{
+          color: colors.chalk,
+          textDecoration: "underline",
+          textShadow: "1px 1px 1px #000000",
+        }}
       >
         {title}
       </Typography>
