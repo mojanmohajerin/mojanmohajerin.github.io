@@ -35,7 +35,7 @@ export const Header = () => {
         justifyContent="space-between"
         alignItems="center"
         sx={{
-          paddingLeft: "2rem",
+          paddingLeft: "7rem",
           paddingRight: "5rem",
           paddingY: "1rem",
           height: 130,
@@ -47,7 +47,6 @@ export const Header = () => {
             spacing={4}
             justifyContent="center"
             alignItems="center"
-            sx={{ paddingLeft: "5rem" }}
           >
             <Box
               sx={{
@@ -79,7 +78,7 @@ export const Header = () => {
         </Link>
         <Stack
           direction="row"
-          spacing={2}
+          spacing={3}
           justifyContent="center"
           alignItems="center"
         >
