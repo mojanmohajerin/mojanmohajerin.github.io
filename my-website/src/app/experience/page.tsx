@@ -1,15 +1,32 @@
+"use client";
+
 import { Box, Stack, Typography } from "@mui/material";
+import { useEffect, useState } from "react";
 
 import { Experience } from "@/sections/experience";
-import { colors } from "@/styles/colors";
 
 export default function ExperiencePage() {
+  const [scrollPosition, setScrollPosition] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrollPosition(window.scrollY);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   return (
     <Box
       sx={{
         minHeight: "100svh",
         display: "flex",
         flexDirection: "column",
+        position: "relative",
       }}
     >
       <Stack
@@ -17,7 +34,11 @@ export default function ExperiencePage() {
         spacing={2}
         justifyContent="flex-start"
         alignItems="flex-start"
-        sx={{ position: "relative" }}
+        sx={{
+          position: "absolute",
+          left: -scrollPosition,
+          transition: "left 0.1s",
+        }}
       >
         <Box
           sx={{
@@ -26,9 +47,8 @@ export default function ExperiencePage() {
             left: -80,
             height: 180,
             width: 400,
-            backgroundColor: colors.base.light,
-            border: "3px solid rgb(56, 116, 120, 0.5)",
-            opacity: 0.4,
+            background: `linear-gradient(90deg, rgba(98,149,132,1) 0%, rgba(0,212,255,0) 100%)`,
+            opacity: 0.6,
             zIndex: -1,
           }}
         />
@@ -39,7 +59,7 @@ export default function ExperiencePage() {
           variant="body1"
           sx={{ paddingLeft: 1, textShadow: "2px 2px 4px #000000" }}
         >
-          (in a nutshell)
+          {`(in a nutshell)`}
         </Typography>
       </Stack>
       <Experience />

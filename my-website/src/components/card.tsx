@@ -62,7 +62,6 @@ export const CardUnit = ({
         <CardContent>
           <Stack direction="column" spacing={0}>
             <Typography
-              //   gutterBottom
               variant="h5"
               sx={{
                 textShadow: `1px 1px 1px ${colors.chalk}`,

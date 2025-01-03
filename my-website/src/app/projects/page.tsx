@@ -1,11 +1,27 @@
+"use client";
+
 import { Box, Stack, Typography } from "@mui/material";
+import { useEffect, useState } from "react";
 
 import { CardUnit } from "@/components/card";
-import { colors } from "@/styles/colors";
 import GithubToolImage from "../../assets/projects/github-tool-image.jpeg";
 import HiveImage from "../../assets/projects/hive-image.webp";
 
 export default function ProjectsPage() {
+  const [scrollPosition, setScrollPosition] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrollPosition(window.scrollY);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   return (
     <Box
       sx={{
@@ -19,24 +35,36 @@ export default function ProjectsPage() {
         spacing={2}
         justifyContent="flex-start"
         alignItems="flex-start"
-        sx={{ position: "relative" }}
+        sx={{
+          position: "relative",
+        }}
       >
         <Box
           sx={{
             position: "absolute",
-            top: -20,
-            left: -80,
-            height: 180,
-            width: 500,
-            backgroundColor: colors.base.light,
-            border: "3px solid rgb(56, 116, 120, 0.5)",
-            opacity: 0.4,
-            zIndex: -1,
+            left: -scrollPosition,
+            transition: "left 0.1s",
           }}
-        />
-        <Typography variant="h3" sx={{ textShadow: "2px 2px 4px #000000" }}>
-          Some Projects
-        </Typography>
+        >
+          <Box
+            sx={{
+              position: "absolute",
+              top: -20,
+              left: -80,
+              height: 180,
+              width: 500,
+              background: `linear-gradient(90deg, rgba(98,149,132,1) 0%, rgba(0,212,255,0) 100%)`,
+              opacity: 0.6,
+              zIndex: -1,
+            }}
+          />
+          <Typography
+            variant="h3"
+            sx={{ textShadow: "2px 2px 4px #000000", paddingTop: "1rem" }}
+          >
+            Some Projects
+          </Typography>
+        </Box>
         <Stack direction="row" spacing={8} sx={{ paddingTop: "12rem" }}>
           <CardUnit
             image={HiveImage}
