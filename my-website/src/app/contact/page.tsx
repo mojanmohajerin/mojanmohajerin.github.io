@@ -1,23 +1,6 @@
-"use client";
-
 import { Box, Stack, Typography } from "@mui/material";
-import { useEffect, useState } from "react";
 
 export default function ContactPage() {
-  const [scrollPosition, setScrollPosition] = useState(0);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrollPosition(window.scrollY);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
-
   return (
     <Stack
       direction="column"
@@ -27,7 +10,7 @@ export default function ContactPage() {
       <Box
         sx={{
           position: "absolute",
-          left: -scrollPosition,
+          left: 0,
           transition: "left 0.1s",
         }}
       >

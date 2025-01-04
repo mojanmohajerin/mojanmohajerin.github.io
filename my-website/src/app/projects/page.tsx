@@ -1,27 +1,10 @@
-"use client";
-
 import { Box, Stack, Typography } from "@mui/material";
-import { useEffect, useState } from "react";
 
 import { CardUnit } from "@/components/card";
 import GithubToolImage from "../../assets/projects/github-tool-image.jpeg";
 import HiveImage from "../../assets/projects/hive-image.webp";
 
 export default function ProjectsPage() {
-  const [scrollPosition, setScrollPosition] = useState(0);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrollPosition(window.scrollY);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
-
   return (
     <Box
       sx={{
@@ -39,13 +22,7 @@ export default function ProjectsPage() {
           position: "relative",
         }}
       >
-        <Box
-          sx={{
-            position: "absolute",
-            left: -scrollPosition,
-            transition: "left 0.1s",
-          }}
-        >
+        <Box>
           <Box
             sx={{
               position: "absolute",
@@ -62,10 +39,10 @@ export default function ProjectsPage() {
             variant="h3"
             sx={{ textShadow: "2px 2px 4px #000000", paddingTop: "1rem" }}
           >
-            Some Projects
+            Some personal projects
           </Typography>
         </Box>
-        <Stack direction="row" spacing={8} sx={{ paddingTop: "12rem" }}>
+        <Stack direction="row" spacing={8} sx={{ paddingTop: "15rem" }}>
           <CardUnit
             image={HiveImage}
             name="Hive"

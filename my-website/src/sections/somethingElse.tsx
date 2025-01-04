@@ -49,16 +49,15 @@ export const SomethingElse = () => {
       />
       <Stack direction="column" spacing={5} sx={{ zIndex: 1 }}>
         <Typography variant="h2" sx={{ textShadow: "2px 2px 4px #000000" }}>
-          Something Else...
+          Going off topic...
         </Typography>
         <Typography variant="h4" sx={{ textShadow: "2px 2px 4px #000000" }}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat. Duis aute irure dolor in
-          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-          culpa qui officia deserunt mollit anim id est laborum.
+          {`I've always been facinated by foreign langauges. I got entrapped in
+          this dark forest about 10 years ago with my (then) girlfriend who
+          happened to be German, and have since been trying to find my way out -
+          slowly improving in one regard while letting the other aspects
+          deteriorate to disrepair. The most recent project is Japanese, having
+          started early 2023, excited to see where it takes me!`}
         </Typography>
       </Stack>
     </Stack>

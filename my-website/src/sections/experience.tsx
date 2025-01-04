@@ -12,19 +12,22 @@ import {
   TimelineSeparator,
 } from "@mui/lab";
 import { Box, Button, Stack, Typography } from "@mui/material";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 
 import { life, years } from "@/data/life";
 import { colors } from "@/styles/colors";
 import Image from "next/image";
+
+interface ExperienceProps {
+  activeYear: number;
+  setActiveYear: (activeYear: number) => void;
+}
 
 interface TimelineBlockProps {
   year: number;
   connector: boolean;
   activeYear: number;
   setActiveYear: (year: number) => void;
-  clicked: number;
-  setClicked: (clicked: number) => void;
 }
 
 const TimelineBlock = ({
@@ -32,8 +35,6 @@ const TimelineBlock = ({
   connector,
   activeYear,
   setActiveYear,
-  clicked,
-  setClicked,
 }: TimelineBlockProps) => {
   const indexInArray = years.indexOf(year);
   const connectorHeight = 80 * (years[indexInArray] - years[indexInArray + 1]);
@@ -44,7 +45,6 @@ const TimelineBlock = ({
   const handleClick = (year: number) => {
     if (activeYear !== year) {
       setActiveYear(year);
-      setClicked(year);
     }
   };
 
@@ -162,9 +162,9 @@ const TimelineBlock = ({
               height: dotSize,
               width: dotSize,
               borderColor:
-                clicked === year ? colors.base.dark : colors.base.lightest,
+                activeYear === year ? colors.base.dark : colors.base.lightest,
               backgroundColor:
-                clicked === year ? colors.base.dark : colors.base.lightest,
+                activeYear === year ? colors.base.dark : colors.base.lightest,
               borderWidth: 9,
             }}
           />
@@ -204,10 +204,7 @@ const TimelineBlock = ({
   );
 };
 
-export const Experience = () => {
-  const [activeYear, setActiveYear] = useState<number>(years[0]);
-  const [clicked, setClicked] = useState(years[0]);
-
+export const Experience = ({ activeYear, setActiveYear }: ExperienceProps) => {
   return (
     <Box sx={{ paddingTop: "2rem", width: "100%" }}>
       <Timeline position="left">
@@ -230,8 +227,6 @@ export const Experience = () => {
             connector={index !== years.length - 1}
             activeYear={activeYear}
             setActiveYear={setActiveYear}
-            clicked={clicked}
-            setClicked={setClicked}
           />
         ))}
       </Timeline>

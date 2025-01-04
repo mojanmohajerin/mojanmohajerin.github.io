@@ -1,7 +1,7 @@
 import { StaticImageData } from "next/image";
 
 import ausFlag from "../assets/experiencePagePhotos/aus-flag.png";
-import gravityWellLogo from "../assets/experiencePagePhotos/gravity-well-logo.png";
+import gravityWellLogo from "../assets/experiencePagePhotos/gravity-well-logo.jpg";
 import japanFlag from "../assets/experiencePagePhotos/japan-flag.jpg";
 import nzFlag from "../assets/experiencePagePhotos/nz-flag.svg";
 import skLogo from "../assets/experiencePagePhotos/sk-logo.svg";
@@ -34,8 +34,7 @@ export const life: Life = {
       place: "Fukuoka",
       country: "Japan",
       image: japanFlag,
-      event:
-        "Moved to Fukuoka.\nCurrently trying to find work and establish myself here. :)",
+      event: "Moved to Fukuoka. :)",
     },
     {
       date: "Oct",

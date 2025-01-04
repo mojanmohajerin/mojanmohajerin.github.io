@@ -38,7 +38,7 @@ export const BitAboutMe = () => {
           top: -50,
           left: scrollPosition < 600 ? 600 - scrollPosition : 0,
           zIndex: 0,
-          height: 500,
+          height: 550,
           width: 1000,
           backgroundColor: colors.base.light,
           opacity: 0.4,
@@ -50,13 +50,15 @@ export const BitAboutMe = () => {
           A bit about me...
         </Typography>
         <Typography variant="h4" sx={{ textShadow: "2px 2px 4px #000000" }}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat. Duis aute irure dolor in
-          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-          culpa qui officia deserunt mollit anim id est laborum.
+          I graduated with a degree in Mechatronic Engineering. I recently
+          joined a small start-up in New Zealand as a Software Engineer and
+          loved every moment of it - both the work culture and the work itself.
+          I felt being able to write programmical solutions to tangible problems
+          was intellectually stimulating and fulfilling, like a riddle. At this
+          company, I gained front-end development experience using programming
+          frameworks and languages such as React, Next.js and Typescript. I also
+          had the opportunity to play with API queries with GraphQL and GitHub
+          API. I am excited to see where this journey takes me.
         </Typography>
       </Stack>
     </Stack>

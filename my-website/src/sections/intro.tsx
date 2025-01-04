@@ -57,6 +57,7 @@ export const Intro = () => {
           display: "inline-block",
           width: profileImageSize,
           height: profileImageSize,
+          flexShrink: 0,
           zIndex: 1,
         }}
       >
@@ -73,10 +74,10 @@ export const Intro = () => {
           {`Hi, I'm Mo!`}
         </Typography>
         <Typography variant="h4" sx={{ textShadow: "2px 2px 4px #000000" }}>
-          {`I'm a software engineer with a passion for web development.`}
+          {`I'm an Australian software engineer.`}
         </Typography>
         <Typography variant="h4" sx={{ textShadow: "2px 2px 4px #000000" }}>
-          {`I'm currently working with React, Next.js, and TypeScript.`}
+          {`I was recently living in New Zealand, but now I'm starting my life afresh in Japan!`}
         </Typography>
       </Stack>
     </Stack>

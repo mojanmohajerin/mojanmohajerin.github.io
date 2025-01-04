@@ -36,9 +36,17 @@ export const Footer = () => {
         <GithubIcon />
         <StylishDivider />
       </Stack>
-      <Stack direction="row" justifyContent="center">
+      <Stack
+        direction="column"
+        spacing={0}
+        justifyContent="center"
+        alignItems="center"
+      >
         <Typography variant="body2">
-          {`© 2024 Mo's Website. All rights reserved.`}
+          {`Website developed with Next.js and Material-UI.`}
+        </Typography>
+        <Typography variant="body2">
+          {`© 2025 Mo's Website. All rights reserved.`}
         </Typography>
       </Stack>
     </Stack>
