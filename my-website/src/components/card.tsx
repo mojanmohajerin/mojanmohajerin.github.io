@@ -15,20 +15,18 @@ import { colors } from "@/styles/colors";
 import { ProjectModal } from "./modal";
 
 interface CardUnitProps {
-  image: StaticImageData;
-  name: string;
-  description: string;
-  date: string;
-  technologies: string[];
+  project: {
+    thumbnailImage: StaticImageData;
+    otherImages: StaticImageData[];
+    name: string;
+    outline: string;
+    description: string;
+    date: string;
+    technologies: string[];
+  };
 }
 
-export const CardUnit = ({
-  image,
-  name,
-  description,
-  date,
-  technologies,
-}: CardUnitProps) => {
+export const CardUnit = ({ project }: CardUnitProps) => {
   const [open, setOpen] = useState(false);
 
   const handleClick = () => {
@@ -64,8 +62,8 @@ export const CardUnit = ({
             }}
           >
             <Image
-              src={image}
-              alt={name}
+              src={project.thumbnailImage}
+              alt={project.name}
               layout="fill"
               objectFit="cover"
               style={{
@@ -82,7 +80,7 @@ export const CardUnit = ({
                   textShadow: `1px 1px 1px ${colors.chalk}`,
                 }}
               >
-                {name}
+                {project.name}
               </Typography>
               <Typography
                 variant="overline"
@@ -92,7 +90,7 @@ export const CardUnit = ({
                   paddingTop: 0.75,
                 }}
               >
-                {date}
+                {project.date}
               </Typography>
             </Stack>
             <Stack direction="column" spacing={1}>
@@ -103,13 +101,13 @@ export const CardUnit = ({
                   textShadow: `1px 1px 1px ${colors.chalk}`,
                 }}
               >
-                {description}
+                {project.outline}
               </Typography>
               <Stack direction="row" spacing={1} justifyContent="flex-start">
-                {technologies.map((tech) => {
+                {project.technologies.map((tech) => {
                   return (
                     <Box
-                      key={tech}
+                      key={`${project.name}-${tech}`}
                       sx={{
                         backgroundColor: "rgba(226, 241, 231, 0.5)",
                         borderRadius: "50%",
@@ -133,15 +131,7 @@ export const CardUnit = ({
           </CardContent>
         </CardActionArea>
       </Card>
-      <ProjectModal
-        open={open}
-        setOpen={setOpen}
-        name={name}
-        description={description}
-        date={date}
-        technologies={technologies}
-        image={image}
-      />
+      <ProjectModal open={open} setOpen={setOpen} project={project} />
     </>
   );
 };

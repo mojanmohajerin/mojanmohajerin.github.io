@@ -19,7 +19,7 @@ export default function ContactPage() {
             position: "absolute",
             top: -20,
             left: -80,
-            height: 180,
+            height: 150,
             width: 500,
             background: `linear-gradient(90deg, rgba(98,149,132,1) 0%, rgba(0,212,255,0) 100%)`,
             opacity: 0.6,
@@ -28,7 +28,7 @@ export default function ContactPage() {
         />
         <Typography
           variant="h3"
-          sx={{ textShadow: "1px 1px 2px #000000", paddingTop: "1rem" }}
+          sx={{ textShadow: "2px 2px 4px #000000", paddingTop: "1rem" }}
         >
           Contact Details
         </Typography>

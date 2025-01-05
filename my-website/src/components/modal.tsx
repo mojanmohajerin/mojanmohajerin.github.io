@@ -1,28 +1,24 @@
-import { colors } from "@/styles/colors";
 import { Backdrop, Box, Fade, Modal, Stack, Typography } from "@mui/material";
 import Image, { StaticImageData } from "next/image";
+
+import { colors } from "@/styles/colors";
+import { XCloseButton } from "./xCloseButton";
 
 interface ProjectModalProps {
   open: boolean;
   setOpen: (open: boolean) => void;
-  name: string;
-  description: string;
-  date: string;
-  technologies: string[];
-  image: StaticImageData;
+  project: {
+    thumbnailImage: StaticImageData;
+    otherImages: StaticImageData[];
+    name: string;
+    outline: string;
+    description: string;
+    date: string;
+    technologies: string[];
+  };
 }
 
-export const ProjectModal = ({
-  open,
-  setOpen,
-  name,
-  description,
-  date,
-  technologies,
-  image,
-}: ProjectModalProps) => {
-  // const imageSize = 500;
-
+export const ProjectModal = ({ open, setOpen, project }: ProjectModalProps) => {
   const handleClose = () => setOpen(false);
 
   return (
@@ -56,6 +52,7 @@ export const ProjectModal = ({
             spacing={2}
             justifyContent="space-between"
             alignItems="flex-start"
+            sx={{ position: "relative" }}
           >
             <Box
               sx={{
@@ -65,7 +62,15 @@ export const ProjectModal = ({
                 height: "100%",
               }}
             >
-              <Image src={image} alt={name} width={1000} height={580} />
+              <Image
+                src={project.thumbnailImage}
+                alt={project.name}
+                width={1000}
+                height={580}
+              />
+            </Box>
+            <Box sx={{ position: "absolute", top: 0, right: 0 }}>
+              <XCloseButton handleClose={handleClose} />
             </Box>
             <Stack
               direction="column"
@@ -73,7 +78,7 @@ export const ProjectModal = ({
               justifyContent="flex-start"
               alignItems="flex-start"
               sx={{
-                paddingX: 2,
+                paddingX: 4,
                 color: colors.chalk,
                 textShadow: "2px 2px 2px #000",
               }}
@@ -83,14 +88,45 @@ export const ProjectModal = ({
                   variant="h4"
                   sx={{ fontWeight: "bold", textDecoration: "underline" }}
                 >
-                  {name}
+                  {project.name}
                 </Typography>
                 <Typography variant="overline" sx={{ paddingTop: 2 }}>
-                  {date}
+                  {project.date}
                 </Typography>
               </Stack>
-              <Typography variant="body2">{description}</Typography>
-              <Typography variant="body2">{technologies}</Typography>
+              <Stack
+                direction="column"
+                spacing={2}
+                justifyContent="space-between"
+                alignItems="flex-start"
+                sx={{ height: "100%" }}
+              >
+                <Typography variant="body1">{project.description}</Typography>
+                <Stack direction="row" spacing={1} justifyContent="flex-start">
+                  {project.technologies.map((tech) => {
+                    return (
+                      <Box
+                        key={`${project.name}-${tech}`}
+                        sx={{
+                          backgroundColor: "rgba(226, 241, 231, 0.5)",
+                          borderRadius: "50%",
+                          padding: 1,
+                        }}
+                      >
+                        <Typography
+                          variant="body1"
+                          sx={{
+                            color: colors.charcoal,
+                            textShadow: `1px 1px 1px ${colors.chalk}`,
+                          }}
+                        >
+                          {tech}
+                        </Typography>
+                      </Box>
+                    );
+                  })}
+                </Stack>
+              </Stack>
             </Stack>
           </Stack>
         </Box>

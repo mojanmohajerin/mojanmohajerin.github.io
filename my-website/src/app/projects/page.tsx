@@ -1,8 +1,7 @@
 import { Box, Stack, Typography } from "@mui/material";
 
 import { CardUnit } from "@/components/card";
-import GithubToolImage from "../../assets/projects/github-tool-image.jpeg";
-import HiveImage from "../../assets/projects/hive-image.webp";
+import { projects } from "../../data/projects";
 
 export default function ProjectsPage() {
   return (
@@ -43,7 +42,10 @@ export default function ProjectsPage() {
           </Typography>
         </Box>
         <Stack direction="row" spacing={8} sx={{ paddingTop: "15rem" }}>
-          <CardUnit
+          {projects.map((project) => {
+            return <CardUnit key={project.name} project={project} />;
+          })}
+          {/* <CardUnit
             image={HiveImage}
             name="Hive"
             description="A board game."
@@ -56,7 +58,7 @@ export default function ProjectsPage() {
             description="An application to optimise GitHub PR efficiency."
             date="July, 2024"
             technologies={["Typescript", "React", "GitHub API"]}
-          />
+          /> */}
         </Stack>
       </Stack>
     </Box>
