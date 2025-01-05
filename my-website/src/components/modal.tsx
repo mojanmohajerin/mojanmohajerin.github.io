@@ -1,7 +1,12 @@
+"use client";
+
 import { Backdrop, Box, Fade, Modal, Stack, Typography } from "@mui/material";
 import Image, { StaticImageData } from "next/image";
 
 import { colors } from "@/styles/colors";
+import { useState } from "react";
+import { LeftButton } from "./leftButton";
+import { RightButton } from "./rightButton";
 import { XCloseButton } from "./xCloseButton";
 
 interface ProjectModalProps {
@@ -19,6 +24,11 @@ interface ProjectModalProps {
 }
 
 export const ProjectModal = ({ open, setOpen, project }: ProjectModalProps) => {
+  const imageHeight = 580;
+  const imageWidth = 1000;
+
+  const [displayImageIndex, setDisplayImageIndex] = useState<number>(0);
+
   const handleClose = () => setOpen(false);
 
   return (
@@ -56,17 +66,41 @@ export const ProjectModal = ({ open, setOpen, project }: ProjectModalProps) => {
           >
             <Box
               sx={{
-                overflow: "hidden",
+                position: "relative",
                 display: "inline-block",
-                width: "100%",
-                height: "100%",
+                width: imageWidth,
+                height: imageHeight,
+                backgroundColor: colors.charcoal,
               }}
             >
               <Image
-                src={project.thumbnailImage}
+                src={project.otherImages[displayImageIndex]}
                 alt={project.name}
-                width={1000}
-                height={580}
+                width={imageWidth}
+                height={imageHeight}
+                style={{
+                  maxWidth: "100%",
+                  maxHeight: "100%",
+                  width: "auto",
+                  height: "auto",
+                  position: "absolute",
+                  top: 0,
+                  bottom: 0,
+                  left: 0,
+                  right: 0,
+                  margin: "auto",
+                }}
+              />
+
+              <LeftButton
+                displayImageIndex={displayImageIndex}
+                setDisplayImageIndex={setDisplayImageIndex}
+                imagesArrayLength={project.otherImages.length}
+              />
+              <RightButton
+                displayImageIndex={displayImageIndex}
+                setDisplayImageIndex={setDisplayImageIndex}
+                imagesArrayLength={project.otherImages.length}
               />
             </Box>
             <Box sx={{ position: "absolute", top: 0, right: 0 }}>
@@ -116,8 +150,8 @@ export const ProjectModal = ({ open, setOpen, project }: ProjectModalProps) => {
                         <Typography
                           variant="body1"
                           sx={{
-                            color: colors.charcoal,
-                            textShadow: `1px 1px 1px ${colors.chalk}`,
+                            color: colors.chalk,
+                            textShadow: `1px 1px 1px ${colors.charcoal}`,
                           }}
                         >
                           {tech}
