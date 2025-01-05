@@ -4,6 +4,7 @@ import { Box, Stack, Typography } from "@mui/material";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
+import { HoverOverMe } from "@/components/hoverOverMe";
 import { colors } from "@/styles/colors";
 import profileImage from "../assets/portrait-headshot.jpg";
 import "../styles/effects.css";
@@ -36,6 +37,7 @@ export const Intro = () => {
         position: "relative",
       }}
     >
+      <HoverOverMe />
       <Box
         sx={{
           position: "absolute",

@@ -19,7 +19,7 @@ export default function ContactPage() {
             position: "absolute",
             top: -20,
             left: -80,
-            height: 150,
+            height: 180,
             width: 500,
             background: `linear-gradient(90deg, rgba(98,149,132,1) 0%, rgba(0,212,255,0) 100%)`,
             opacity: 0.6,

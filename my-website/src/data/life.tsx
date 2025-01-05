@@ -34,14 +34,15 @@ export const life: Life = {
       place: "Fukuoka",
       country: "Japan",
       image: japanFlag,
-      event: "Moved to Fukuoka. :)",
+      event: "Moved to Fukuoka! :)",
     },
     {
       date: "Oct",
       place: "Tokyo",
       country: "Japan",
       image: japanFlag,
-      event: "Moved to Japan.\nWorking Holiday Visa.",
+      event:
+        "Moved to Japan.\nWorking Holiday Visa.\nSpent the first month travelling\nToyko -> Nagoya -> Mie -> Sendai -> Aomori -> Hakodate -> Sapporo -> Osaka",
     },
     {
       date: "Oct",
