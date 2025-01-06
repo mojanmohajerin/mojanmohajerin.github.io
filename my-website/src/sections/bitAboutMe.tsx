@@ -54,11 +54,12 @@ export const BitAboutMe = () => {
           joined a small start-up in New Zealand as a Software Engineer and
           loved every moment of it - both the work culture and the work itself.
           I felt being able to write programmical solutions to tangible problems
-          was intellectually stimulating and fulfilling, like a riddle. At this
-          company, I gained front-end development experience using technologies
-          such as React, Next.js and Typescript. I also had the opportunity to
-          play with API queries with GraphQL and GitHub API. I am excited to see
-          where this journey takes me.
+          was intellectually stimulating and fulfilling, like piecing together a
+          simple yet intricate a riddle until everything locks into place. At
+          this company, I gained front-end development experience using
+          technologies such as React, Next.js and Typescript. I also had the
+          opportunity to play with API queries with GraphQL and GitHub API. I am
+          excited to see where this journey takes me.
         </Typography>
       </Stack>
     </Stack>

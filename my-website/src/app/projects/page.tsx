@@ -45,20 +45,6 @@ export default function ProjectsPage() {
           {projects.map((project) => {
             return <CardUnit key={project.name} project={project} />;
           })}
-          {/* <CardUnit
-            image={HiveImage}
-            name="Hive"
-            description="A board game."
-            date="May, 2020"
-            technologies={["Python"]}
-          />
-          <CardUnit
-            image={GithubToolImage}
-            name="GitHub Tool"
-            description="An application to optimise GitHub PR efficiency."
-            date="July, 2024"
-            technologies={["Typescript", "React", "GitHub API"]}
-          /> */}
         </Stack>
       </Stack>
     </Box>

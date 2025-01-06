@@ -19,10 +19,6 @@ export const CurrentYear = ({
     setActiveYear(yearNav);
   };
 
-  const handleClickPresent = () => {
-    setActiveYear(new Date().getFullYear());
-  };
-
   return (
     <Box sx={{ position: "fixed", top: 425, left: 100 }}>
       <Box

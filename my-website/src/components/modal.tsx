@@ -4,6 +4,7 @@ import { Backdrop, Box, Fade, Modal, Stack, Typography } from "@mui/material";
 import Image, { StaticImageData } from "next/image";
 
 import { colors } from "@/styles/colors";
+import Link from "next/link";
 import { useState } from "react";
 import { LeftButton } from "./leftButton";
 import { RightButton } from "./rightButton";
@@ -20,6 +21,7 @@ interface ProjectModalProps {
     description: string;
     date: string;
     technologies: string[];
+    url?: string;
   };
 }
 
@@ -62,7 +64,7 @@ export const ProjectModal = ({ open, setOpen, project }: ProjectModalProps) => {
             spacing={2}
             justifyContent="space-between"
             alignItems="flex-start"
-            sx={{ position: "relative" }}
+            sx={{ position: "relative", height: "98%" }}
           >
             <Box
               sx={{
@@ -136,6 +138,19 @@ export const ProjectModal = ({ open, setOpen, project }: ProjectModalProps) => {
                 sx={{ height: "100%" }}
               >
                 <Typography variant="body1">{project.description}</Typography>
+                {project.url && (
+                  <Link
+                    href={project.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{
+                      textDecoration: "underline",
+                      color: colors.base.lightest,
+                    }}
+                  >
+                    {project.url}
+                  </Link>
+                )}
                 <Stack direction="row" spacing={1} justifyContent="flex-start">
                   {project.technologies.map((tech) => {
                     return (
