@@ -57,7 +57,7 @@ export const SomethingElse = () => {
           happened to be German, and have since been trying to find my way out -
           slowly improving in one regard while letting the other aspects
           deteriorate to disrepair. The most recent project is Japanese, having
-          started early 2023, excited to see where it takes me!`}
+          started learning around early 2023, excited to see where this journey takes me!`}
         </Typography>
       </Stack>
     </Stack>

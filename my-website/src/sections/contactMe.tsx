@@ -40,12 +40,9 @@ export const ContactMe = () => {
         text: "I'll get back to you as soon as I can. 🙏🏻",
         icon: "success",
       });
-      console.log(result);
       setDuringSubmission(false);
     }
   }
-
-  console.log("during submission", duringSubmission);
 
   return (
     <>

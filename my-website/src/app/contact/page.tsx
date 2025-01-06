@@ -60,7 +60,7 @@ export default function ContactPage() {
         >
           <Typography variant="h5" sx={{ textShadow: "1px 1px 1px #000" }}>
             *Or you can contact me directly with one of the social media links
-            below or at:
+            below, or at:
           </Typography>
           <Typography
             variant="h5"
@@ -73,7 +73,7 @@ export default function ContactPage() {
           </Typography>
         </Stack>
         <Typography variant="h5" sx={{ textShadow: "1px 1px 1px #000" }}>
-          Feel free to reach out to me for any inquiries or just to say hi!
+          Feel free to reach out for any inquiries or just to say hi!
         </Typography>
       </Stack>
     </Stack>

@@ -51,7 +51,7 @@ export const projects = [
     outline:
       "A marketplace environment to purchase premium Squarespace templates.",
     description:
-      "SquareKicker Template Store is a groundbreaking extension of the Squarespace ecosystem. It is an online marketplace connecting website creators and Squarespace users to browse hundreds of premium Squarespace templates across a variety of categories. Template Store is the first innovative product to bring together template creators and end users on one convenient platform.",
+      "The SquareKicker Template Store is a groundbreaking extension of the Squarespace ecosystem. It is an online marketplace environment allowing Squarespace users to browse hundreds of premium Squarespace templates across a variety of categories. The Template Store is the first of it's kind, an innovative product integrating template creators and end users in one convenient platform.",
     date: "Mar, 2024",
     technologies: [
       "Typescript",

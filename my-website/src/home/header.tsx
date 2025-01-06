@@ -64,7 +64,7 @@ export const Header = () => {
                 style={{
                   border: `2px solid ${colors.base.lightest}`,
                   borderRadius: "15%",
-                  transition: "width 0.3s, height 0.3s", // Smooth transition
+                  transition: "width 0.3s, height 0.3s",
                 }}
               />
             </Box>

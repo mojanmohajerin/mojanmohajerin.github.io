@@ -42,21 +42,21 @@ export const life: Life = {
       country: "Japan",
       image: japanFlag,
       event:
-        "Moved to Japan.\nWorking Holiday Visa.\nSpent the first month travelling\nToyko -> Nagoya -> Mie -> Sendai -> Aomori -> Hakodate -> Sapporo -> Osaka",
+        "Moved to Japan on a Working Holiday Visa.\nSpent the first month travelling\nToyko -> Nagoya -> Mie -> Sendai -> Aomori -> Hakodate -> Sapporo -> Osaka",
     },
     {
       date: "Oct",
       place: "SquareKicker",
       country: "New Zealand",
       image: skLogo,
-      event: "Role: Software Engineer\nResigned.",
+      event: "Resigned.\nRole: Software Engineer",
     },
     {
       date: "Oct",
       place: "The Gravity Well",
       country: "New Zealand",
       image: gravityWellLogo,
-      event: "Role: Wall Assistant\nResigned.",
+      event: "Resigned.\nRole: Wall Assistant",
     },
   ],
   2022: [
@@ -65,28 +65,28 @@ export const life: Life = {
       place: "The Gravity Well",
       country: "New Zealand",
       image: gravityWellLogo,
-      event: "Started work.\nRole: Wall Assistant.",
+      event: "Started part-time work.\nRole: Wall Assistant",
     },
     {
       date: "Oct",
       place: "SquareKicker",
       country: "New Zealand",
       image: skLogo,
-      event: "Role: Software Engineer\nStarted work.",
+      event: "Started work.\nRole: Software Engineer",
     },
     {
       date: "Sept",
       place: "Victory Primary School",
       country: "New Zealand",
       image: victorySchoolLogo,
-      event: "Role: Teacher Aide\nResigned.",
+      event: "Resigned.\nRole: Teacher Aide",
     },
     {
       date: "Mar",
       place: "Victory Primary School",
       country: "New Zealand",
       image: victorySchoolLogo,
-      event: "Role: Teacher Aide\nStarted work.",
+      event: "Started work.\nRole: Teacher Aide",
     },
     {
       date: "Jan",
@@ -111,7 +111,7 @@ export const life: Life = {
       place: "SMEC",
       country: "Australia",
       image: smecLogo,
-      event: "Role: Graduate Electrical Engineer (Rail)\nResigned.",
+      event: "Resigned.\nRole: Graduate Electrical Engineer (Rail)",
     },
   ],
   2020: [
@@ -120,7 +120,7 @@ export const life: Life = {
       place: "SMEC",
       country: "Australia",
       image: smecLogo,
-      event: "Role: Graduate Electrical Engineer (Rail)\nChanged department.",
+      event: "Changed department.\nRole: Graduate Electrical Engineer (Rail)",
     },
   ],
   2019: [
@@ -129,7 +129,8 @@ export const life: Life = {
       place: "University of Sydney",
       country: "Australia",
       image: usydLogo,
-      event: "Graduated university.\nSecond Class, First Division (Honours).",
+      event:
+        "Graduated university.\nDegree: Bachelor of Engineering Honours (Mechatronic)\nSecond Class, First Division (Honours)",
     },
   ],
   2018: [
@@ -138,7 +139,7 @@ export const life: Life = {
       place: "SMEC",
       country: "Australia",
       image: smecLogo,
-      event: "Role: Document Controller\nStarted internship.",
+      event: "Started internship.\nRole: Document Controller",
     },
   ],
   2015: [
@@ -190,7 +191,7 @@ export const life: Life = {
   1996: [
     {
       date: "Nov",
-      place: "Hornsby Hospital, Sydney",
+      place: "Hornsby, Sydney",
       country: "Australia",
       image: ausFlag,
       event: "I was born!",

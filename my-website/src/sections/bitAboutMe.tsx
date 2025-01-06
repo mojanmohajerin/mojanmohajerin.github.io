@@ -38,7 +38,7 @@ export const BitAboutMe = () => {
           top: -50,
           left: scrollPosition < 600 ? 600 - scrollPosition : 0,
           zIndex: 0,
-          height: 550,
+          height: 600,
           width: 1000,
           backgroundColor: colors.base.light,
           opacity: 0.4,
@@ -50,16 +50,16 @@ export const BitAboutMe = () => {
           A bit about me...
         </Typography>
         <Typography variant="h4" sx={{ textShadow: "2px 2px 4px #000000" }}>
-          I graduated with a degree in Mechatronic Engineering. I recently
-          joined a small start-up in New Zealand as a Software Engineer and
-          loved every moment of it - both the work culture and the work itself.
-          I felt being able to write programmical solutions to tangible problems
-          was intellectually stimulating and fulfilling, like piecing together a
-          simple yet intricate a riddle until everything locks into place. At
-          this company, I gained front-end development experience using
-          technologies such as React, Next.js and Typescript. I also had the
-          opportunity to play with API queries with GraphQL and GitHub API. I am
-          excited to see where this journey takes me.
+          I graduated with a degree in Mechatronic Engineering in 2019. I
+          recently joined a small start-up in New Zealand as a Software Engineer
+          and loved every moment of it - company culture, the people, the work
+          itself. I felt being able to write programmical solutions to tangible
+          problems was an intellectually stimulating and fulfilling challenge,
+          like piecing together an intricate riddle until everything locks into
+          place and clarifies into a simple, errorless execution. At this
+          company, I gained front-end development experience using technologies
+          such as React, Next.js and Typescript. I also had the opportunity to
+          play with API queries with GraphQL and GitHub API.
         </Typography>
       </Stack>
     </Stack>
