@@ -83,7 +83,7 @@ export const Header = () => {
           alignItems="center"
         >
           <NavLink title="Home" href={paths.home} />
-          <NavLink title="Experience" href={paths.experience} />
+          <NavLink title="Timeline" href={paths.experience} />
           <NavLink title="Projects" href={paths.projects} />
           <NavLink title="Photo Gallery" href={paths.photo_gallery} />
           <NavLink title="Contact" href={paths.contact} />
