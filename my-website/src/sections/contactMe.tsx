@@ -1,15 +1,52 @@
 "use client";
 
-import { LoadingButton } from "@mui/lab";
 import { Stack, SvgIcon, Typography } from "@mui/material";
 import { Send01 } from "@untitled-ui/icons-react";
 import { Form, Formik } from "formik";
+import Swal from "sweetalert2";
 
 import { InputField } from "@/components/inputField";
 import { colors } from "@/styles/colors";
 import { ContactMeValidation } from "@/validation/contactMe";
+import { LoadingButton } from "@mui/lab";
+import { useState } from "react";
 
 export const ContactMe = () => {
+  const [duringSubmission, setDuringSubmission] = useState<boolean>(false);
+
+  async function handleSubmit(values: {
+    name: string;
+    email: string;
+    message: string;
+  }) {
+    setDuringSubmission(true);
+    const response = await fetch("https://api.web3forms.com/submit", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify({
+        access_key: `${process.env.NEXT_PUBLIC_CONTACT_ACCESS_TOKEN}`,
+        name: values.name,
+        email: values.email,
+        message: values.message,
+      }),
+    });
+    const result = await response.json();
+    if (result.success) {
+      Swal.fire({
+        title: "Sent! 🥳",
+        text: "I'll get back to you as soon as I can. 🙏🏻",
+        icon: "success",
+      });
+      console.log(result);
+      setDuringSubmission(false);
+    }
+  }
+
+  console.log("during submission", duringSubmission);
+
   return (
     <>
       <Stack
@@ -36,10 +73,10 @@ export const ContactMe = () => {
           }}
           validationSchema={ContactMeValidation}
           onSubmit={(values) => {
-            console.log(values);
+            handleSubmit(values);
           }}
         >
-          {({ isSubmitting }) => (
+          {() => (
             <Form>
               <Stack direction="column" spacing={2} sx={{ paddingX: 5 }}>
                 <InputField name="Name" type="name" />
@@ -57,7 +94,7 @@ export const ContactMe = () => {
                 >
                   <LoadingButton
                     type="submit"
-                    loading={isSubmitting}
+                    loading={duringSubmission}
                     variant="outlined"
                     size="large"
                     endIcon={
@@ -71,7 +108,7 @@ export const ContactMe = () => {
                       color: colors.base.lightest,
                       paddingX: 5,
                       textTransform: "capitalize",
-                      textShadow: "1px 1px 1px #000",
+                      textShadow: duringSubmission ? null : "1px 1px 1px #000",
                       "&:hover": {
                         backgroundColor: colors.base.dark,
                       },

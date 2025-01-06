@@ -58,20 +58,21 @@ export default function ContactPage() {
           justifyContent="center"
           alignItems="center"
         >
-          <Typography variant="h5" sx={{ textShadow: "1px 1px 2px #fff" }}>
-            *Or you can contact me directly at:
+          <Typography variant="h5" sx={{ textShadow: "1px 1px 1px #000" }}>
+            *Or you can contact me directly with one of the social media links
+            below or at:
           </Typography>
           <Typography
             variant="h5"
             sx={{
-              textShadow: "1px 1px 2px #fff",
+              textShadow: "1px 1px 1px #000",
               textDecoration: "underline",
             }}
           >
             mojan.mohajerin@gmail.com
           </Typography>
         </Stack>
-        <Typography variant="h5" sx={{ textShadow: "1px 1px 2px #fff" }}>
+        <Typography variant="h5" sx={{ textShadow: "1px 1px 1px #000" }}>
           Feel free to reach out to me for any inquiries or just to say hi!
         </Typography>
       </Stack>

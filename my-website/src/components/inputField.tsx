@@ -27,6 +27,7 @@ export const InputField = ({ name, type, as, styleProps }: InputFieldProps) => {
         <Field
           type={type}
           name={type}
+          placeholder={`Please enter your ${type}`}
           as={as}
           style={{
             width: "100%",
