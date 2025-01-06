@@ -40,8 +40,14 @@ export const ContactMe = () => {
         text: "I'll get back to you as soon as I can. 🙏🏻",
         icon: "success",
       });
-      setDuringSubmission(false);
+    } else {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Something went wrong! 🙄",
+      });
     }
+    setDuringSubmission(false);
   }
 
   return (
