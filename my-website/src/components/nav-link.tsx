@@ -29,7 +29,7 @@ export const NavLink = ({ title, href }: NavLinkProps) => {
         variant="h6"
         sx={{
           textTransform: "capitalize",
-          fontWeight: params === href ? "bold" : "normal",
+          fontWeight: params === href.slice(1) ? "bold" : "normal",
           textShadow: "1px 1px 1px #000000",
         }}
       >

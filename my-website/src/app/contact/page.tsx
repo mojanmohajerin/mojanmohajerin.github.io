@@ -33,7 +33,7 @@ export default function ContactPage() {
           variant="h3"
           sx={{ textShadow: "2px 2px 4px #000000", paddingTop: "1rem" }}
         >
-          Contact Details
+          Contact
         </Typography>
       </Box>
       <Box
