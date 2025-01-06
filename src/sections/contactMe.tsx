@@ -27,7 +27,7 @@ export const ContactMe = () => {
         Accept: "application/json",
       },
       body: JSON.stringify({
-        access_key: `${process.env.NEXT_PUBLIC_CONTACT_ACCESS_TOKEN}`,
+        access_key: `dedb13d7-42c9-46d3-ba01-30cd394ca715`,
         name: values.name,
         email: values.email,
         message: values.message,
