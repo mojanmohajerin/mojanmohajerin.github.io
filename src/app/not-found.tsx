@@ -7,7 +7,6 @@ export default function NotFound() {
   return (
     <Box
       sx={{
-        minHeight: "100svh",
         flexGrow: 1,
         display: "flex",
         flexDirection: "column",
@@ -17,7 +16,6 @@ export default function NotFound() {
     >
       <Image src={Coding} alt="Not found image" height={300} width={300} />
       <Stack
-        direction="column"
         spacing={2}
         justifyContent="center"
         alignItems="center"

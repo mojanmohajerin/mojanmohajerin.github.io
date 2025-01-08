@@ -38,8 +38,8 @@ export const CardUnit = ({ project }: CardUnitProps) => {
       <Card
         raised
         sx={{
-          width: 400,
-          height: 400,
+          maxWidth: "500px",
+          minHeight: "400px",
           backgroundColor: "transparent",
           boxShadow: "0 0 0 0",
           transition: "transform 0.3s",
@@ -93,7 +93,7 @@ export const CardUnit = ({ project }: CardUnitProps) => {
                 {project.date}
               </Typography>
             </Stack>
-            <Stack direction="column" spacing={1}>
+            <Stack spacing={1}>
               <Typography
                 variant="body1"
                 sx={{

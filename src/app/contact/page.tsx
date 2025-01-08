@@ -1,81 +1,49 @@
 import { Box, Stack, Typography } from "@mui/material";
 
 import { ContactMe } from "@/sections/contactMe";
+import { Title } from "@/sections/title";
 import { colors } from "@/styles/colors";
 
 export default function ContactPage() {
   return (
-    <Stack
-      direction="column"
-      spacing={35}
-      sx={{ minHeight: "100vh", position: "relative" }}
-    >
-      <Box
-        sx={{
-          position: "absolute",
-          left: 0,
-          transition: "left 0.1s",
-        }}
-      >
+    <Stack spacing={10}>
+      <Title title="Contact" />
+      <Box sx={{ padding: "5rem" }}>
         <Box
           sx={{
-            position: "absolute",
-            top: -20,
-            left: -80,
-            height: 180,
-            width: 500,
-            background: `linear-gradient(90deg, rgba(98,149,132,1) 0%, rgba(0,212,255,0) 100%)`,
-            opacity: 0.6,
-            zIndex: -1,
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
           }}
-        />
-        <Typography
-          variant="h3"
-          sx={{ textShadow: "2px 2px 4px #000000", paddingTop: "1rem" }}
         >
-          Contact
-        </Typography>
-      </Box>
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <ContactMe />
-      </Box>
-      <Stack
-        direction="column"
-        spacing={3}
-        justifyContent="center"
-        alignItems="center"
-        sx={{ color: colors.base.darkest }}
-      >
+          <ContactMe />
+        </Box>
         <Stack
-          direction="column"
-          spacing={1}
+          spacing={3}
           justifyContent="center"
           alignItems="center"
+          sx={{ color: colors.base.darkest }}
         >
+          <Stack spacing={1} justifyContent="center" alignItems="center">
+            <Typography variant="h5" sx={{ textShadow: "1px 1px 1px #000" }}>
+              *Or you can contact me directly with one of the social media links
+              below, or at:
+            </Typography>
+            <Typography
+              variant="h5"
+              sx={{
+                textShadow: "1px 1px 1px #000",
+                textDecoration: "underline",
+              }}
+            >
+              mojan.mohajerin@gmail.com
+            </Typography>
+          </Stack>
           <Typography variant="h5" sx={{ textShadow: "1px 1px 1px #000" }}>
-            *Or you can contact me directly with one of the social media links
-            below, or at:
-          </Typography>
-          <Typography
-            variant="h5"
-            sx={{
-              textShadow: "1px 1px 1px #000",
-              textDecoration: "underline",
-            }}
-          >
-            mojan.mohajerin@gmail.com
+            Feel free to reach out for any inquiries or just to say hi!
           </Typography>
         </Stack>
-        <Typography variant="h5" sx={{ textShadow: "1px 1px 1px #000" }}>
-          Feel free to reach out for any inquiries or just to say hi!
-        </Typography>
-      </Stack>
+      </Box>
     </Stack>
   );
 }

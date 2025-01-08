@@ -5,7 +5,7 @@ import { Stack } from "@mui/material";
 
 export const Body = () => {
   return (
-    <Stack direction="column" spacing={30} sx={{ paddingBottom: 30 }}>
+    <Stack spacing={30} sx={{ paddingBottom: "15rem" }}>
       <Intro />
       <BitAboutMe />
       <SomethingElse />

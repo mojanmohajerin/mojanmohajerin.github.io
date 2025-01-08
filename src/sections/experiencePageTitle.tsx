@@ -20,7 +20,6 @@ export const ExperiencePageTitle = () => {
 
   return (
     <Stack
-      direction="column"
       spacing={2}
       justifyContent="flex-start"
       alignItems="flex-start"
@@ -47,7 +46,7 @@ export const ExperiencePageTitle = () => {
       </Typography>
       <Typography
         variant="body1"
-        sx={{ paddingLeft: 1, textShadow: "2px 2px 4px #000000" }}
+        sx={{ paddingLeft: "1rem", textShadow: "2px 2px 4px #000000" }}
       >
         {`(in a nutshell)`}
       </Typography>

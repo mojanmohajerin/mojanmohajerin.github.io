@@ -38,7 +38,7 @@ export const Header = () => {
           paddingLeft: "7rem",
           paddingRight: "5rem",
           paddingY: "1rem",
-          height: 130,
+          minHeight: "8rem",
         }}
       >
         <Link href={paths.home}>
@@ -51,9 +51,9 @@ export const Header = () => {
             <Box
               sx={{
                 position: "fixed",
-                top: 10,
-                left: 10,
-                zIndex: 1000,
+                top: "10px",
+                left: "10px",
+                zIndex: 10,
               }}
             >
               <Image

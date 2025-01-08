@@ -1,19 +1,12 @@
 import { Box } from "@mui/material";
 
 import { ExperiencePageBody } from "@/sections/experiencePageBody";
-import { ExperiencePageTitle } from "@/sections/experiencePageTitle";
+import { Title } from "@/sections/title";
 
 export default function ExperiencePage() {
   return (
-    <Box
-      sx={{
-        minHeight: "100svh",
-        display: "flex",
-        flexDirection: "column",
-        position: "relative",
-      }}
-    >
-      <ExperiencePageTitle />
+    <Box>
+      <Title title="My life story" additionalText="(in a nutshell)" />
       <ExperiencePageBody />
     </Box>
   );

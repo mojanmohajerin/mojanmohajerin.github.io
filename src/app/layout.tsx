@@ -30,20 +30,29 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        <Box sx={{ height: "100%", position: "relative" }}>
-          <Box className="background-image" />
-          <Header />
+      <body
+        className={`${geistSans.variable} ${geistMono.variable}`}
+        style={{ position: "relative", minHeight: "100svh" }}
+      >
+        <Box className="background-image" />
+        <Header />
+        <Box
+          sx={{
+            maxWidth: "1500px",
+            marginInline: "auto",
+            overflow: "hidden",
+          }}
+        >
           <Box
             sx={{
               color: colors.chalk,
-              padding: "5rem",
+              padding: "5rem 0",
             }}
           >
             {children}
           </Box>
-          <Footer />
         </Box>
+        <Footer />
       </body>
     </html>
   );

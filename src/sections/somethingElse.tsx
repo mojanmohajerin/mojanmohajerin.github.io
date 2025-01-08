@@ -38,7 +38,7 @@ export const SomethingElse = () => {
         sx={{
           position: "absolute",
           top: -50,
-          left: scrollPosition < 1200 ? -1000 + scrollPosition : 200,
+          left: scrollPosition < 900 ? -700 + scrollPosition : 200,
           zIndex: 0,
           height: 550,
           width: 1150,
@@ -47,7 +47,7 @@ export const SomethingElse = () => {
           transition: "left 0.1s",
         }}
       />
-      <Stack direction="column" spacing={5} sx={{ zIndex: 1 }}>
+      <Stack spacing={5} sx={{ zIndex: 1 }}>
         <Typography variant="h2" sx={{ textShadow: "2px 2px 4px #000000" }}>
           Going off topic...
         </Typography>

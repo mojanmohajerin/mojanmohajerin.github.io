@@ -60,7 +60,6 @@ export const ProjectModal = ({ open, setOpen, project }: ProjectModalProps) => {
           }}
         >
           <Stack
-            direction="column"
             spacing={2}
             justifyContent="space-between"
             alignItems="flex-start"
@@ -109,7 +108,6 @@ export const ProjectModal = ({ open, setOpen, project }: ProjectModalProps) => {
               <XCloseButton handleClose={handleClose} />
             </Box>
             <Stack
-              direction="column"
               spacing={2}
               justifyContent="flex-start"
               alignItems="flex-start"
@@ -131,7 +129,6 @@ export const ProjectModal = ({ open, setOpen, project }: ProjectModalProps) => {
                 </Typography>
               </Stack>
               <Stack
-                direction="column"
                 spacing={2}
                 justifyContent="space-between"
                 alignItems="flex-start"

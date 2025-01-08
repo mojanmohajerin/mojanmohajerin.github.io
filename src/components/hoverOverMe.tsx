@@ -32,7 +32,7 @@ export const HoverOverMe = () => {
       }}
     >
       <Button disableRipple onClick={handleClick} sx={{}}>
-        <Stack direction="column" spacing={1} alignItems="center">
+        <Stack spacing={1} alignItems="center">
           <Typography
             variant="overline"
             sx={{

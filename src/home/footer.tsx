@@ -11,7 +11,6 @@ import { YoutubeIcon } from "../assets/socialIcons/youtubeIcon";
 export const Footer = () => {
   return (
     <Stack
-      direction="column"
       spacing={5}
       justifyContent="space-between"
       sx={{
@@ -36,12 +35,7 @@ export const Footer = () => {
         <GithubIcon />
         <StylishDivider />
       </Stack>
-      <Stack
-        direction="column"
-        spacing={0}
-        justifyContent="center"
-        alignItems="center"
-      >
+      <Stack spacing={0} justifyContent="center" alignItems="center">
         <Typography variant="body2">
           {`Website developed with Next.js and Material-UI.`}
         </Typography>

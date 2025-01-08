@@ -61,7 +61,6 @@ const TimelineBlock = ({
     <TimelineItem
       ref={timelineItemRef}
       sx={{
-        position: "relative",
         "&:hover .timeline-dot": {
           backgroundColor: colors.base.dark,
           transition: "background-color 0.5s ease-in-out",
@@ -74,7 +73,6 @@ const TimelineBlock = ({
             sx={{ position: "absolute", top: 0, right: -50, width: "50%" }}
           >
             <Stack
-              direction="column"
               spacing={4}
               sx={{
                 padding: 3,
@@ -85,12 +83,8 @@ const TimelineBlock = ({
             >
               {life[year].map((milestone: Milestone, index: number) => {
                 return (
-                  <Stack
-                    key={`${milestone.date}-${milestone.place}`}
-                    direction="column"
-                    spacing={0}
-                  >
-                    <Stack direction="column" spacing={0}>
+                  <Stack key={`${milestone.date}-${milestone.place}`}>
+                    <Stack>
                       {index === 0 ||
                       (index > 0 &&
                         milestone.date !== life[year][index - 1].date) ? (
@@ -115,14 +109,12 @@ const TimelineBlock = ({
                         >
                           {`${milestone.place}, ${milestone.country}`}
                         </Typography>
-                        {milestone.image ? (
-                          <Image
-                            src={milestone.image}
-                            alt={milestone.country}
-                            height={15}
-                            width={25}
-                          />
-                        ) : null}
+                        <Image
+                          src={milestone.image}
+                          alt={milestone.country}
+                          height={15}
+                          width={25}
+                        />
                       </Stack>
                     </Stack>
                     <Typography
@@ -179,7 +171,7 @@ const TimelineBlock = ({
           />
         ) : null}
       </TimelineSeparator>
-      <TimelineContent sx={{ width: "50%" }}>
+      <TimelineContent>
         <Button
           onClick={() => handleClick(year)}
           disableFocusRipple
@@ -206,7 +198,7 @@ const TimelineBlock = ({
 
 export const Experience = ({ activeYear, setActiveYear }: ExperienceProps) => {
   return (
-    <Box sx={{ paddingTop: "2rem", width: "100%" }}>
+    <Box>
       <Timeline position="left">
         <TimelineItem>
           <TimelineSeparator>

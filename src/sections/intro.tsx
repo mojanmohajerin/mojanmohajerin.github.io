@@ -71,7 +71,7 @@ export const Intro = () => {
           height={profileImageSize}
         />
       </Box>
-      <Stack direction="column" spacing={5} sx={{ zIndex: 1 }}>
+      <Stack spacing={5} sx={{ zIndex: 1 }}>
         <Typography variant="h2" sx={{ textShadow: "2px 2px 4px #000000" }}>
           {`Hi, I'm Mo!`}
         </Typography>

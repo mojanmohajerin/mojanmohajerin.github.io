@@ -53,7 +53,6 @@ export const ContactMe = () => {
   return (
     <>
       <Stack
-        direction="column"
         spacing={5}
         justifyContent="center"
         alignItems="flex-start"
@@ -81,7 +80,7 @@ export const ContactMe = () => {
         >
           {() => (
             <Form>
-              <Stack direction="column" spacing={2} sx={{ paddingX: 5 }}>
+              <Stack spacing={2} sx={{ paddingX: 5 }}>
                 <InputField name="Name" type="name" />
                 <InputField name="Email" type="email" />
                 <InputField

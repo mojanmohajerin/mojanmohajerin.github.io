@@ -45,7 +45,7 @@ export const BitAboutMe = () => {
           transition: "left 0.1s",
         }}
       />
-      <Stack direction="column" spacing={5} sx={{ zIndex: 1 }}>
+      <Stack spacing={5} sx={{ zIndex: 1 }}>
         <Typography variant="h2" sx={{ textShadow: "2px 2px 4px #000000" }}>
           A bit about me...
         </Typography>

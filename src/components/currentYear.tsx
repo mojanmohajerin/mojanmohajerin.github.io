@@ -33,56 +33,36 @@ export const CurrentYear = ({
           zIndex: -1,
         }}
       />
-      <Stack
-        direction="column"
-        spacing={1.5}
-        justifyContent="center"
-        alignItems="flex-start"
-      >
-        {index > 0 ? (
-          <Button
-            disableRipple
-            onClick={() => handleClick(years[index - 1])}
-            sx={{
-              transition: "scale 0.3s ease-in-out",
-              textDecoration: "none",
-              color: colors.chalk,
-              padding: 0,
-              margin: 0,
-              "&:hover": {
-                backgroundColor: "transparent",
-                transform: "scale(1.1)",
-              },
-            }}
-          >
+      <Stack spacing={1.5} justifyContent="center" alignItems="flex-start">
+        {/* {index > 0 ? ( */}
+        <Button
+          disableRipple
+          onClick={index > 0 ? () => handleClick(years[index - 1]) : () => {}}
+          sx={{
+            transition: "scale 0.3s ease-in-out",
+            textDecoration: "none",
+            textTransform: index > 0 ? "auto" : "capitalize",
+            color: colors.chalk,
+            padding: 0,
+            "&:hover": {
+              backgroundColor: "transparent",
+              transform: "scale(1.1)",
+            },
+          }}
+        >
+          {index > 0 ? (
             <Typography
               variant="h4"
               sx={{ textShadow: "1px 1px 2px #000", paddingLeft: 1 }}
             >
               {years[index - 1]}
             </Typography>
-          </Button>
-        ) : (
-          <Button
-            disableRipple
-            sx={{
-              transition: "scale 0.3s ease-in-out",
-              textDecoration: "none",
-              textTransform: "capitalize",
-              color: colors.chalk,
-              padding: 0,
-              margin: 0,
-              "&:hover": {
-                backgroundColor: "transparent",
-                transform: "scale(1.1)",
-              },
-            }}
-          >
+          ) : (
             <Typography variant="h4" sx={{ textShadow: "1px 1px 2px #000" }}>
               {"Present"}
             </Typography>
-          </Button>
-        )}
+          )}
+        </Button>
         <StylishDividerVert />
         <Typography variant="h3" sx={{ textShadow: "1px 1px 2px #000" }}>
           {activeYear}
@@ -98,7 +78,6 @@ export const CurrentYear = ({
                 textDecoration: "none",
                 color: colors.chalk,
                 padding: 0,
-                margin: 0,
                 "&:hover": {
                   backgroundColor: "transparent",
                   transform: "scale(1.1)",
