@@ -19,7 +19,6 @@ export const InputField = ({ name, type, as, styleProps }: InputFieldProps) => {
           display: "flex",
           justifyContent: "flex-start",
           alignItems: "flex-start",
-          width: 400,
           height: 30,
           ...styleProps,
         }}
@@ -34,7 +33,7 @@ export const InputField = ({ name, type, as, styleProps }: InputFieldProps) => {
             height: "100%",
             borderRadius: "10px",
             border: "none",
-            padding: 10,
+            padding: "1em",
             fontFamily: "Arial",
           }}
         />

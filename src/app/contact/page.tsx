@@ -8,7 +8,7 @@ export default function ContactPage() {
   return (
     <Stack spacing={10}>
       <Title title="Contact" />
-      <Box sx={{ padding: "5rem" }}>
+      <Stack spacing={10} sx={{ padding: "5rem" }}>
         <Box
           sx={{
             display: "flex",
@@ -43,7 +43,7 @@ export default function ContactPage() {
             Feel free to reach out for any inquiries or just to say hi!
           </Typography>
         </Stack>
-      </Box>
+      </Stack>
     </Stack>
   );
 }

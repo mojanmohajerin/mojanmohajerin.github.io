@@ -51,79 +51,75 @@ export const ContactMe = () => {
   }
 
   return (
-    <>
-      <Stack
-        spacing={5}
-        justifyContent="center"
-        alignItems="flex-start"
-        sx={{
-          backgroundColor: "rgba(98, 149, 132, 0.5)",
-          border: `3px solid ${colors.charcoal}`,
-          borderRadius: "10px",
-          width: "50%",
-          padding: 5,
+    <Stack
+      spacing={5}
+      sx={{
+        backgroundColor: "rgba(98, 149, 132, 0.5)",
+        border: `3px solid ${colors.charcoal}`,
+        borderRadius: "10px",
+        minWidth: "400px",
+        padding: "2em",
+      }}
+    >
+      <Typography variant="h3" sx={{ textShadow: "2px 2px 4px #000" }}>
+        Send me a message!*
+      </Typography>
+      <Formik
+        initialValues={{
+          name: "",
+          email: "",
+          message: "",
+        }}
+        validationSchema={ContactMeValidation}
+        onSubmit={(values) => {
+          handleSubmit(values);
         }}
       >
-        <Typography variant="h3" sx={{ textShadow: "2px 2px 4px #000" }}>
-          Send me a message!*
-        </Typography>
-        <Formik
-          initialValues={{
-            name: "",
-            email: "",
-            message: "",
-          }}
-          validationSchema={ContactMeValidation}
-          onSubmit={(values) => {
-            handleSubmit(values);
-          }}
-        >
-          {() => (
-            <Form>
-              <Stack spacing={2} sx={{ paddingX: 5 }}>
-                <InputField name="Name" type="name" />
-                <InputField name="Email" type="email" />
-                <InputField
-                  name="Message"
-                  type="message"
-                  as="textarea"
-                  styleProps={{ height: 250 }}
-                />
-                <Stack
-                  justifyContent="center"
-                  alignItems="center"
-                  sx={{ paddingTop: 5 }}
+        {() => (
+          <Form>
+            <Stack spacing={2} sx={{ paddingX: 5 }}>
+              <InputField name="Name" type="name" />
+              <InputField name="Email" type="email" />
+              <InputField
+                name="Message"
+                type="message"
+                as="textarea"
+                styleProps={{ height: 250 }}
+              />
+              <Stack
+                justifyContent="center"
+                alignItems="center"
+                sx={{ paddingTop: 5 }}
+              >
+                <LoadingButton
+                  type="submit"
+                  loading={duringSubmission}
+                  variant="outlined"
+                  size="large"
+                  endIcon={
+                    <SvgIcon sx={{ filter: `drop-shadow(1px 1px 2px #000)` }}>
+                      <Send01 />
+                    </SvgIcon>
+                  }
+                  sx={{
+                    border: `1px solid ${colors.base.darkest}`,
+                    backgroundColor: "rgb(56, 116, 120, 0.7)",
+                    color: colors.base.lightest,
+                    paddingX: 5,
+                    textTransform: "capitalize",
+                    textShadow: duringSubmission ? null : "1px 1px 1px #000",
+                    "&:hover": {
+                      backgroundColor: colors.base.dark,
+                    },
+                  }}
                 >
-                  <LoadingButton
-                    type="submit"
-                    loading={duringSubmission}
-                    variant="outlined"
-                    size="large"
-                    endIcon={
-                      <SvgIcon sx={{ filter: `drop-shadow(1px 1px 2px #000)` }}>
-                        <Send01 />
-                      </SvgIcon>
-                    }
-                    sx={{
-                      border: `1px solid ${colors.base.darkest}`,
-                      backgroundColor: "rgb(56, 116, 120, 0.7)",
-                      color: colors.base.lightest,
-                      paddingX: 5,
-                      textTransform: "capitalize",
-                      textShadow: duringSubmission ? null : "1px 1px 1px #000",
-                      "&:hover": {
-                        backgroundColor: colors.base.dark,
-                      },
-                    }}
-                  >
-                    Submit
-                  </LoadingButton>
-                </Stack>
+                  Submit
+                </LoadingButton>
               </Stack>
-            </Form>
-          )}
-        </Formik>
-      </Stack>
-    </>
+            </Stack>
+          </Form>
+        )}
+      </Formik>
+    </Stack>
   );
 };

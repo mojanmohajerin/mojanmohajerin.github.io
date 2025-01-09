@@ -37,7 +37,7 @@ export const Footer = () => {
       </Stack>
       <Stack spacing={0} justifyContent="center" alignItems="center">
         <Typography variant="body2">
-          {`Website developed with Next.js and Material-UI.`}
+          {`Website developed with Next.js and React. Hosted on GitHub.`}
         </Typography>
         <Typography variant="body2">
           {`© 2025 Mo's Website. All rights reserved.`}
