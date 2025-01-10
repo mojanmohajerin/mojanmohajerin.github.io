@@ -57,7 +57,7 @@ export const ContactMe = () => {
         backgroundColor: "rgba(98, 149, 132, 0.5)",
         border: `3px solid ${colors.charcoal}`,
         borderRadius: "10px",
-        minWidth: "400px",
+        minWidth: "350px",
         padding: "2em",
       }}
     >

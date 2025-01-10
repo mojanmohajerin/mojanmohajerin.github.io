@@ -7,15 +7,17 @@ import { colors } from "@/styles/colors";
 interface NavLinkProps {
   title: string;
   href: string;
+  onClick?: () => void;
 }
 
-export const NavLink = ({ title, href }: NavLinkProps) => {
+export const NavLink = ({ title, href, onClick }: NavLinkProps) => {
   const params = usePathname();
 
   return (
     <Button
       component={Link}
       href={href}
+      onClick={onClick}
       sx={{
         transition: "transform 0.3s",
         borderRadius: "50%",

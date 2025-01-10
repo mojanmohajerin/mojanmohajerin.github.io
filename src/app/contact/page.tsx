@@ -19,27 +19,28 @@ export default function ContactPage() {
           <ContactMe />
         </Box>
         <Stack
-          spacing={3}
+          spacing={1}
           justifyContent="center"
           alignItems="center"
-          sx={{ color: colors.base.darkest }}
+          sx={{ color: colors.base.darkest, width: "100%" }}
         >
-          <Stack spacing={1} justifyContent="center" alignItems="center">
-            <Typography variant="h5" sx={{ textShadow: "1px 1px 1px #000" }}>
-              *Or you can contact me directly with one of the social media links
-              below, or at:
-            </Typography>
-            <Typography
-              variant="h5"
-              sx={{
-                textShadow: "1px 1px 1px #000",
-                textDecoration: "underline",
-              }}
-            >
-              mojan.mohajerin@gmail.com
-            </Typography>
-          </Stack>
           <Typography variant="h5" sx={{ textShadow: "1px 1px 1px #000" }}>
+            *Or you can contact me directly with one of the social media links
+            below, or at:
+          </Typography>
+          <Typography
+            variant="h5"
+            sx={{
+              textShadow: "1px 1px 1px #000",
+              textDecoration: "underline",
+            }}
+          >
+            mojan.mohajerin@gmail.com
+          </Typography>
+          <Typography
+            variant="h5"
+            sx={{ textShadow: "1px 1px 1px #000", paddingTop: "1em" }}
+          >
             Feel free to reach out for any inquiries or just to say hi!
           </Typography>
         </Stack>

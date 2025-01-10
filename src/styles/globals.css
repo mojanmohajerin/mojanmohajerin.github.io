@@ -77,3 +77,19 @@ a {
   z-index: -1;
   pointer-events: none;
 }
+
+.drawer-background::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    to right,
+    rgba(36, 54, 66, 0.7) 0%,
+    rgba(36, 54, 66, 0.4) 100%
+  );
+  z-index: -1;
+  pointer-events: none;
+}

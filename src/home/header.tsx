@@ -1,17 +1,30 @@
 "use client";
 
-import { Box, Stack, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Stack,
+  SvgIcon,
+  Typography,
+  useMediaQuery,
+} from "@mui/material";
+import { Menu01 } from "@untitled-ui/icons-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
 import { NavLink } from "@/components/nav-link";
 import { paths } from "@/paths";
+import { NavDrawer } from "@/sections/navDrawer";
 import { colors } from "@/styles/colors";
 import cartoonImage from "../assets/cartoon-image.png";
 
 export const Header = () => {
+  const xs = useMediaQuery("(min-width:450px)");
+  const md = useMediaQuery("(min-width:900px)");
+
   const [scrollPosition, setScrollPosition] = useState(0);
+  const [open, setOpen] = useState<boolean>(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -26,6 +39,10 @@ export const Header = () => {
   }, []);
 
   const cartoonImageSize = scrollPosition < 50 ? 100 : 50;
+
+  const handleClick = () => {
+    setOpen(true);
+  };
 
   return (
     <Box sx={{ position: "relative" }}>
@@ -68,26 +85,39 @@ export const Header = () => {
                 }}
               />
             </Box>
-            <Typography
-              variant="h4"
-              sx={{ color: colors.chalk, textShadow: "1px 1px 1px #000000" }}
-            >
-              Mojan Mohajerin
-            </Typography>
+            {xs ? (
+              <Typography
+                variant="h4"
+                sx={{ color: colors.chalk, textShadow: "1px 1px 1px #000000" }}
+              >
+                Mojan Mohajerin
+              </Typography>
+            ) : null}
           </Stack>
         </Link>
-        <Stack
-          direction="row"
-          spacing={3}
-          justifyContent="center"
-          alignItems="center"
-        >
-          <NavLink title="Home" href={paths.home} />
-          <NavLink title="Timeline" href={paths.experience} />
-          <NavLink title="Projects" href={paths.projects} />
-          <NavLink title="Photo Gallery" href={paths.photo_gallery} />
-          <NavLink title="Contact" href={paths.contact} />
-        </Stack>
+        {md ? (
+          <Stack
+            direction="row"
+            spacing={3}
+            justifyContent="center"
+            alignItems="center"
+          >
+            <NavLink title="Home" href={paths.home} />
+            <NavLink title="Timeline" href={paths.experience} />
+            <NavLink title="Projects" href={paths.projects} />
+            <NavLink title="Photo Gallery" href={paths.photo_gallery} />
+            <NavLink title="Contact" href={paths.contact} />
+          </Stack>
+        ) : (
+          <>
+            <Button onClick={handleClick}>
+              <SvgIcon sx={{ color: colors.base.lightest }}>
+                <Menu01 />
+              </SvgIcon>
+            </Button>
+            <NavDrawer open={open} setOpen={setOpen} />
+          </>
+        )}
       </Stack>
     </Box>
   );
