@@ -13,8 +13,12 @@ export const ExperiencePageBody = () => {
   const [activeYear, setActiveYear] = useState<number>(years[0]);
 
   return (
-    <Box sx={{ padding: "5rem" }}>
-      <Experience activeYear={activeYear} setActiveYear={setActiveYear} />
+    <Box sx={{ padding: { xs: 0, md: "5em" } }}>
+      <Experience
+        activeYear={activeYear}
+        setActiveYear={setActiveYear}
+        md={md}
+      />
       {md ? (
         <CurrentYear activeYear={activeYear} setActiveYear={setActiveYear} />
       ) : null}

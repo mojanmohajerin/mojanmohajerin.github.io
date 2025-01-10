@@ -9,11 +9,8 @@ export const Title = ({ title, additionalText }: TitleProps) => {
   return (
     <Box
       sx={{
-        // position: "absolute",
-        // left: 0,
         background: `linear-gradient(90deg, rgba(98,149,132,0.6) 0%, rgba(0,212,255,0) 80%)`,
         width: "50%",
-        // opacity: 0.6,
         zIndex: -1,
         paddingTop: "1rem",
         paddingLeft: "2rem",

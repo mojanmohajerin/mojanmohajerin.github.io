@@ -21,6 +21,7 @@ import Image from "next/image";
 interface ExperienceProps {
   activeYear: number;
   setActiveYear: (activeYear: number) => void;
+  md: boolean;
 }
 
 interface TimelineBlockProps {
@@ -28,6 +29,7 @@ interface TimelineBlockProps {
   connector: boolean;
   activeYear: number;
   setActiveYear: (year: number) => void;
+  md: boolean;
 }
 
 const TimelineBlock = ({
@@ -35,6 +37,7 @@ const TimelineBlock = ({
   connector,
   activeYear,
   setActiveYear,
+  md,
 }: TimelineBlockProps) => {
   const indexInArray = years.indexOf(year);
   const connectorHeight = 80 * (years[indexInArray] - years[indexInArray + 1]);
@@ -61,6 +64,7 @@ const TimelineBlock = ({
     <TimelineItem
       ref={timelineItemRef}
       sx={{
+        position: "relative",
         "&:hover .timeline-dot": {
           backgroundColor: colors.base.dark,
           transition: "background-color 0.5s ease-in-out",
@@ -70,7 +74,13 @@ const TimelineBlock = ({
       {year === activeYear ? (
         <>
           <TimelineOppositeContent
-            sx={{ position: "absolute", top: 0, right: -50, width: "50%" }}
+            sx={{
+              position: "absolute",
+              top: 0,
+              right: { xs: -30, md: -50 },
+              width: { xs: "100%", md: "50%" },
+              zIndex: 5,
+            }}
           >
             <Stack
               spacing={4}
@@ -135,83 +145,127 @@ const TimelineBlock = ({
           </TimelineOppositeContent>
         </>
       ) : null}
-      <TimelineSeparator>
-        <Button
-          onClick={() => handleClick(year)}
-          disableFocusRipple
-          disableRipple
-          sx={{
-            "&:hover": {
-              backgroundColor: "transparent",
-              color: "transparent",
-            },
-          }}
-        >
-          <TimelineDot
-            variant="outlined"
-            className="timeline-dot"
+      {md && (
+        <TimelineSeparator>
+          <Button
+            onClick={() => handleClick(year)}
+            disableFocusRipple
+            disableRipple
             sx={{
-              height: dotSize,
-              width: dotSize,
-              borderColor:
-                activeYear === year ? colors.base.dark : colors.base.lightest,
-              backgroundColor:
-                activeYear === year ? colors.base.dark : colors.base.lightest,
-              borderWidth: 9,
+              "&:hover": {
+                backgroundColor: "transparent",
+                color: "transparent",
+              },
             }}
-          />
-        </Button>
-        {connector ? (
-          <TimelineConnector
-            sx={{
-              height: connectorHeight,
-              width: 4,
-              backgroundColor: colors.charcoal,
-            }}
-          />
-        ) : null}
-      </TimelineSeparator>
-      <TimelineContent>
-        <Button
-          onClick={() => handleClick(year)}
-          disableFocusRipple
-          disableRipple
-          sx={{
-            "&:hover": {
-              backgroundColor: "transparent",
-              color: "transparent",
-            },
-          }}
-        >
-          <Typography
-            color={colors.chalk}
-            variant="h4"
-            sx={{ textShadow: "2px 2px 4px #000000" }}
           >
-            {year}
-          </Typography>
-        </Button>
-      </TimelineContent>
-    </TimelineItem>
-  );
-};
-
-export const Experience = ({ activeYear, setActiveYear }: ExperienceProps) => {
-  return (
-    <Box>
-      <Timeline position="left">
-        <TimelineItem>
-          <TimelineSeparator>
+            <TimelineDot
+              variant="outlined"
+              className="timeline-dot"
+              sx={{
+                height: dotSize,
+                width: dotSize,
+                borderColor:
+                  activeYear === year ? colors.base.dark : colors.base.lightest,
+                backgroundColor:
+                  activeYear === year ? colors.base.dark : colors.base.lightest,
+                borderWidth: 9,
+              }}
+            />
+          </Button>
+          {connector ? (
             <TimelineConnector
               sx={{
-                height: 50,
+                height: connectorHeight,
                 width: 4,
                 backgroundColor: colors.charcoal,
               }}
             />
-          </TimelineSeparator>
-          <TimelineContent />
-        </TimelineItem>
+          ) : null}
+        </TimelineSeparator>
+      )}
+      {!md ? (
+        <Stack sx={{ position: "absolute", left: -35, top: 0 }}>
+          <TimelineContent>
+            <Button
+              onClick={() => handleClick(year)}
+              disableFocusRipple
+              disableRipple
+              sx={{
+                transform: "rotate(-40deg)",
+                "&:hover": {
+                  backgroundColor: "transparent",
+                  color: "transparent",
+                },
+              }}
+            >
+              <Typography
+                color={colors.chalk}
+                variant="h4"
+                sx={{
+                  textShadow: "2px 2px 4px #000000",
+                  fontWeight: year === activeYear ? "bold" : "none",
+                }}
+              >
+                {year}
+              </Typography>
+            </Button>
+          </TimelineContent>
+        </Stack>
+      ) : (
+        <>
+          <TimelineContent>
+            <Button
+              onClick={() => handleClick(year)}
+              disableFocusRipple
+              disableRipple
+              sx={{
+                transform: "rotate(-40deg)",
+                "&:hover": {
+                  backgroundColor: "transparent",
+                  color: "transparent",
+                },
+              }}
+            >
+              <Typography
+                color={colors.chalk}
+                variant="h4"
+                sx={{
+                  textShadow: "2px 2px 4px #000000",
+                  fontWeight: year === activeYear ? "bold" : "none",
+                }}
+              >
+                {year}
+              </Typography>
+            </Button>
+          </TimelineContent>
+        </>
+      )}
+    </TimelineItem>
+  );
+};
+
+export const Experience = ({
+  activeYear,
+  setActiveYear,
+  md,
+}: ExperienceProps) => {
+  return (
+    <Box>
+      <Timeline position="left">
+        {md && (
+          <TimelineItem>
+            <TimelineSeparator>
+              <TimelineConnector
+                sx={{
+                  height: 50,
+                  width: 4,
+                  backgroundColor: colors.charcoal,
+                }}
+              />
+            </TimelineSeparator>
+            <TimelineContent />
+          </TimelineItem>
+        )}
         {years.map((year, index) => (
           <TimelineBlock
             key={year}
@@ -219,6 +273,7 @@ export const Experience = ({ activeYear, setActiveYear }: ExperienceProps) => {
             connector={index !== years.length - 1}
             activeYear={activeYear}
             setActiveYear={setActiveYear}
+            md={md}
           />
         ))}
       </Timeline>
