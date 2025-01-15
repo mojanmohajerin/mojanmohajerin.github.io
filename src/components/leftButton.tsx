@@ -30,12 +30,12 @@ export const LeftButton = ({
           top: 0,
           left: 0,
           bottom: 0,
-          paddingLeft: 2,
+          paddingLeft: { xs: 0, md: 2 },
           width: "25%",
           display: "flex",
           justifyContent: "flex-start",
           alignItems: "center",
-          opacity: 0,
+          opacity: { xs: 0.7, md: 0 },
           transition: "opacity 0.3s",
           "&:hover": {
             opacity: 0.7,
@@ -62,7 +62,10 @@ export const LeftButton = ({
               alignItems: "center",
               border: `1px solid ${colors.chalk}`,
               "&:hover": {
-                backgroundColor: colors.base.dark,
+                backgroundColor: {
+                  xs: null,
+                  md: colors.base.dark,
+                },
               },
             }}
           >

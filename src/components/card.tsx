@@ -110,7 +110,8 @@ export const CardUnit = ({ project }: CardUnitProps) => {
                       key={`${project.name}-${tech}`}
                       sx={{
                         backgroundColor: "rgba(226, 241, 231, 0.5)",
-                        borderRadius: "50%",
+                        borderRadius: "100px",
+                        border: `1px solid ${colors.charcoal}`,
                         padding: 1,
                       }}
                     >

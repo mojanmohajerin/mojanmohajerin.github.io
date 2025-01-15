@@ -30,12 +30,12 @@ export const RightButton = ({
           top: 0,
           right: 0,
           bottom: 0,
-          paddingRight: 2,
+          paddingRight: { xs: 0, md: 2 },
           width: "25%",
           display: "flex",
           justifyContent: "flex-end",
           alignItems: "center",
-          opacity: 0,
+          opacity: { xs: 0.7, md: 0 },
           transition: "opacity 0.3s",
           "&:hover": {
             opacity: 0.7,
@@ -62,7 +62,8 @@ export const RightButton = ({
               alignItems: "center",
               border: `1px solid ${colors.chalk}`,
               "&:hover": {
-                backgroundColor: colors.base.dark,
+                xs: null,
+                md: colors.base.dark,
               },
             }}
           >

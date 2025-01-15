@@ -53,15 +53,7 @@ export const projects = [
     description:
       "The SquareKicker Template Store is a groundbreaking extension of the Squarespace ecosystem. It is an online marketplace environment allowing Squarespace users to browse hundreds of premium Squarespace templates across a variety of categories. The Template Store is the first of it's kind, an innovative product integrating template creators and end users in one convenient platform.",
     date: "Mar, 2024",
-    technologies: [
-      "Typescript",
-      "React",
-      "Next.js",
-      "GraphQL",
-      "Strapi",
-      "Stripe",
-      "Vercel",
-    ],
+    technologies: ["Typescript", "React", "Next.js", "GraphQL", "Vercel"],
     url: "https://store.squarekicker.com/templates",
   },
 ];
