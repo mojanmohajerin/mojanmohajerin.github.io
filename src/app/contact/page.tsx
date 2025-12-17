@@ -22,7 +22,7 @@ export default function ContactPage() {
           spacing={1}
           justifyContent="center"
           alignItems="center"
-          sx={{ color: colors.base.darkest, width: "100%" }}
+          sx={{ color: colors.base.lightest, width: "100%" }}
         >
           <Typography variant="h5" sx={{ textShadow: "1px 1px 1px #000" }}>
             *Or you can contact me directly with one of the social media links

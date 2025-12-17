@@ -10,6 +10,7 @@ import tpsLogo from "../assets/experiencePagePhotos/tps-logo.png";
 import thsLogo from "../assets/experiencePagePhotos/tuzza-logo.png";
 import usydLogo from "../assets/experiencePagePhotos/usyd-logo.webp";
 import victorySchoolLogo from "../assets/experiencePagePhotos/victory-school-logo.jpeg";
+import m2laboLogo from "../assets/experiencePagePhotos/m2labo-logo.png";
 
 export interface Milestone {
   date: string;
@@ -24,10 +25,19 @@ interface Life {
 }
 
 export const years = [
-  2024, 2022, 2021, 2020, 2019, 2018, 2015, 2014, 2009, 2002, 1996,
+  2025, 2024, 2022, 2021, 2020, 2019, 2018, 2015, 2014, 2009, 2002, 1996,
 ];
 
 export const life: Life = {
+  2025: [
+    {
+      date: "Mar",
+      place: "M2Labo",
+      country: "Japan",
+      image: m2laboLogo,
+      event: "Started work.\nRole: Systems Engineer",
+    },
+  ],
   2024: [
     {
       date: "Dec",
