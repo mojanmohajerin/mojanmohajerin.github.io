@@ -32,7 +32,12 @@ export default function RootLayout({
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable}`}
-        style={{ position: "relative", minHeight: "100svh" }}
+        style={{
+          position: "relative",
+          minHeight: "100svh",
+          display: "flex",
+          flexDirection: "column",
+        }}
       >
         <Box className="background-image" />
         <Header />
@@ -41,6 +46,8 @@ export default function RootLayout({
             maxWidth: "1500px",
             marginInline: "auto",
             overflow: "hidden",
+            width: "100%",
+            flex: "1 0 auto",
           }}
         >
           <Box

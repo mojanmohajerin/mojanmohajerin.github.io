@@ -30,43 +30,44 @@ export const LeftButton = ({
           top: 0,
           left: 0,
           bottom: 0,
-          paddingLeft: { xs: 0, md: 2 },
-          width: "25%",
+          paddingLeft: { xs: 1, md: 2 },
+          width: "18%",
           display: "flex",
           justifyContent: "flex-start",
           alignItems: "center",
-          opacity: { xs: 0.7, md: 0 },
+          opacity: { xs: 1, md: 0.72 },
           transition: "opacity 0.3s",
           "&:hover": {
-            opacity: 0.7,
+            opacity: 1,
           },
         }}
       >
         <Button
-          variant="outlined"
+          aria-label="Show previous project image"
           onClick={handleClick}
           sx={{
-            borderColor: "transparent",
-            color: "transparent",
+            minWidth: 0,
+            p: 0,
+            borderRadius: "50%",
+            backgroundColor: "rgba(255, 254, 249, 0.88)",
+            color: colors.charcoal,
+            boxShadow: "0 6px 20px rgba(0, 0, 0, 0.24)",
+            transition:
+              "background-color 0.2s ease-in-out, transform 0.2s ease-in-out",
+            "&:hover": {
+              backgroundColor: colors.chalk,
+              transform: "scale(1.08)",
+            },
           }}
         >
           <Box
             sx={{
-              backgroundColor: colors.base.darkest,
-              color: colors.chalk,
-              height: 40,
-              width: 30,
+              height: 42,
+              width: 42,
               borderRadius: "50%",
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
-              border: `1px solid ${colors.chalk}`,
-              "&:hover": {
-                backgroundColor: {
-                  xs: null,
-                  md: colors.base.dark,
-                },
-              },
             }}
           >
             <SvgIcon>

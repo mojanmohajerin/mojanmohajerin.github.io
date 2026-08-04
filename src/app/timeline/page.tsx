@@ -5,8 +5,12 @@ import { Title } from "@/sections/title";
 
 export default function ExperiencePage() {
   return (
-    <Box>
-      <Title title="My life story" additionalText="(in a nutshell)" />
+    <Box sx={{ mt: "-3rem", mb: "-3rem" }}>
+      <Title
+        title="My life story"
+        additionalText="(in a nutshell)"
+        bottomSpacing="0"
+      />
       <ExperiencePageBody />
     </Box>
   );

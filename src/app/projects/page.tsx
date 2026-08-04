@@ -7,7 +7,7 @@ import { projects } from "../../data/projects";
 export default function ProjectsPage() {
   return (
     <>
-      <Title title="Some personal projects" />
+      <Title title="Some personal projects" bottomSpacing="2rem" />
       <Box
         sx={{
           display: "grid",

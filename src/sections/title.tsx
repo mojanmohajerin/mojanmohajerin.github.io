@@ -3,9 +3,14 @@ import { Box, Typography } from "@mui/material";
 interface TitleProps {
   title: string;
   additionalText?: string;
+  bottomSpacing?: string;
 }
 
-export const Title = ({ title, additionalText }: TitleProps) => {
+export const Title = ({
+  title,
+  additionalText,
+  bottomSpacing = "10rem",
+}: TitleProps) => {
   return (
     <Box
       sx={{
@@ -15,7 +20,7 @@ export const Title = ({ title, additionalText }: TitleProps) => {
         paddingTop: "1rem",
         paddingLeft: "2rem",
         paddingBottom: "4rem",
-        marginBottom: "10rem",
+        marginBottom: bottomSpacing,
       }}
     >
       <Typography

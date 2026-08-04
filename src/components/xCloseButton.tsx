@@ -14,14 +14,14 @@ export const XCloseButton: FC<XCloseButtonProps> = ({ handleClose }) => {
     <Button
       onClick={handleClose}
       sx={{
-        color: colors.red,
+        color: "#000000",
         transform: "scale(1)",
-        transition: "transform 0.2s ease-in-out",
+        transition: "color 0.2s ease-in-out, transform 0.2s ease-in-out",
 
         "&:hover": {
           backgroundColor: "transparent",
+          color: colors.red,
           transform: "scale(1.2) rotate(90deg)",
-          transition: "transform 0.2s ease-in-out",
         },
       }}
       disableRipple
