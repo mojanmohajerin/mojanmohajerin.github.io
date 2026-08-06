@@ -25,10 +25,19 @@ interface Life {
 }
 
 export const years = [
-  2025, 2024, 2022, 2021, 2020, 2019, 2018, 2015, 2014, 2009, 2002, 1996,
+  2026, 2025, 2024, 2022, 2021, 2020, 2019, 2018, 2015, 2014, 2009, 2002, 1996,
 ];
 
 export const life: Life = {
+  2026: [
+    {
+      date: "Sept",
+      place: "M2Labo",
+      country: "Japan",
+      image: m2laboLogo,
+      event: "Resigned.\nRole: Systems Engineer",
+    },
+  ],
   2025: [
     {
       date: "Mar",

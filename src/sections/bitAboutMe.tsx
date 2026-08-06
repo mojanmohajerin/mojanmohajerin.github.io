@@ -1,28 +1,20 @@
 "use client";
 
 import { Box, Stack, Typography } from "@mui/material";
-import { useEffect, useState } from "react";
+import { useRef } from "react";
 
+import { useScrollIntoViewProgress } from "@/hooks/useScrollIntoViewProgress";
 import { colors } from "@/styles/colors";
 import "../styles/effects.css";
 
 export const BitAboutMe = () => {
-  const [scrollPosition, setScrollPosition] = useState(0);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrollPosition(window.scrollY);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const scrollProgress = useScrollIntoViewProgress(sectionRef);
+  const rectangleOffset = 260 - scrollProgress * 520;
 
   return (
     <Stack
+      ref={sectionRef}
       direction="row"
       spacing={5}
       justifyContent="center"
@@ -30,19 +22,23 @@ export const BitAboutMe = () => {
       sx={{
         color: colors.chalk,
         position: "relative",
+        zIndex: 0,
       }}
     >
       <Box
         sx={{
           position: "absolute",
           top: -50,
-          left: scrollPosition < 600 ? 600 - scrollPosition : 0,
+          left: "50%",
+          transform: `translateX(calc(-50% + ${rectangleOffset}px))`,
           zIndex: 0,
           height: 600,
-          width: 1000,
+          width: { xs: "calc(100vw - 2rem)", md: 1000 },
           backgroundColor: colors.base.light,
           opacity: 0.4,
-          transition: "left 0.1s",
+          pointerEvents: "none",
+          transition: "transform 0.1s",
+          willChange: "transform",
         }}
       />
       <Stack spacing={5} sx={{ zIndex: 1 }}>

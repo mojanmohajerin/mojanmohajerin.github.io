@@ -2,32 +2,23 @@
 
 import { Box, Grid2, Stack, Typography } from "@mui/material";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useRef } from "react";
 
 import { HoverOverMe } from "@/components/hoverOverMe";
+import { useScrollIntoViewProgress } from "@/hooks/useScrollIntoViewProgress";
 import { colors } from "@/styles/colors";
 import profileImage from "../assets/portrait-headshot.jpg";
 import "../styles/effects.css";
 
 export const Intro = () => {
   const profileImageSize = 400;
-
-  const [scrollPosition, setScrollPosition] = useState(0);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrollPosition(window.scrollY);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const scrollProgress = useScrollIntoViewProgress(sectionRef);
+  const rectangleOffset = -260 + scrollProgress * 520;
 
   return (
     <Grid2
+      ref={sectionRef}
       container
       spacing={5}
       justifyContent="center"
@@ -36,22 +27,26 @@ export const Intro = () => {
         color: colors.chalk,
         padding: "1em",
         position: "relative",
+        zIndex: 0,
       }}
     >
       <Box
         sx={{
           position: "absolute",
           top: -50,
-          left: 150 + scrollPosition * 0.9,
-          zIndex: -2,
+          left: "50%",
+          transform: `translateX(calc(-50% + ${rectangleOffset}px))`,
+          zIndex: 0,
           height: 550,
-          width: 1200,
+          width: { xs: "calc(100vw - 2rem)", md: 1200 },
           backgroundColor: colors.base.light,
           opacity: 0.4,
-          transition: "left 0.1s",
+          pointerEvents: "none",
+          transition: "transform 0.1s",
+          willChange: "transform",
         }}
       />
-      <Grid2 size={{ xs: 12, md: 4 }}>
+      <Grid2 size={{ xs: 12, md: 4 }} sx={{ position: "relative", zIndex: 1 }}>
         <Box
           sx={{
             borderRadius: "50%",
@@ -73,7 +68,7 @@ export const Intro = () => {
           />
         </Box>
       </Grid2>
-      <Grid2 size={{ xs: 12, md: 8 }}>
+      <Grid2 size={{ xs: 12, md: 8 }} sx={{ position: "relative", zIndex: 1 }}>
         <Stack spacing={5} sx={{ zIndex: 1 }}>
           <Typography variant="h2" sx={{ textShadow: "2px 2px 4px #000000" }}>
             {`Hi, I'm Mo!`}
