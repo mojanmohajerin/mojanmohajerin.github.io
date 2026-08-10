@@ -2,6 +2,7 @@ import { Box } from "@mui/material";
 
 import { ExperiencePageBody } from "@/sections/experiencePageBody";
 import { Title } from "@/sections/title";
+import { WorkExperience } from "@/sections/workExperience";
 
 export default function ExperiencePage() {
   return (
@@ -12,6 +13,7 @@ export default function ExperiencePage() {
         bottomSpacing="0"
       />
       <ExperiencePageBody />
+      <WorkExperience />
     </Box>
   );
 }

@@ -7,33 +7,48 @@ import { colors } from "@/styles/colors";
 interface CurrentYearProps {
   activeYear: number;
   setActiveYear: (activeYear: number) => void;
+  onTimelineClick: () => void;
 }
 
 export const CurrentYear = ({
   activeYear,
   setActiveYear,
+  onTimelineClick,
 }: CurrentYearProps) => {
+  const navRef = useRef<HTMLElement>(null);
   const activeButtonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
-    activeButtonRef.current?.scrollIntoView({
-      block: "center",
+    const nav = navRef.current;
+    const activeButton = activeButtonRef.current;
+
+    if (!nav || !activeButton) {
+      return;
+    }
+
+    nav.scrollTo({
+      top:
+        activeButton.offsetTop -
+        nav.clientHeight / 2 +
+        activeButton.clientHeight / 2,
       behavior: "smooth",
     });
   }, [activeYear]);
 
   const handleClick = (yearNav: number) => {
+    onTimelineClick();
     setActiveYear(yearNav);
   };
 
   return (
     <Box
+      ref={navRef}
       component="nav"
       aria-label="Timeline years"
       sx={{
-        position: "fixed",
-        top: "50%",
-        right: { md: 36, lg: 64 },
+        position: "absolute",
+        top: "42%",
+        right: { md: -12, lg: 0 },
         transform: "translateY(-50%)",
         width: 170,
         maxHeight: 170,

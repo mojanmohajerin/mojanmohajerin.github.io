@@ -11,9 +11,10 @@ import {
   TimelineOppositeContent,
   TimelineSeparator,
 } from "@mui/lab";
-import { Box, Button, Stack, Typography } from "@mui/material";
+import { Box, Button, Stack, SvgIcon, Typography } from "@mui/material";
+import { ArrowBlockDown } from "@untitled-ui/icons-react";
 import type { MouseEvent } from "react";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
 import { life, years } from "@/data/life";
 import { colors } from "@/styles/colors";
@@ -22,8 +23,9 @@ import Image from "next/image";
 interface ExperienceProps {
   activeYear: number;
   setActiveYear: (activeYear: number) => void;
-  scrollToActiveToken: number;
   md: boolean;
+  showPrompt: boolean;
+  onTimelineClick: () => void;
 }
 
 interface TimelineBlockProps {
@@ -31,9 +33,10 @@ interface TimelineBlockProps {
   connector: boolean;
   activeYear: number;
   hoveredYear?: number;
-  scrollToActiveToken: number;
   setActiveYear: (year: number) => void;
   setHoveredYear: (year?: number) => void;
+  onTimelineClick: () => void;
+  showPrompt: boolean;
 }
 
 interface MilestonePanelProps {
@@ -52,6 +55,63 @@ const milestoneCardBackground = "rgb(36, 54, 66, 0.82)";
 const horizontalTimelineDotSize = 22;
 const horizontalTimelineDotBottom = 48;
 const horizontalTimelineConnectorHeight = 90;
+const timelinePromptYear = 1996;
+
+const TimelineClickPrompt = ({
+  placement,
+  bottomOffset,
+  onClick,
+}: {
+  placement: "horizontal" | "vertical";
+  bottomOffset?: number;
+  onClick: () => void;
+}) => {
+  const handleClick = () => {
+    onClick();
+  };
+
+  return (
+    <Box
+      sx={{
+        position: "absolute",
+        left: placement === "horizontal" ? -38 : -38,
+        bottom: placement === "horizontal" ? bottomOffset : "auto",
+        top: placement === "vertical" ? -64 : "auto",
+        transform: "rotate(-28deg)",
+        transformOrigin: "center bottom",
+        zIndex: 9,
+        pointerEvents: "auto",
+      }}
+    >
+      <Button disableRipple onClick={handleClick} sx={{ p: 0 }}>
+        <Stack spacing={1} alignItems="center">
+          <Typography
+            variant="overline"
+            sx={{
+              color: colors.red,
+              textShadow: `1px 1px 2px ${colors.charcoal}`,
+              fontWeight: "bold",
+              lineHeight: 1,
+              whiteSpace: "nowrap",
+            }}
+          >
+            Click me!
+          </Typography>
+          <SvgIcon
+            sx={{
+              color: colors.red,
+              filter: `drop-shadow(1px 1px 2px ${colors.charcoal})`,
+              animation: "bounce 1s ease-in-out 3.25",
+              cursor: "pointer",
+            }}
+          >
+            <ArrowBlockDown />
+          </SvgIcon>
+        </Stack>
+      </Button>
+    </Box>
+  );
+};
 
 const SideSpeechBubbleTail = () => (
   <Box
@@ -290,9 +350,10 @@ const TimelineBlock = ({
   connector,
   activeYear,
   hoveredYear,
-  scrollToActiveToken,
   setActiveYear,
   setHoveredYear,
+  onTimelineClick,
+  showPrompt,
 }: TimelineBlockProps) => {
   const indexInArray = years.indexOf(year);
   const nextYear = years[indexInArray + 1];
@@ -303,43 +364,39 @@ const TimelineBlock = ({
   const isActive = year === activeYear;
   const isHighlighted = showMilestones;
 
-  const timelineItemRef = useRef<HTMLDivElement>(null);
-
   const handleClick = (year: number) => {
+    onTimelineClick();
+
     if (activeYear !== year) {
       setActiveYear(year);
     }
   };
 
-  useEffect(() => {
-    if (
-      scrollToActiveToken > 0 &&
-      activeYear === year &&
-      timelineItemRef.current
-    ) {
-      timelineItemRef.current.scrollIntoView({
-        behavior: "smooth",
-        block: "center",
-      });
-    }
-  }, [activeYear, scrollToActiveToken, year]);
-
   return (
     <TimelineItem
-      ref={timelineItemRef}
-      onMouseEnter={() => setHoveredYear(year)}
+      onMouseEnter={() => {
+        setHoveredYear(year);
+      }}
       onMouseLeave={() => setHoveredYear(undefined)}
       sx={{
         position: "relative",
       }}
     >
+      {showPrompt && year === timelinePromptYear ? (
+        <TimelineClickPrompt
+          placement="vertical"
+          onClick={() => handleClick(timelinePromptYear)}
+        />
+      ) : null}
       {showMilestones ? (
         <MilestonePanel year={year} pinned={year === activeYear} />
       ) : null}
       <TimelineSeparator>
         <Button
           onClick={() => handleClick(year)}
-          onFocus={() => setHoveredYear(year)}
+          onFocus={() => {
+            setHoveredYear(year);
+          }}
           onBlur={() => setHoveredYear(undefined)}
           disableFocusRipple
           disableRipple
@@ -383,7 +440,9 @@ const TimelineBlock = ({
         <TimelineContent>
           <Button
             onClick={() => handleClick(year)}
-            onFocus={() => setHoveredYear(year)}
+            onFocus={() => {
+              setHoveredYear(year);
+            }}
             onBlur={() => setHoveredYear(undefined)}
             disableFocusRipple
             disableRipple
@@ -426,6 +485,8 @@ interface HorizontalTimelineBlockProps {
   hoveredYear?: number;
   setActiveYear: (year: number) => void;
   setHoveredYear: (year?: number) => void;
+  onTimelineClick: () => void;
+  showPrompt: boolean;
 }
 
 const HorizontalTimelineBlock = ({
@@ -440,6 +501,8 @@ const HorizontalTimelineBlock = ({
   hoveredYear,
   setActiveYear,
   setHoveredYear,
+  onTimelineClick,
+  showPrompt,
 }: HorizontalTimelineBlockProps) => {
   const isActive = year === activeYear;
   const visibleYear = hoveredYear ?? activeYear;
@@ -473,6 +536,7 @@ const HorizontalTimelineBlock = ({
   };
 
   const handleClick = (event: MouseEvent<HTMLDivElement>) => {
+    onTimelineClick();
     setActiveYear(getClosestYear(event.currentTarget, event.clientX));
   };
 
@@ -485,6 +549,16 @@ const HorizontalTimelineBlock = ({
         height: 270,
       }}
     >
+      {showPrompt && year === timelinePromptYear ? (
+        <TimelineClickPrompt
+          placement="horizontal"
+          bottomOffset={horizontalTimelineDotBottom + elevation + 34}
+          onClick={() => {
+            onTimelineClick();
+            setActiveYear(timelinePromptYear);
+          }}
+        />
+      ) : null}
       {showMilestones ? (
         <Box
           sx={{
@@ -523,8 +597,13 @@ const HorizontalTimelineBlock = ({
       <Button
         aria-label={`Select ${year}`}
         aria-current={isActive ? "date" : undefined}
-        onClick={() => setActiveYear(year)}
-        onFocus={() => setHoveredYear(year)}
+        onClick={() => {
+          onTimelineClick();
+          setActiveYear(year);
+        }}
+        onFocus={() => {
+          setHoveredYear(year);
+        }}
         onBlur={() => setHoveredYear(undefined)}
         disableFocusRipple
         disableRipple
@@ -599,8 +678,13 @@ const HorizontalTimelineBlock = ({
         </Box>
       ) : null}
       <Button
-        onClick={() => setActiveYear(year)}
-        onFocus={() => setHoveredYear(year)}
+        onClick={() => {
+          onTimelineClick();
+          setActiveYear(year);
+        }}
+        onFocus={() => {
+          setHoveredYear(year);
+        }}
         onBlur={() => setHoveredYear(undefined)}
         disableFocusRipple
         disableRipple
@@ -634,8 +718,9 @@ const HorizontalTimelineBlock = ({
 export const Experience = ({
   activeYear,
   setActiveYear,
-  scrollToActiveToken,
   md,
+  showPrompt,
+  onTimelineClick,
 }: ExperienceProps) => {
   const [hoveredYear, setHoveredYear] = useState<number | undefined>();
   const horizontalYears = [...years].reverse();
@@ -645,7 +730,6 @@ export const Experience = ({
     const distanceFromVisibleYear = Math.abs(
       horizontalYears.indexOf(year) - visibleYearIndex,
     );
-
     return Math.round(46 * Math.exp(-1.25 * distanceFromVisibleYear));
   };
 
@@ -685,6 +769,8 @@ export const Experience = ({
               hoveredYear={hoveredYear}
               setActiveYear={setActiveYear}
               setHoveredYear={setHoveredYear}
+              onTimelineClick={onTimelineClick}
+              showPrompt={showPrompt}
             />
           ))}
         </Box>
@@ -714,9 +800,10 @@ export const Experience = ({
             connector={index !== years.length - 1}
             activeYear={activeYear}
             hoveredYear={hoveredYear}
-            scrollToActiveToken={scrollToActiveToken}
             setActiveYear={setActiveYear}
             setHoveredYear={setHoveredYear}
+            onTimelineClick={onTimelineClick}
+            showPrompt={showPrompt}
           />
         ))}
       </Timeline>
