@@ -98,7 +98,7 @@ export const Header = () => {
         {md ? (
           <Stack
             direction="row"
-            spacing={3}
+            spacing={1.25}
             justifyContent="center"
             alignItems="center"
           >
@@ -110,8 +110,38 @@ export const Header = () => {
           </Stack>
         ) : (
           <>
-            <Button onClick={handleClick}>
-              <SvgIcon sx={{ color: colors.base.lightest }}>
+            <Button
+              onClick={handleClick}
+              aria-label="Open navigation"
+              sx={{
+                minWidth: 0,
+                width: 44,
+                height: 44,
+                borderRadius: "999px",
+                backgroundColor: "rgba(226, 241, 231, 0.1)",
+                border: "1px solid rgba(226, 241, 231, 0.28)",
+                boxShadow: "inset 0 1px 0 rgba(226, 241, 231, 0.14)",
+                transition:
+                  "transform 180ms ease, background-color 180ms ease, border-color 180ms ease, box-shadow 180ms ease",
+                "&:hover": {
+                  transform: "translateY(-2px)",
+                  backgroundColor: "rgba(226, 241, 231, 0.18)",
+                  borderColor: "rgba(226, 241, 231, 0.58)",
+                  boxShadow:
+                    "0 10px 24px rgba(0, 0, 0, 0.26), inset 0 1px 0 rgba(226, 241, 231, 0.22)",
+                },
+                "&:active": {
+                  transform: "translateY(0)",
+                  backgroundColor: "rgba(98, 149, 132, 0.42)",
+                  borderColor: "rgba(189, 172, 106, 0.78)",
+                },
+                "&:focus-visible": {
+                  outline: `2px solid ${colors.gold}`,
+                  outlineOffset: 3,
+                },
+              }}
+            >
+              <SvgIcon sx={{ color: colors.base.lightest, fontSize: 24 }}>
                 <Menu01 />
               </SvgIcon>
             </Button>
