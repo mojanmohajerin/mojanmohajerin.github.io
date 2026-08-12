@@ -14,10 +14,14 @@ import m2laboLogo from "../assets/experiencePagePhotos/m2labo-logo.png";
 
 export interface Milestone {
   date: string;
+  dateJa?: string;
   place: string;
+  placeJa?: string;
   country: string;
+  countryJa?: string;
   image: StaticImageData;
   event: string;
+  eventJa?: string;
 }
 
 interface Life {

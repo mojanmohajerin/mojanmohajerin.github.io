@@ -11,6 +11,7 @@ import {
 } from "@mui/material";
 import Image, { StaticImageData } from "next/image";
 
+import { useLanguage } from "@/i18n/language";
 import { colors } from "@/styles/colors";
 import Link from "next/link";
 import { useState } from "react";
@@ -27,7 +28,9 @@ interface ProjectModalProps {
     name: string;
     outline: string;
     description: string;
+    descriptionJa?: string;
     date: string;
+    dateJa?: string;
     technologies: string[];
     url?: string;
   };
@@ -35,6 +38,10 @@ interface ProjectModalProps {
 
 export const ProjectModal = ({ open, setOpen, project }: ProjectModalProps) => {
   const md = useMediaQuery("(min-width:900px)");
+  const { language } = useLanguage();
+  const description =
+    language === "ja" ? project.descriptionJa ?? project.description : project.description;
+  const date = language === "ja" ? project.dateJa ?? project.date : project.date;
 
   const [displayImageIndex, setDisplayImageIndex] = useState<number>(0);
 
@@ -142,14 +149,14 @@ export const ProjectModal = ({ open, setOpen, project }: ProjectModalProps) => {
                   {project.name}
                 </Typography>
                 <Typography variant="overline" sx={{ color: colors.base.dark }}>
-                  {project.date}
+                  {date}
                 </Typography>
               </Stack>
               <Typography
                 variant="body1"
                 sx={{ maxWidth: "72rem", lineHeight: 1.65 }}
               >
-                {project.description}
+                {description}
               </Typography>
               {project.url && (
                 <Link

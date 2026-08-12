@@ -17,6 +17,8 @@ import type { MouseEvent } from "react";
 import { useEffect, useState } from "react";
 
 import { life, years } from "@/data/life";
+import { useLanguage } from "@/i18n/language";
+import { translations } from "@/i18n/translations";
 import { colors } from "@/styles/colors";
 import Image from "next/image";
 
@@ -57,6 +59,72 @@ const horizontalTimelineDotBottom = 48;
 const horizontalTimelineConnectorHeight = 90;
 const timelinePromptYear = 1996;
 
+const timelineDateJa: Record<string, string> = {
+  Jan: "1月",
+  Mar: "3月",
+  April: "4月",
+  May: "5月",
+  July: "7月",
+  Oct: "10月",
+  Nov: "11月",
+  Dec: "12月",
+  Sept: "9月",
+};
+
+const timelinePlaceJa: Record<string, string> = {
+  Japan: "日本",
+  "New Zealand": "ニュージーランド",
+  Australia: "オーストラリア",
+  Tokyo: "東京",
+  Fukuoka: "福岡",
+  Nelson: "ネルソン",
+  Dunedin: "ダニーデン",
+  "University of Sydney": "シドニー大学",
+  "Turramurra High School": "タラマラ高校",
+  "Turramurra Public School": "タラマラ公立小学校",
+  "Hornsby, Sydney": "シドニー、ホーンズビー",
+};
+
+const timelineEventJa: Record<string, string> = {
+  "Resigned.\nRole: Systems Engineer": "退職。\n職種：システムエンジニア",
+  "Started work.\nRole: Systems Engineer":
+    "勤務開始。\n職種：システムエンジニア",
+  "Moved to Fukuoka! :)": "福岡へ引っ越しました！ :)",
+  "Moved to Japan on a Working Holiday Visa.\nSpent the first month travelling\nToyko -> Nagoya -> Mie -> Sendai -> Aomori -> Hakodate -> Sapporo -> Osaka":
+    "ワーキングホリデービザで日本へ移住。\n最初の1か月は旅行をしました。\n東京 -> 名古屋 -> 三重 -> 仙台 -> 青森 -> 函館 -> 札幌 -> 大阪",
+  "Resigned.\nRole: Software Engineer":
+    "退職。\n職種：ソフトウェアエンジニア",
+  "Resigned.\nRole: Wall Assistant": "退職。\n職種：ウォールアシスタント",
+  "Started part-time work.\nRole: Wall Assistant":
+    "パートタイム勤務開始。\n職種：ウォールアシスタント",
+  "Started work.\nRole: Software Engineer":
+    "勤務開始。\n職種：ソフトウェアエンジニア",
+  "Resigned.\nRole: Teacher Aide": "退職。\n職種：ティーチャーエイド",
+  "Started work.\nRole: Teacher Aide":
+    "勤務開始。\n職種：ティーチャーエイド",
+  "Moved to Nelson.\nContinued efforts in community building projects.":
+    "ネルソンへ引っ越しました。\nコミュニティづくりのプロジェクトへの取り組みを継続しました。",
+  "Moved to New Zealand.\nDedicated a period of time to voluntary community building and educational projects.":
+    "ニュージーランドへ移住。\n自主的なコミュニティづくりと教育プロジェクトに一定期間を捧げました。",
+  "Resigned.\nRole: Graduate Electrical Engineer (Rail)":
+    "退職。\n職種：新卒電気エンジニア（鉄道）",
+  "Changed department.\nRole: Graduate Electrical Engineer (Rail)":
+    "部署異動。\n職種：新卒電気エンジニア（鉄道）",
+  "Graduated university.\nDegree: Bachelor of Engineering Honours (Mechatronic)\nSecond Class, First Division (Honours)":
+    "大学卒業。\n学位：工学士（優等学位・メカトロニクス）\nSecond Class, First Division（優等）",
+  "Started internship.\nRole: Document Controller":
+    "インターン開始。\n職種：ドキュメントコントローラー",
+  "Changed major.\nDegree: Bachelor of Engineering Honours (Mechatronic).":
+    "専攻変更。\n学位：工学士（優等学位・メカトロニクス）。",
+  "Started attending university.\nDegree: Bachelor of Biomedical Engineering & Medical Science (double degree).":
+    "大学入学。\n学位：生物医学工学・医科学のダブルディグリー。",
+  "Graduated high school.\nHSC score 96.55.":
+    "高校卒業。\nHSC スコア 96.55。",
+  "Started attending high school.": "高校に入学。",
+  "Started attending primary school.": "小学校に入学。",
+  "I was born!": "誕生！",
+};
+
 const TimelineClickPrompt = ({
   placement,
   bottomOffset,
@@ -66,6 +134,9 @@ const TimelineClickPrompt = ({
   bottomOffset?: number;
   onClick: () => void;
 }) => {
+  const { language } = useLanguage();
+  const t = translations[language];
+
   const handleClick = () => {
     onClick();
   };
@@ -95,7 +166,7 @@ const TimelineClickPrompt = ({
               whiteSpace: "nowrap",
             }}
           >
-            Click me!
+            {t.timeline.clickMe}
           </Typography>
           <SvgIcon
             sx={{
@@ -175,6 +246,7 @@ const MilestoneCard = ({
   surface = true,
 }: MilestoneCardProps) => {
   const milestones = [...life[year]].reverse();
+  const { language } = useLanguage();
 
   return (
     <Stack
@@ -209,6 +281,24 @@ const MilestoneCard = ({
     >
       {milestones.map((milestone: Milestone, index: number) => {
         const isLastMilestone = index === milestones.length - 1;
+        const date =
+          language === "ja"
+            ? milestone.dateJa ?? timelineDateJa[milestone.date] ?? milestone.date
+            : milestone.date;
+        const place =
+          language === "ja"
+            ? milestone.placeJa ?? timelinePlaceJa[milestone.place] ?? milestone.place
+            : milestone.place;
+        const country =
+          language === "ja"
+            ? milestone.countryJa ??
+              timelinePlaceJa[milestone.country] ??
+              milestone.country
+            : milestone.country;
+        const event =
+          language === "ja"
+            ? milestone.eventJa ?? timelineEventJa[milestone.event] ?? milestone.event
+            : milestone.event;
 
         return (
           <Stack
@@ -254,7 +344,7 @@ const MilestoneCard = ({
                   variant={compact ? "subtitle2" : "h6"}
                   sx={{ textShadow: "2px 2px 4px #000000", lineHeight: 1.15 }}
                 >
-                  {`${milestone.date}, ${year}`}
+                  {language === "ja" ? `${year}年${date}` : `${date}, ${year}`}
                 </Typography>
                 <Stack
                   direction="row"
@@ -272,11 +362,11 @@ const MilestoneCard = ({
                       textShadow: "2px 2px 4px #000000",
                     }}
                   >
-                    {milestone.place}
+                    {place}
                   </Typography>
                   <Image
                     src={milestone.image}
-                    alt={milestone.country}
+                    alt={country}
                     height={13}
                     width={22}
                   />
@@ -290,7 +380,7 @@ const MilestoneCard = ({
                   textShadow: "2px 2px 4px #000000",
                 }}
               >
-                {milestone.event}
+                {event}
               </Typography>
             </Stack>
           </Stack>

@@ -4,10 +4,14 @@ import { Box, Button, Stack, SvgIcon, Typography } from "@mui/material";
 import { ArrowBlockDown } from "@untitled-ui/icons-react";
 import { useEffect, useState } from "react";
 
+import { useLanguage } from "@/i18n/language";
+import { translations } from "@/i18n/translations";
 import { colors } from "@/styles/colors";
 
 export const HoverOverMe = () => {
   const [clicked, setClicked] = useState<boolean>(true);
+  const { language } = useLanguage();
+  const t = translations[language];
 
   const handleClick = () => {
     setClicked(true);
@@ -41,7 +45,7 @@ export const HoverOverMe = () => {
               fontWeight: "bold",
             }}
           >
-            Hover over me!
+            {t.home.hoverPrompt}
           </Typography>
           <SvgIcon
             sx={{

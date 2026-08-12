@@ -13,7 +13,10 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
+import { LanguageButton } from "@/components/language-button";
 import { NavLink } from "@/components/nav-link";
+import { useLanguage } from "@/i18n/language";
+import { translations } from "@/i18n/translations";
 import { paths } from "@/paths";
 import { NavDrawer } from "@/sections/navDrawer";
 import { colors } from "@/styles/colors";
@@ -22,6 +25,8 @@ import cartoonImage from "../assets/cartoon-image.png";
 export const Header = () => {
   const xs = useMediaQuery("(min-width:450px)");
   const md = useMediaQuery("(min-width:900px)");
+  const { language } = useLanguage();
+  const t = translations[language];
 
   const [scrollPosition, setScrollPosition] = useState(0);
   const [open, setOpen] = useState<boolean>(false);
@@ -102,11 +107,12 @@ export const Header = () => {
             justifyContent="center"
             alignItems="center"
           >
-            <NavLink title="Home" href={paths.home} />
-            <NavLink title="Timeline" href={paths.experience} />
-            <NavLink title="Projects" href={paths.projects} />
-            <NavLink title="Photo Gallery" href={paths.photo_gallery} />
-            <NavLink title="Contact" href={paths.contact} />
+            <LanguageButton />
+            <NavLink title={t.nav.home} href={paths.home} />
+            <NavLink title={t.nav.timeline} href={paths.experience} />
+            <NavLink title={t.nav.projects} href={paths.projects} />
+            <NavLink title={t.nav.photoGallery} href={paths.photo_gallery} />
+            <NavLink title={t.nav.contact} href={paths.contact} />
           </Stack>
         ) : (
           <>

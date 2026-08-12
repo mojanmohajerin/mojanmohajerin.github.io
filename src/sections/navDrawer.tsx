@@ -1,6 +1,9 @@
 import { Drawer, Stack, Typography } from "@mui/material";
 
+import { LanguageButton } from "@/components/language-button";
 import { NavLink } from "@/components/nav-link";
+import { useLanguage } from "@/i18n/language";
+import { translations } from "@/i18n/translations";
 import { paths } from "@/paths";
 import { colors } from "@/styles/colors";
 
@@ -10,6 +13,9 @@ interface NavDrawerProps {
 }
 
 export const NavDrawer = ({ open, setOpen }: NavDrawerProps) => {
+  const { language } = useLanguage();
+  const t = translations[language];
+
   const handleClose = () => {
     setOpen(false);
   };
@@ -40,7 +46,7 @@ export const NavDrawer = ({ open, setOpen }: NavDrawerProps) => {
             color: colors.base.lightest,
           }}
         >
-          Navigation
+          {t.nav.navigation}
         </Typography>
         <Stack
           className="drawer-background"
@@ -49,23 +55,28 @@ export const NavDrawer = ({ open, setOpen }: NavDrawerProps) => {
           alignItems="center"
           sx={{ height: "100%", paddingTop: "2em" }}
         >
-          <NavLink title="Home" href={paths.home} onClick={handleClose} />
+          <LanguageButton />
+          <NavLink title={t.nav.home} href={paths.home} onClick={handleClose} />
           <NavLink
-            title="Timeline"
+            title={t.nav.timeline}
             href={paths.experience}
             onClick={handleClose}
           />
           <NavLink
-            title="Projects"
+            title={t.nav.projects}
             href={paths.projects}
             onClick={handleClose}
           />
           <NavLink
-            title="Photo Gallery"
+            title={t.nav.photoGallery}
             href={paths.photo_gallery}
             onClick={handleClose}
           />
-          <NavLink title="Contact" href={paths.contact} onClick={handleClose} />
+          <NavLink
+            title={t.nav.contact}
+            href={paths.contact}
+            onClick={handleClose}
+          />
         </Stack>
       </Stack>
     </Drawer>

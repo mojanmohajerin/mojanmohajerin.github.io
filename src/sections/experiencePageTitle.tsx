@@ -3,8 +3,13 @@
 import { Box, Stack, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 
+import { useLanguage } from "@/i18n/language";
+import { translations } from "@/i18n/translations";
+
 export const ExperiencePageTitle = () => {
   const [scrollPosition, setScrollPosition] = useState(0);
+  const { language } = useLanguage();
+  const t = translations[language];
 
   useEffect(() => {
     const handleScroll = () => {
@@ -42,13 +47,13 @@ export const ExperiencePageTitle = () => {
         }}
       />
       <Typography variant="h3" sx={{ textShadow: "2px 2px 4px #000000" }}>
-        My Life Story
+        {t.pages.timelineTitle}
       </Typography>
       <Typography
         variant="body1"
         sx={{ paddingLeft: "1rem", textShadow: "2px 2px 4px #000000" }}
       >
-        {`(in a nutshell)`}
+        {t.pages.timelineSubtitle}
       </Typography>
     </Stack>
   );

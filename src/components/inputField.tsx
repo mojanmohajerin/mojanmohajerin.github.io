@@ -6,9 +6,16 @@ interface InputFieldProps {
   type: string;
   as?: string;
   styleProps?: object;
+  placeholder?: string;
 }
 
-export const InputField = ({ name, type, as, styleProps }: InputFieldProps) => {
+export const InputField = ({
+  name,
+  type,
+  as,
+  styleProps,
+  placeholder,
+}: InputFieldProps) => {
   return (
     <Stack spacing={0.5}>
       <Typography variant="h5" sx={{ textShadow: "1px 1px 2px #000" }}>
@@ -26,13 +33,16 @@ export const InputField = ({ name, type, as, styleProps }: InputFieldProps) => {
         <Field
           type={type}
           name={type}
-          placeholder={`Please enter your ${type}`}
+          placeholder={placeholder ?? `Please enter your ${type}`}
           as={as}
           style={{
             width: "100%",
             height: "100%",
             borderRadius: "10px",
             border: "none",
+            backgroundColor: "#ffffff",
+            color: "#000000",
+            colorScheme: "light",
             padding: "1em",
             fontFamily: "Arial",
           }}

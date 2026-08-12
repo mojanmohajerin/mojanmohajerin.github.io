@@ -6,6 +6,8 @@ import { useRef } from "react";
 
 import { HoverOverMe } from "@/components/hoverOverMe";
 import { useScrollIntoViewProgress } from "@/hooks/useScrollIntoViewProgress";
+import { useLanguage } from "@/i18n/language";
+import { translations } from "@/i18n/translations";
 import { colors } from "@/styles/colors";
 import profileImage from "../assets/portrait-headshot.jpg";
 import "../styles/effects.css";
@@ -15,6 +17,8 @@ export const Intro = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const scrollProgress = useScrollIntoViewProgress(sectionRef);
   const rectangleOffset = -260 + scrollProgress * 520;
+  const { language } = useLanguage();
+  const t = translations[language];
 
   return (
     <Grid2
@@ -71,13 +75,13 @@ export const Intro = () => {
       <Grid2 size={{ xs: 12, md: 8 }} sx={{ position: "relative", zIndex: 1 }}>
         <Stack spacing={5} sx={{ zIndex: 1 }}>
           <Typography variant="h2" sx={{ textShadow: "2px 2px 4px #000000" }}>
-            {`Hi, I'm Mo!`}
+            {t.home.introTitle}
           </Typography>
           <Typography variant="h4" sx={{ textShadow: "2px 2px 4px #000000" }}>
-            {`I'm an Australian software engineer.`}
+            {t.home.introSubtitle}
           </Typography>
           <Typography variant="h4" sx={{ textShadow: "2px 2px 4px #000000" }}>
-            {`I was recently living in New Zealand, but now I'm starting my life afresh in Japan!`}
+            {t.home.introBody}
           </Typography>
         </Stack>
       </Grid2>

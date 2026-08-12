@@ -1,13 +1,20 @@
+"use client";
+
 import { Box } from "@mui/material";
 
 import { CardUnit } from "@/components/card";
+import { useLanguage } from "@/i18n/language";
+import { translations } from "@/i18n/translations";
 import { Title } from "@/sections/title";
 import { projects } from "../../data/projects";
 
 export default function ProjectsPage() {
+  const { language } = useLanguage();
+  const t = translations[language];
+
   return (
     <>
-      <Title title="Some personal projects" bottomSpacing="2rem" />
+      <Title title={t.pages.projectsTitle} bottomSpacing="2rem" />
       <Box
         sx={{
           display: "grid",

@@ -4,6 +4,8 @@ import { Box, Stack, Typography } from "@mui/material";
 import { useRef } from "react";
 
 import { useScrollIntoViewProgress } from "@/hooks/useScrollIntoViewProgress";
+import { useLanguage } from "@/i18n/language";
+import { translations } from "@/i18n/translations";
 import { colors } from "@/styles/colors";
 import "../styles/effects.css";
 
@@ -11,6 +13,8 @@ export const BitAboutMe = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const scrollProgress = useScrollIntoViewProgress(sectionRef);
   const rectangleOffset = 260 - scrollProgress * 520;
+  const { language } = useLanguage();
+  const t = translations[language];
 
   return (
     <Stack
@@ -43,19 +47,10 @@ export const BitAboutMe = () => {
       />
       <Stack spacing={5} sx={{ zIndex: 1 }}>
         <Typography variant="h2" sx={{ textShadow: "2px 2px 4px #000000" }}>
-          A bit about me...
+          {t.home.aboutTitle}
         </Typography>
         <Typography variant="h4" sx={{ textShadow: "2px 2px 4px #000000" }}>
-          I graduated with a degree in Mechatronic Engineering in 2019. I
-          recently joined a small start-up in New Zealand as a Software Engineer
-          and loved every moment of it - company culture, the people, the work
-          itself. I felt being able to write programmical solutions to tangible
-          problems was an intellectually stimulating and fulfilling challenge,
-          like piecing together an intricate riddle until everything locks into
-          place and clarifies into a simple, errorless execution. At this
-          company, I gained front-end development experience using technologies
-          such as React, Next.js and Typescript. I also had the opportunity to
-          play with API queries with GraphQL and GitHub API.
+          {t.home.aboutBody}
         </Typography>
       </Stack>
     </Stack>

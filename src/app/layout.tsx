@@ -5,6 +5,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 
 import { Footer } from "@/home/footer";
 import { Header } from "@/home/header";
+import { LanguageProvider } from "@/i18n/language";
 import { colors } from "@/styles/colors";
 import "../styles/globals.css";
 
@@ -39,27 +40,29 @@ export default function RootLayout({
           flexDirection: "column",
         }}
       >
-        <Box className="background-image" />
-        <Header />
-        <Box
-          sx={{
-            maxWidth: "1500px",
-            marginInline: "auto",
-            overflow: "hidden",
-            width: "100%",
-            flex: "1 0 auto",
-          }}
-        >
+        <LanguageProvider>
+          <Box className="background-image" />
+          <Header />
           <Box
             sx={{
-              color: colors.chalk,
-              padding: "5rem 0",
+              maxWidth: "1500px",
+              marginInline: "auto",
+              overflow: "hidden",
+              width: "100%",
+              flex: "1 0 auto",
             }}
           >
-            {children}
+            <Box
+              sx={{
+                color: colors.chalk,
+                padding: "5rem 0",
+              }}
+            >
+              {children}
+            </Box>
           </Box>
-        </Box>
-        <Footer />
+          <Footer />
+        </LanguageProvider>
       </body>
     </html>
   );

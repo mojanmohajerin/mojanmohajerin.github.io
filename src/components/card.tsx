@@ -11,6 +11,7 @@ import {
 import Image, { StaticImageData } from "next/image";
 import { useState } from "react";
 
+import { useLanguage } from "@/i18n/language";
 import { colors } from "@/styles/colors";
 import { ProjectModal } from "./modal";
 
@@ -20,14 +21,21 @@ interface CardUnitProps {
     otherImages: StaticImageData[];
     name: string;
     outline: string;
+    outlineJa?: string;
     description: string;
+    descriptionJa?: string;
     date: string;
+    dateJa?: string;
     technologies: string[];
   };
 }
 
 export const CardUnit = ({ project }: CardUnitProps) => {
   const [open, setOpen] = useState(false);
+  const { language } = useLanguage();
+  const outline =
+    language === "ja" ? project.outlineJa ?? project.outline : project.outline;
+  const date = language === "ja" ? project.dateJa ?? project.date : project.date;
 
   const handleClick = () => {
     setOpen(true);
@@ -77,7 +85,8 @@ export const CardUnit = ({ project }: CardUnitProps) => {
               <Typography
                 variant="h5"
                 sx={{
-                  textShadow: `1px 1px 1px ${colors.chalk}`,
+                  color: colors.chalk,
+                  textShadow: "1px 1px 2px #000000",
                 }}
               >
                 {project.name}
@@ -85,23 +94,23 @@ export const CardUnit = ({ project }: CardUnitProps) => {
               <Typography
                 variant="overline"
                 sx={{
-                  color: "text.secondary",
-                  textShadow: `1px 1px 1px ${colors.chalk}`,
+                  color: colors.base.lightest,
+                  textShadow: "1px 1px 2px #000000",
                   paddingTop: 0.75,
                 }}
               >
-                {project.date}
+                {date}
               </Typography>
             </Stack>
             <Stack spacing={1}>
               <Typography
                 variant="body1"
                 sx={{
-                  color: colors.charcoal,
-                  textShadow: `1px 1px 1px ${colors.chalk}`,
+                  color: colors.chalk,
+                  textShadow: "1px 1px 2px #000000",
                 }}
               >
-                {project.outline}
+                {outline}
               </Typography>
               <Stack direction="row" spacing={1} justifyContent="flex-start">
                 {project.technologies.map((tech) => {
@@ -109,17 +118,17 @@ export const CardUnit = ({ project }: CardUnitProps) => {
                     <Box
                       key={`${project.name}-${tech}`}
                       sx={{
-                        backgroundColor: "rgba(226, 241, 231, 0.5)",
+                        backgroundColor: "rgba(36, 54, 66, 0.72)",
                         borderRadius: "100px",
-                        border: `1px solid ${colors.charcoal}`,
+                        border: `1px solid rgba(226, 241, 231, 0.42)`,
                         padding: 1,
                       }}
                     >
                       <Typography
                         variant="body1"
                         sx={{
-                          color: colors.charcoal,
-                          textShadow: `1px 1px 1px ${colors.chalk}`,
+                          color: colors.chalk,
+                          textShadow: "1px 1px 2px #000000",
                         }}
                       >
                         {tech}

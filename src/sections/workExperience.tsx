@@ -4,24 +4,37 @@ import { Box, Stack, Typography } from "@mui/material";
 import Image from "next/image";
 
 import { workExperience } from "@/data/workExperience";
+import { useLanguage } from "@/i18n/language";
+import { translations } from "@/i18n/translations";
 import { colors } from "@/styles/colors";
 
 const servicePrograms = [
   {
     title: "Baha'i neighbourhood children's classes",
+    titleJa: "バハイ近隣子どもクラス",
     timeframe: "2015 - Present",
+    timeframeJa: "2015年 - 現在",
     description:
       "Classes that help children develop spiritual qualities such as kindness, truthfulness, generosity, and courage through stories, songs, prayer, memorisation, games, and acts of service.",
+    descriptionJa:
+      "物語、歌、祈り、暗唱、ゲーム、奉仕の実践を通して、親切、正直、寛大さ、勇気といった精神的な資質を子どもたちが育めるよう助けるクラスです。",
   },
   {
     title: "Junior Youth Spiritual Empowerment Program",
+    titleJa: "ジュニアユース精神的エンパワーメントプログラム",
     timeframe: "2015 - Present",
+    timeframeJa: "2015年 - 現在",
     description:
       "A community-building program for early adolescents that strengthens expression, moral reasoning, cooperation, and service-mindedness so participants can contribute to the wellbeing of their neighbourhoods.",
+    descriptionJa:
+      "思春期初期の若者を対象としたコミュニティづくりのプログラムで、表現力、道徳的な判断力、協力する力、奉仕の心を育み、参加者が地域の幸福に貢献できるよう支援します。",
   },
 ];
 
 export const WorkExperience = () => {
+  const { language } = useLanguage();
+  const t = translations[language];
+
   const scrollToService = () => {
     document
       .getElementById("bahai-service")
@@ -52,13 +65,13 @@ export const WorkExperience = () => {
           variant="h3"
           sx={{ textShadow: "2px 2px 4px #000000", paddingTop: "1rem" }}
         >
-          Professional experience
+          {t.timeline.professionalTitle}
         </Typography>
         <Typography
           variant="body1"
           sx={{ paddingLeft: "1rem", textShadow: "2px 2px 4px #000000" }}
         >
-          (in a nutshell)
+          {t.timeline.summary}
         </Typography>
       </Box>
 
@@ -66,6 +79,30 @@ export const WorkExperience = () => {
         {workExperience.map((experience) => {
           const isEducation = experience.type === "education";
           const isService = experience.type === "service";
+          const company =
+            language === "ja"
+              ? experience.companyJa ?? experience.company
+              : experience.company;
+          const role =
+            language === "ja" ? experience.roleJa ?? experience.role : experience.role;
+          const location =
+            language === "ja"
+              ? experience.locationJa ?? experience.location
+              : experience.location;
+          const start =
+            language === "ja" ? experience.startJa ?? experience.start : experience.start;
+          const end =
+            language === "ja" ? experience.endJa ?? experience.end : experience.end;
+          const duration =
+            language === "ja"
+              ? experience.durationJa ?? experience.duration
+              : experience.duration;
+          const summary =
+            language === "ja"
+              ? experience.summaryJa ?? experience.summary
+              : experience.summary;
+          const skills =
+            language === "ja" ? experience.skillsJa ?? experience.skills : experience.skills;
           const cardTone = isService
             ? {
               background: "rgba(45, 58, 62, 0.58)",
@@ -133,47 +170,24 @@ export const WorkExperience = () => {
                     overflow: "hidden",
                     backgroundColor: colors.chalk,
                     border: `1px solid rgba(226, 241, 231, 0.55)`,
-                    "& .logo-cover": {
-                      opacity: 1,
-                      transform: "scale(1)",
+                    "& .logo-zoom": {
+                      transform: "scale(1.65)",
+                      transition: "transform 320ms ease",
                     },
-                    "& .logo-full": {
-                      opacity: 0,
-                      transform: "scale(0.94)",
-                    },
-                    "& .logo-cover, & .logo-full": {
-                      transition:
-                        "opacity 240ms ease, transform 240ms ease",
-                    },
-                    "&:hover .logo-cover": {
-                      opacity: 0,
-                      transform: "scale(1.08)",
-                    },
-                    "&:hover .logo-full": {
-                      opacity: 1,
+                    "&:hover .logo-zoom": {
                       transform: "scale(1)",
                     },
                   }}
                 >
                   {experience.image ? (
-                    <>
-                      <Image
-                        className="logo-cover"
-                        src={experience.image}
-                        alt={experience.company}
-                        fill
-                        sizes="60px"
-                        style={{ objectFit: "cover" }}
-                      />
-                      <Image
-                        className="logo-full"
-                        src={experience.image}
-                        alt=""
-                        fill
-                        sizes="60px"
-                        style={{ objectFit: "contain", padding: 3 }}
-                      />
-                    </>
+                    <Image
+                      className="logo-zoom"
+                      src={experience.image}
+                      alt={company}
+                      fill
+                      sizes="60px"
+                      style={{ objectFit: "contain", padding: 3 }}
+                    />
                   ) : (
                     <Stack
                       alignItems="center"
@@ -201,7 +215,7 @@ export const WorkExperience = () => {
                     textShadow: "1px 1px 2px #000",
                   }}
                 >
-                  {`${experience.start} - ${experience.end}`}
+                  {`${start} - ${end}`}
                 </Typography>
                 <Typography
                   variant="h6"
@@ -211,7 +225,7 @@ export const WorkExperience = () => {
                     textShadow: "2px 2px 4px #000000",
                   }}
                 >
-                  {experience.duration}
+                  {duration}
                 </Typography>
               </Stack>
 
@@ -225,13 +239,13 @@ export const WorkExperience = () => {
                       textShadow: "2px 2px 4px #000000",
                     }}
                   >
-                    {experience.role}
+                    {role}
                   </Typography>
                   <Typography
                     variant="body2"
                     sx={{ color: colors.base.lightest, opacity: 0.88 }}
                   >
-                    {`${experience.company}, ${experience.location}`}
+                    {`${company}, ${location}`}
                   </Typography>
                 </Stack>
 
@@ -243,7 +257,7 @@ export const WorkExperience = () => {
                     textShadow: "1px 1px 2px #000000",
                   }}
                 >
-                  {experience.summary}
+                  {summary}
                 </Typography>
               </Stack>
 
@@ -267,7 +281,7 @@ export const WorkExperience = () => {
                     textShadow: "1px 1px 2px #000",
                   }}
                 >
-                  Skills
+                  {t.timeline.skills}
                 </Typography>
                 <Stack
                   direction="row"
@@ -276,8 +290,8 @@ export const WorkExperience = () => {
                   flexWrap="wrap"
                   justifyContent={{ xs: "flex-start", md: "flex-end" }}
                 >
-                  {experience.skills.length > 0 ? (
-                    experience.skills.map((skill) => (
+                  {skills.length > 0 ? (
+                    skills.map((skill) => (
                       <Box
                         key={`${experience.company}-${skill}`}
                         sx={{
@@ -306,7 +320,7 @@ export const WorkExperience = () => {
                         variant="caption"
                         sx={{ color: colors.base.lightest, opacity: 0.78 }}
                       >
-                        Skills to add
+                        {t.timeline.skillsToAdd}
                       </Typography>
                     </Box>
                   )}
@@ -340,13 +354,13 @@ export const WorkExperience = () => {
             variant="h3"
             sx={{ textShadow: "2px 2px 4px #000000", paddingTop: "1rem" }}
           >
-            Voluntary experience
+            {language === "ja" ? "奉仕活動" : "Voluntary experience"}
           </Typography>
           <Typography
             variant="body1"
             sx={{ paddingLeft: "1rem", textShadow: "2px 2px 4px #000000" }}
           >
-            (in a nutshell)
+            {t.timeline.summary}
           </Typography>
         </Box>
 
@@ -377,7 +391,7 @@ export const WorkExperience = () => {
                     textShadow: "1px 1px 2px #000",
                   }}
                 >
-                  {program.timeframe}
+                  {language === "ja" ? program.timeframeJa : program.timeframe}
                 </Typography>
                 <Typography
                   variant="h5"
@@ -387,7 +401,7 @@ export const WorkExperience = () => {
                     textShadow: "2px 2px 4px #000000",
                   }}
                 >
-                  {program.title}
+                  {language === "ja" ? program.titleJa : program.title}
                 </Typography>
                 <Typography
                   variant="body2"
@@ -397,7 +411,7 @@ export const WorkExperience = () => {
                     textShadow: "1px 1px 2px #000000",
                   }}
                 >
-                  {program.description}
+                  {language === "ja" ? program.descriptionJa : program.description}
                 </Typography>
               </Stack>
             </Box>

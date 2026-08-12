@@ -4,13 +4,16 @@ import { Box, Stack, Typography } from "@mui/material";
 import { useRef } from "react";
 
 import { useScrollIntoViewProgress } from "@/hooks/useScrollIntoViewProgress";
+import { useLanguage } from "@/i18n/language";
+import { translations } from "@/i18n/translations";
 import { colors } from "@/styles/colors";
-import "../styles/effects.css";
 
 export const SomethingElse = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const scrollProgress = useScrollIntoViewProgress(sectionRef);
   const rectangleOffset = -260 + scrollProgress * 520;
+  const { language } = useLanguage();
+  const t = translations[language];
 
   return (
     <Stack
@@ -43,15 +46,10 @@ export const SomethingElse = () => {
       />
       <Stack spacing={5} sx={{ zIndex: 1 }}>
         <Typography variant="h2" sx={{ textShadow: "2px 2px 4px #000000" }}>
-          Going off topic...
+          {t.home.languageTitle}
         </Typography>
         <Typography variant="h4" sx={{ textShadow: "2px 2px 4px #000000" }}>
-          {`I've always been facinated by foreign langauges. I got entrapped in
-          this dark forest about 10 years ago with my (then) girlfriend who
-          happened to be German, and have since been trying to find my way out -
-          slowly improving in one regard while letting the other aspects
-          deteriorate to disrepair. The most recent project is Japanese, having
-          started learning around early 2023, excited to see where this journey takes me!`}
+          {t.home.languageBody}
         </Typography>
       </Stack>
     </Stack>

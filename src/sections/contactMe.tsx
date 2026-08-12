@@ -6,13 +6,17 @@ import { Form, Formik } from "formik";
 import Swal from "sweetalert2";
 
 import { InputField } from "@/components/inputField";
+import { useLanguage } from "@/i18n/language";
+import { translations } from "@/i18n/translations";
 import { colors } from "@/styles/colors";
-import { ContactMeValidation } from "@/validation/contactMe";
+import { getContactMeValidation } from "@/validation/contactMe";
 import { LoadingButton } from "@mui/lab";
 import { useState } from "react";
 
 export const ContactMe = () => {
   const [duringSubmission, setDuringSubmission] = useState<boolean>(false);
+  const { language } = useLanguage();
+  const t = translations[language];
 
   async function handleSubmit(values: {
     name: string;
@@ -36,15 +40,15 @@ export const ContactMe = () => {
     const result = await response.json();
     if (result.success) {
       Swal.fire({
-        title: "Sent! 🥳",
-        text: "I'll get back to you as soon as I can. 🙏🏻",
+        title: t.contact.successTitle,
+        text: t.contact.successText,
         icon: "success",
       });
     } else {
       Swal.fire({
         icon: "error",
-        title: "Oops...",
-        text: "Something went wrong! 🙄",
+        title: t.contact.errorTitle,
+        text: t.contact.errorText,
       });
     }
     setDuringSubmission(false);
@@ -62,7 +66,7 @@ export const ContactMe = () => {
       }}
     >
       <Typography variant="h3" sx={{ textShadow: "2px 2px 4px #000" }}>
-        Send me a message!*
+        {t.contact.heading}
       </Typography>
       <Formik
         initialValues={{
@@ -70,7 +74,7 @@ export const ContactMe = () => {
           email: "",
           message: "",
         }}
-        validationSchema={ContactMeValidation}
+        validationSchema={getContactMeValidation(language)}
         onSubmit={(values) => {
           handleSubmit(values);
         }}
@@ -78,13 +82,22 @@ export const ContactMe = () => {
         {() => (
           <Form>
             <Stack spacing={2} sx={{ paddingX: 5 }}>
-              <InputField name="Name" type="name" />
-              <InputField name="Email" type="email" />
               <InputField
-                name="Message"
+                name={t.contact.name}
+                type="name"
+                placeholder={t.contact.placeholder(t.contact.name)}
+              />
+              <InputField
+                name={t.contact.email}
+                type="email"
+                placeholder={t.contact.placeholder(t.contact.email)}
+              />
+              <InputField
+                name={t.contact.message}
                 type="message"
                 as="textarea"
                 styleProps={{ height: 250 }}
+                placeholder={t.contact.placeholder(t.contact.message)}
               />
               <Stack
                 justifyContent="center"
@@ -113,7 +126,7 @@ export const ContactMe = () => {
                     },
                   }}
                 >
-                  Submit
+                  {t.contact.submit}
                 </LoadingButton>
               </Stack>
             </Stack>
