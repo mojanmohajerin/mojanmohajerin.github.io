@@ -1,12 +1,8 @@
 import HiveImage17 from "../assets/projects/hive-image17.jpg";
-import HiveImage23 from "../assets/projects/hive-image23.jpg";
-import HiveImage29 from "../assets/projects/hive-image29.jpg";
 import HiveImage9 from "../assets/projects/hive-image9.jpg";
 
 import GithubToolImage from "../assets/projects/github-tool-image.jpeg";
-import GithubToolImage1 from "../assets/projects/github-tool-image1.jpeg";
 import GithubToolImage2 from "../assets/projects/github-tool-image2.jpeg";
-import GithubToolImage3 from "../assets/projects/github-tool-image3.jpeg";
 import GithubToolImage4 from "../assets/projects/github-tool-image4.jpeg";
 
 import SKTemplateStoreCreator from "../assets/projects/sk-template-store-creator.jpg";
@@ -16,7 +12,7 @@ import SKTemplateStore from "../assets/projects/sk-template-store.jpg";
 export const projects = [
   {
     thumbnailImage: HiveImage9,
-    otherImages: [HiveImage9, HiveImage17, HiveImage23, HiveImage29],
+    otherImages: [HiveImage9, HiveImage17],
     name: "Hive",
     outline: "A board game.",
     outlineJa: "ボードゲーム。",
@@ -32,9 +28,7 @@ export const projects = [
     thumbnailImage: GithubToolImage,
     otherImages: [
       GithubToolImage,
-      GithubToolImage1,
       GithubToolImage2,
-      GithubToolImage3,
       GithubToolImage4,
     ],
     name: "GitHub Tool",
