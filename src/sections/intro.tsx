@@ -1,10 +1,12 @@
 "use client";
 
-import { Box, Grid2, Stack, Typography } from "@mui/material";
+import { Box, Grid2 } from "@mui/material";
 import Image from "next/image";
 import { useRef } from "react";
 
 import { HoverOverMe } from "@/components/hoverOverMe";
+import { HomeTextBlock } from "@/components/homeTextBlock";
+import { SlidingGlassPanel } from "@/components/slidingGlassPanel";
 import { useScrollIntoViewProgress } from "@/hooks/useScrollIntoViewProgress";
 import { useLanguage } from "@/i18n/language";
 import { translations } from "@/i18n/translations";
@@ -17,6 +19,9 @@ export const Intro = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const scrollProgress = useScrollIntoViewProgress(sectionRef);
   const rectangleOffset = -260 + scrollProgress * 520;
+  const fastPanelOffset = 360 - scrollProgress * 760;
+  const slowPanelOffset = -520 + scrollProgress * 260;
+  const risingPanelOffset = 140 + scrollProgress * 360;
   const { language } = useLanguage();
   const t = translations[language];
 
@@ -34,21 +39,44 @@ export const Intro = () => {
         zIndex: 0,
       }}
     >
-      <Box
-        sx={{
-          position: "absolute",
-          top: -50,
-          left: "50%",
-          transform: `translateX(calc(-50% + ${rectangleOffset}px))`,
-          zIndex: 0,
-          height: 550,
-          width: { xs: "calc(100vw - 2rem)", md: 1200 },
-          backgroundColor: colors.base.light,
-          opacity: 0.4,
-          pointerEvents: "none",
-          transition: "transform 0.1s",
-          willChange: "transform",
-        }}
+      <SlidingGlassPanel
+        offset={rectangleOffset}
+        height={550}
+        width={{ xs: "calc(100vw - 2rem)", md: 1200 }}
+        accentSide="right"
+      />
+      <SlidingGlassPanel
+        offset={fastPanelOffset}
+        yOffset={-84 + scrollProgress * 42}
+        rotate={-2}
+        top={-88}
+        height={210}
+        width={{ xs: "64vw", md: 520 }}
+        opacity={0.62}
+        accentSide="left"
+        blur={3}
+      />
+      <SlidingGlassPanel
+        offset={slowPanelOffset}
+        yOffset={120 - scrollProgress * 80}
+        rotate={2.5}
+        top={250}
+        height={170}
+        width={{ xs: "58vw", md: 420 }}
+        opacity={0.5}
+        accentSide="none"
+        blur={2}
+      />
+      <SlidingGlassPanel
+        offset={risingPanelOffset}
+        yOffset={180 - scrollProgress * 150}
+        rotate={-1.5}
+        top={70}
+        height={320}
+        width={{ xs: "44vw", md: 300 }}
+        opacity={0.42}
+        accentSide="right"
+        blur={2}
       />
       <Grid2 size={{ xs: 12, md: 4 }} sx={{ position: "relative", zIndex: 1 }}>
         <Box
@@ -73,17 +101,9 @@ export const Intro = () => {
         </Box>
       </Grid2>
       <Grid2 size={{ xs: 12, md: 8 }} sx={{ position: "relative", zIndex: 1 }}>
-        <Stack spacing={5} sx={{ zIndex: 1 }}>
-          <Typography variant="h2" sx={{ textShadow: "2px 2px 4px #000000" }}>
-            {t.home.introTitle}
-          </Typography>
-          <Typography variant="h4" sx={{ textShadow: "2px 2px 4px #000000" }}>
-            {t.home.introSubtitle}
-          </Typography>
-          <Typography variant="h4" sx={{ textShadow: "2px 2px 4px #000000" }}>
-            {t.home.introBody}
-          </Typography>
-        </Stack>
+        <HomeTextBlock title={t.home.introTitle}>
+          {[t.home.introSubtitle, t.home.introBody]}
+        </HomeTextBlock>
       </Grid2>
     </Grid2>
   );
