@@ -52,6 +52,11 @@ export const translations = {
       voluntaryTitle: "Voluntary Experience",
       serviceSubtitle: "(community building)",
     },
+    footer: {
+      builtWith: "Website developed with Next.js and React. Hosted on GitHub.",
+      lastUpdated: "Last updated: 19 Aug 2026",
+      copyright: "© 2025 Mo's Website. All rights reserved.",
+    },
     notFound: {
       title: "Still under development.",
       body: "Please try again later.",
@@ -109,6 +114,11 @@ export const translations = {
       serviceTitle: "バハイ奉仕活動",
       serviceSubtitle: "（コミュニティづくり）",
       voluntaryTitle: "奉仕活動",
+    },
+    footer: {
+      builtWith: "Next.js と React で開発し、GitHub でホストしています。",
+      lastUpdated: "最終更新：2026年8月19日",
+      copyright: "© 2025 Mo's Website. All rights reserved.",
     },
     notFound: {
       title: "現在開発中です。",
