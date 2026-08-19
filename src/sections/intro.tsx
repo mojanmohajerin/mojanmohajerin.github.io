@@ -19,9 +19,9 @@ export const Intro = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const scrollProgress = useScrollIntoViewProgress(sectionRef);
   const rectangleOffset = -260 + scrollProgress * 520;
-  const fastPanelOffset = 360 - scrollProgress * 760;
-  const slowPanelOffset = -520 + scrollProgress * 260;
-  const risingPanelOffset = 140 + scrollProgress * 360;
+  const fastPanelOffset = 110 - scrollProgress * 280;
+  const slowPanelOffset = -120 + scrollProgress * 180;
+  const risingPanelOffset = 70 + scrollProgress * 240;
   const { language } = useLanguage();
   const t = translations[language];
 
@@ -47,33 +47,36 @@ export const Intro = () => {
       />
       <SlidingGlassPanel
         offset={fastPanelOffset}
-        yOffset={-84 + scrollProgress * 42}
+        left="16%"
+        yOffset={-92 + scrollProgress * 64}
         rotate={-2}
-        top={-88}
+        top={-135}
         height={210}
-        width={{ xs: "64vw", md: 520 }}
+        width={{ xs: "46vw", md: 420 }}
         opacity={0.62}
         accentSide="left"
         blur={3}
       />
       <SlidingGlassPanel
         offset={slowPanelOffset}
-        yOffset={120 - scrollProgress * 80}
+        left="88%"
+        yOffset={150 - scrollProgress * 110}
         rotate={2.5}
-        top={250}
+        top={310}
         height={170}
-        width={{ xs: "58vw", md: 420 }}
+        width={{ xs: "50vw", md: 360 }}
         opacity={0.5}
         accentSide="none"
         blur={2}
       />
       <SlidingGlassPanel
         offset={risingPanelOffset}
-        yOffset={180 - scrollProgress * 150}
+        left="4%"
+        yOffset={210 - scrollProgress * 170}
         rotate={-1.5}
-        top={70}
-        height={320}
-        width={{ xs: "44vw", md: 300 }}
+        top={100}
+        height={280}
+        width={{ xs: "38vw", md: 240 }}
         opacity={0.42}
         accentSide="right"
         blur={2}

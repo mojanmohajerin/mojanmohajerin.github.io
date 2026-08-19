@@ -47,7 +47,7 @@ export default function RootLayout({
             sx={{
               maxWidth: "1500px",
               marginInline: "auto",
-              overflow: "hidden",
+              overflow: "visible",
               width: "100%",
               flex: "1 0 auto",
             }}

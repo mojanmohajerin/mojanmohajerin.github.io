@@ -50,17 +50,48 @@ export const Header = () => {
   };
 
   return (
-    <Box sx={{ position: "relative" }}>
+    <Box sx={{ position: "relative", zIndex: 6, overflow: "visible" }}>
+      <Link href={paths.home}>
+        <Box
+          sx={{
+            position: "fixed",
+            top: "10px",
+            left: "10px",
+            zIndex: 20,
+          }}
+        >
+          <Image
+            src={cartoonImage}
+            alt="cartoon image"
+            width={cartoonImageSize}
+            height={cartoonImageSize}
+            style={{
+              border: `2px solid ${colors.base.lightest}`,
+              borderRadius: "15%",
+              transition: "width 0.3s, height 0.3s",
+            }}
+          />
+        </Box>
+      </Link>
       <Stack
         className="header-background"
         direction="row"
         justifyContent="space-between"
         alignItems="center"
         sx={{
-          paddingLeft: "7rem",
+          position: "relative",
+          overflow: "visible",
+          paddingLeft: { xs: "7.75rem", md: "8.5rem" },
           paddingRight: "5rem",
           paddingY: "1rem",
           minHeight: "8rem",
+          background:
+            "linear-gradient(to bottom, rgba(36, 54, 66, 0.62) 0%, rgba(36, 54, 66, 0.24) 58%, rgba(36, 54, 66, 0) 100%)",
+          backdropFilter: "blur(3px)",
+          "& > *": {
+            position: "relative",
+            zIndex: 1,
+          },
         }}
       >
         <Link href={paths.home}>
@@ -70,26 +101,6 @@ export const Header = () => {
             justifyContent="center"
             alignItems="center"
           >
-            <Box
-              sx={{
-                position: "fixed",
-                top: "10px",
-                left: "10px",
-                zIndex: 10,
-              }}
-            >
-              <Image
-                src={cartoonImage}
-                alt="cartoon image"
-                width={cartoonImageSize}
-                height={cartoonImageSize}
-                style={{
-                  border: `2px solid ${colors.base.lightest}`,
-                  borderRadius: "15%",
-                  transition: "width 0.3s, height 0.3s",
-                }}
-              />
-            </Box>
             {xs ? (
               <Typography
                 variant="h4"

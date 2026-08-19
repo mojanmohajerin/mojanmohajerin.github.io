@@ -14,7 +14,7 @@ import {
 import { Box, Button, Stack, SvgIcon, Typography } from "@mui/material";
 import { ArrowBlockDown } from "@untitled-ui/icons-react";
 import type { MouseEvent } from "react";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { life, years } from "@/data/life";
 import { useLanguage } from "@/i18n/language";
@@ -37,6 +37,7 @@ interface TimelineBlockProps {
   hoveredYear?: number;
   setActiveYear: (year: number) => void;
   setHoveredYear: (year?: number) => void;
+  clearHoveredYear: (delay?: number) => void;
   onTimelineClick: () => void;
   showPrompt: boolean;
 }
@@ -44,6 +45,8 @@ interface TimelineBlockProps {
 interface MilestonePanelProps {
   year: number;
   pinned: boolean;
+  setHoveredYear: (year?: number) => void;
+  clearHoveredYear: (delay?: number) => void;
 }
 
 interface MilestoneCardProps {
@@ -53,10 +56,9 @@ interface MilestoneCardProps {
   surface?: boolean;
 }
 
-const milestoneCardBackground = "rgb(36, 54, 66, 0.82)";
+const milestoneCardBackground = "rgba(36, 54, 66, 0.86)";
 const horizontalTimelineDotSize = 22;
 const horizontalTimelineDotBottom = 48;
-const horizontalTimelineConnectorHeight = 90;
 const timelinePromptYear = 1996;
 
 const timelineDateJa: Record<string, string> = {
@@ -217,7 +219,7 @@ const SideSpeechBubbleTail = () => (
         height: 0,
         borderTop: "11px solid transparent",
         borderBottom: "11px solid transparent",
-        borderRight: `16px solid ${colors.base.light}`,
+        borderRight: `16px solid rgba(226, 241, 231, 0.26)`,
         transform: "translateY(-50%)",
         zIndex: 1,
       }}
@@ -231,7 +233,7 @@ const SideSpeechBubbleTail = () => (
         height: 0,
         borderTop: "9px solid transparent",
         borderBottom: "9px solid transparent",
-        borderRight: `14px solid ${milestoneCardBackground}`,
+        borderRight: `14px solid rgba(36, 54, 66, 0.86)`,
         transform: "translateY(-50%)",
         zIndex: 2,
       }}
@@ -255,10 +257,15 @@ const MilestoneCard = ({
         position: "relative",
         zIndex: 1,
         padding: compact ? 1.5 : { xs: 1.5, md: 2 },
-        backgroundColor: surface ? milestoneCardBackground : "transparent",
+        background: surface
+          ? "linear-gradient(145deg, rgba(36, 54, 66, 0.9) 0%, rgba(56, 116, 120, 0.68) 62%, rgba(36, 54, 66, 0.84) 100%)"
+          : "transparent",
         borderRadius: surface ? 2 : 0,
-        border: surface ? `1px solid ${colors.base.light}` : "none",
-        boxShadow: surface ? "0 12px 32px rgb(0, 0, 0, 0.25)" : "none",
+        border: surface ? `1px solid rgba(226, 241, 231, 0.26)` : "none",
+        boxShadow: surface
+          ? "0 18px 42px rgba(0, 0, 0, 0.34), inset 0 1px 0 rgba(255, 254, 249, 0.12)"
+          : "none",
+        backdropFilter: surface ? "blur(8px)" : "none",
         maxHeight,
         overflowY: maxHeight ? "auto" : "visible",
         scrollbarWidth: maxHeight ? "thin" : "auto",
@@ -315,7 +322,8 @@ const MilestoneCard = ({
                   borderRadius: "50%",
                   backgroundColor: colors.gold,
                   border: `1px solid ${colors.base.lightest}`,
-                  boxShadow: "0 0 0 2px rgba(36, 54, 66, 0.45)",
+                  boxShadow:
+                    "0 0 0 2px rgba(36, 54, 66, 0.45), 0 0 14px rgba(189, 172, 106, 0.55)",
                   mt: 0.35,
                   flexShrink: 0,
                 }}
@@ -327,7 +335,8 @@ const MilestoneCard = ({
                     flex: "1 1 auto",
                     minHeight: 20,
                     mt: 0.5,
-                    backgroundColor: "rgba(226, 241, 231, 0.35)",
+                    background:
+                      "linear-gradient(180deg, rgba(189, 172, 106, 0.42), rgba(226, 241, 231, 0.18))",
                   }}
                 />
               )}
@@ -408,8 +417,9 @@ const HorizontalMilestoneCard = ({
         right: openTowardCenter ? horizontalTimelineDotSize / 2 : "auto",
         width: 2,
         height: 10,
-        backgroundColor: colors.base.light,
+        background: `linear-gradient(180deg, ${colors.gold}, rgba(226, 241, 231, 0.45))`,
         opacity: 0.85,
+        boxShadow: `0 0 12px rgba(189, 172, 106, 0.42)`,
         transform: "translateX(-50%)",
         pointerEvents: "none",
       },
@@ -419,15 +429,22 @@ const HorizontalMilestoneCard = ({
   </Box>
 );
 
-const MilestonePanel = ({ year, pinned }: MilestonePanelProps) => (
+const MilestonePanel = ({
+  year,
+  pinned,
+  setHoveredYear,
+  clearHoveredYear,
+}: MilestonePanelProps) => (
   <TimelineOppositeContent
+    onMouseEnter={() => setHoveredYear(year)}
+    onMouseLeave={() => clearHoveredYear(180)}
     sx={{
       position: "absolute",
       top: -6,
       right: { xs: -24, md: -38 },
       width: { xs: "100%", md: "48%" },
       zIndex: pinned ? 6 : 7,
-      pointerEvents: "none",
+      pointerEvents: "auto",
     }}
   >
     <MilestoneCard year={year} compact />
@@ -442,6 +459,7 @@ const TimelineBlock = ({
   hoveredYear,
   setActiveYear,
   setHoveredYear,
+  clearHoveredYear,
   onTimelineClick,
   showPrompt,
 }: TimelineBlockProps) => {
@@ -467,7 +485,7 @@ const TimelineBlock = ({
       onMouseEnter={() => {
         setHoveredYear(year);
       }}
-      onMouseLeave={() => setHoveredYear(undefined)}
+      onMouseLeave={() => clearHoveredYear(180)}
       sx={{
         position: "relative",
       }}
@@ -479,7 +497,12 @@ const TimelineBlock = ({
         />
       ) : null}
       {showMilestones ? (
-        <MilestonePanel year={year} pinned={year === activeYear} />
+        <MilestonePanel
+          year={year}
+          pinned={year === activeYear}
+          setHoveredYear={setHoveredYear}
+          clearHoveredYear={clearHoveredYear}
+        />
       ) : null}
       <TimelineSeparator>
         <Button
@@ -487,7 +510,7 @@ const TimelineBlock = ({
           onFocus={() => {
             setHoveredYear(year);
           }}
-          onBlur={() => setHoveredYear(undefined)}
+          onBlur={() => clearHoveredYear(180)}
           disableFocusRipple
           disableRipple
           sx={{
@@ -506,13 +529,17 @@ const TimelineBlock = ({
               height: dotSize,
               width: dotSize,
               borderColor: isHighlighted
-                ? colors.base.dark
-                : colors.base.lightest,
+                ? colors.gold
+                : "rgba(226, 241, 231, 0.86)",
               backgroundColor: isHighlighted
-                ? colors.base.dark
-                : colors.base.lightest,
-              borderWidth: 6,
-              transition: "background-color 0.2s ease-in-out",
+                ? colors.gold
+                : "rgba(226, 241, 231, 0.82)",
+              borderWidth: 5,
+              boxShadow: isHighlighted
+                ? "0 0 0 5px rgba(189, 172, 106, 0.16), 0 0 20px rgba(189, 172, 106, 0.62)"
+                : "0 0 0 4px rgba(36, 54, 66, 0.4)",
+              transition:
+                "background-color 0.2s ease-in-out, border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out",
             }}
           />
         </Button>
@@ -520,8 +547,11 @@ const TimelineBlock = ({
           <TimelineConnector
             sx={{
               height: connectorHeight,
-              width: 4,
-              backgroundColor: colors.charcoal,
+              width: 3,
+              borderRadius: 999,
+              background:
+                "linear-gradient(180deg, rgba(226, 241, 231, 0.46), rgba(189, 172, 106, 0.24), rgba(226, 241, 231, 0.34))",
+              boxShadow: "0 0 12px rgba(226, 241, 231, 0.16)",
             }}
           />
         ) : null}
@@ -533,7 +563,7 @@ const TimelineBlock = ({
             onFocus={() => {
               setHoveredYear(year);
             }}
-            onBlur={() => setHoveredYear(undefined)}
+            onBlur={() => clearHoveredYear(180)}
             disableFocusRipple
             disableRipple
             sx={{
@@ -549,10 +579,13 @@ const TimelineBlock = ({
             <Typography
               color={colors.chalk}
               variant="h5"
-              sx={{
-                textShadow: "2px 2px 4px #000000",
-                fontWeight: isActive || isHighlighted ? "bold" : "none",
-              }}
+            sx={{
+                color: isActive || isHighlighted ? colors.gold : colors.chalk,
+                textShadow: isActive || isHighlighted
+                  ? "2px 2px 4px #000000, 0 0 14px rgba(189, 172, 106, 0.36)"
+                  : "2px 2px 4px #000000",
+                fontWeight: isActive || isHighlighted ? 700 : 500,
+            }}
             >
               {year}
             </Typography>
@@ -575,6 +608,7 @@ interface HorizontalTimelineBlockProps {
   hoveredYear?: number;
   setActiveYear: (year: number) => void;
   setHoveredYear: (year?: number) => void;
+  clearHoveredYear: (delay?: number) => void;
   onTimelineClick: () => void;
   showPrompt: boolean;
 }
@@ -591,6 +625,7 @@ const HorizontalTimelineBlock = ({
   hoveredYear,
   setActiveYear,
   setHoveredYear,
+  clearHoveredYear,
   onTimelineClick,
   showPrompt,
 }: HorizontalTimelineBlockProps) => {
@@ -651,6 +686,8 @@ const HorizontalTimelineBlock = ({
       ) : null}
       {showMilestones ? (
         <Box
+          onMouseEnter={() => setHoveredYear(year)}
+          onMouseLeave={() => clearHoveredYear(180)}
           sx={{
             position: "absolute",
             left: openTowardCenter ? "auto" : 0,
@@ -661,6 +698,7 @@ const HorizontalTimelineBlock = ({
             width: 300,
             zIndex: isActive ? 6 : 7,
             pointerEvents: "auto",
+            transition: "bottom 220ms cubic-bezier(0.2, 0.8, 0.2, 1)",
           }}
         >
           <HorizontalMilestoneCard
@@ -673,7 +711,7 @@ const HorizontalTimelineBlock = ({
         onMouseEnter={handleMouseMove}
         onMouseMove={handleMouseMove}
         onClick={handleClick}
-        onMouseLeave={() => setHoveredYear(undefined)}
+        onMouseLeave={() => clearHoveredYear(180)}
         sx={{
           position: "absolute",
           left: 0,
@@ -694,7 +732,7 @@ const HorizontalTimelineBlock = ({
         onFocus={() => {
           setHoveredYear(year);
         }}
-        onBlur={() => setHoveredYear(undefined)}
+        onBlur={() => clearHoveredYear(180)}
         disableFocusRipple
         disableRipple
         sx={{
@@ -703,11 +741,15 @@ const HorizontalTimelineBlock = ({
           bottom: horizontalTimelineDotBottom + elevation,
           minWidth: 0,
           p: 0,
+          transition: "bottom 220ms cubic-bezier(0.2, 0.8, 0.2, 1)",
           "&:hover": {
             backgroundColor: "transparent",
           },
           "&:hover .timeline-dot": {
-            backgroundColor: colors.base.dark,
+            backgroundColor: colors.gold,
+            borderColor: colors.gold,
+            boxShadow:
+              "0 0 0 5px rgba(189, 172, 106, 0.16), 0 0 20px rgba(189, 172, 106, 0.62)",
           },
         }}
       >
@@ -717,56 +759,22 @@ const HorizontalTimelineBlock = ({
           sx={{
             height: 22,
             width: horizontalTimelineDotSize,
-            borderColor: isHighlighted ? colors.base.dark : colors.base.lightest,
+            borderColor: isHighlighted
+              ? colors.gold
+              : "rgba(226, 241, 231, 0.86)",
             backgroundColor: isHighlighted
-              ? colors.base.dark
-              : colors.base.lightest,
-            borderWidth: 6,
+              ? colors.gold
+              : "rgba(226, 241, 231, 0.82)",
+            borderWidth: 5,
             m: 0,
-            transition: "background-color 0.2s ease-in-out",
+            boxShadow: isHighlighted
+              ? "0 0 0 5px rgba(189, 172, 106, 0.16), 0 0 20px rgba(189, 172, 106, 0.62)"
+              : "0 0 0 4px rgba(36, 54, 66, 0.4)",
+            transition:
+              "background-color 0.2s ease-in-out, border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out",
           }}
         />
       </Button>
-      {connector ? (
-        <Box
-          component="svg"
-          viewBox={`0 0 100 ${horizontalTimelineConnectorHeight}`}
-          preserveAspectRatio="none"
-          aria-hidden="true"
-          sx={{
-            position: "absolute",
-            left: horizontalTimelineDotSize / 2,
-            right: -(horizontalTimelineDotSize / 2),
-            bottom: horizontalTimelineDotBottom,
-            height: horizontalTimelineConnectorHeight,
-            pointerEvents: "none",
-            overflow: "visible",
-            zIndex: 0,
-          }}
-        >
-          <path
-            d={`M 0 ${horizontalTimelineConnectorHeight -
-              horizontalTimelineDotSize / 2 -
-              elevation
-              } C 34 ${horizontalTimelineConnectorHeight -
-              horizontalTimelineDotSize / 2 -
-              elevation
-              }, 66 ${horizontalTimelineConnectorHeight -
-              horizontalTimelineDotSize / 2 -
-              nextElevation
-              }, 100 ${horizontalTimelineConnectorHeight -
-              horizontalTimelineDotSize / 2 -
-              nextElevation
-              }`}
-            fill="none"
-            stroke={colors.charcoal}
-            strokeWidth="4"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            vectorEffect="non-scaling-stroke"
-          />
-        </Box>
-      ) : null}
       <Button
         onClick={() => {
           onTimelineClick();
@@ -775,7 +783,7 @@ const HorizontalTimelineBlock = ({
         onFocus={() => {
           setHoveredYear(year);
         }}
-        onBlur={() => setHoveredYear(undefined)}
+        onBlur={() => clearHoveredYear(180)}
         disableFocusRipple
         disableRipple
         sx={{
@@ -785,6 +793,7 @@ const HorizontalTimelineBlock = ({
           minWidth: 0,
           p: 0.5,
           transform: "rotate(-35deg)",
+          transition: "bottom 220ms cubic-bezier(0.2, 0.8, 0.2, 1)",
           "&:hover": {
             backgroundColor: "transparent",
           },
@@ -793,11 +802,14 @@ const HorizontalTimelineBlock = ({
         <Typography
           color={colors.chalk}
           variant="h5"
-          sx={{
-            textShadow: "2px 2px 4px #000000",
-            fontWeight: isActive || isHighlighted ? "bold" : "none",
-          }}
-        >
+        sx={{
+            color: isActive || isHighlighted ? colors.gold : colors.chalk,
+            textShadow: isActive || isHighlighted
+              ? "2px 2px 4px #000000, 0 0 14px rgba(189, 172, 106, 0.36)"
+              : "2px 2px 4px #000000",
+            fontWeight: isActive || isHighlighted ? 700 : 500,
+        }}
+      >
           {year}
         </Typography>
       </Button>
@@ -813,14 +825,54 @@ export const Experience = ({
   onTimelineClick,
 }: ExperienceProps) => {
   const [hoveredYear, setHoveredYear] = useState<number | undefined>();
+  const hoverClearTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(
+    null,
+  );
   const horizontalYears = [...years].reverse();
   const visibleYear = hoveredYear ?? activeYear;
   const visibleYearIndex = horizontalYears.indexOf(visibleYear);
+
+  const showHoveredYear = (year?: number) => {
+    if (hoverClearTimeoutRef.current) {
+      clearTimeout(hoverClearTimeoutRef.current);
+      hoverClearTimeoutRef.current = null;
+    }
+
+    setHoveredYear(year);
+  };
+
+  const clearHoveredYear = (delay = 0) => {
+    if (hoverClearTimeoutRef.current) {
+      clearTimeout(hoverClearTimeoutRef.current);
+      hoverClearTimeoutRef.current = null;
+    }
+
+    if (delay > 0) {
+      hoverClearTimeoutRef.current = setTimeout(() => {
+        setHoveredYear(undefined);
+        hoverClearTimeoutRef.current = null;
+      }, delay);
+
+      return;
+    }
+
+    setHoveredYear(undefined);
+  };
+
+  useEffect(() => {
+    return () => {
+      if (hoverClearTimeoutRef.current) {
+        clearTimeout(hoverClearTimeoutRef.current);
+      }
+    };
+  }, []);
+
   const getTimelineElevation = (year: number) => {
     const distanceFromVisibleYear = Math.abs(
       horizontalYears.indexOf(year) - visibleYearIndex,
     );
-    return Math.round(46 * Math.exp(-1.25 * distanceFromVisibleYear));
+
+    return Math.round(52 * Math.exp(-0.48 * distanceFromVisibleYear ** 2));
   };
 
   if (md) {
@@ -834,11 +886,26 @@ export const Experience = ({
       >
         <Box
           sx={{
+            position: "relative",
             display: "flex",
             alignItems: "flex-end",
             width: "100%",
             px: 3,
             pt: 2,
+            "&::before": {
+              content: '""',
+              position: "absolute",
+              left: `calc(${24}px + ${horizontalTimelineDotSize / 2}px)`,
+              right: `calc(${24}px - ${horizontalTimelineDotSize / 2}px)`,
+              bottom: horizontalTimelineDotBottom + horizontalTimelineDotSize / 2,
+              height: 3,
+              borderRadius: 999,
+              background:
+                "linear-gradient(90deg, rgba(226, 241, 231, 0.08) 0%, rgba(226, 241, 231, 0.46) 18%, rgba(189, 172, 106, 0.3) 50%, rgba(226, 241, 231, 0.46) 82%, rgba(226, 241, 231, 0.08) 100%)",
+              boxShadow: "0 0 14px rgba(226, 241, 231, 0.16)",
+              pointerEvents: "none",
+              zIndex: 0,
+            },
           }}
         >
           {horizontalYears.map((year, index) => (
@@ -858,7 +925,8 @@ export const Experience = ({
               activeYear={activeYear}
               hoveredYear={hoveredYear}
               setActiveYear={setActiveYear}
-              setHoveredYear={setHoveredYear}
+              setHoveredYear={showHoveredYear}
+              clearHoveredYear={clearHoveredYear}
               onTimelineClick={onTimelineClick}
               showPrompt={showPrompt}
             />
@@ -876,8 +944,10 @@ export const Experience = ({
             <TimelineConnector
               sx={{
                 height: 28,
-                width: 4,
-                backgroundColor: colors.charcoal,
+                width: 3,
+                borderRadius: 999,
+                background:
+                  "linear-gradient(180deg, rgba(226, 241, 231, 0.28), rgba(226, 241, 231, 0.46))",
               }}
             />
           </TimelineSeparator>
@@ -891,7 +961,8 @@ export const Experience = ({
             activeYear={activeYear}
             hoveredYear={hoveredYear}
             setActiveYear={setActiveYear}
-            setHoveredYear={setHoveredYear}
+            setHoveredYear={showHoveredYear}
+            clearHoveredYear={clearHoveredYear}
             onTimelineClick={onTimelineClick}
             showPrompt={showPrompt}
           />

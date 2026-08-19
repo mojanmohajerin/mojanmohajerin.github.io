@@ -22,9 +22,9 @@ export const translations = {
         "I've always been facinated by foreign langauges. I got entrapped in this dark forest about 10 years ago with my (then) girlfriend who happened to be German, and have since been trying to find my way out - slowly acquiring toddler-grade venacular in one regard while letting the other previously memorised aspects deteriorate beyond intelligible disrepair. The most recent project is Japanese, having started learning around early 2023, excited to see where this journey takes me!",
     },
     pages: {
-      projectsTitle: "Some personal projects",
+      projectsTitle: "Some Personal Projects",
       contactTitle: "Contact",
-      timelineTitle: "My life story",
+      timelineTitle: "My Life Story",
       timelineSubtitle: "(in a nutshell)",
     },
     contact: {
@@ -44,11 +44,12 @@ export const translations = {
     },
     timeline: {
       clickMe: "Click me!",
-      professionalTitle: "Professional experience",
+      professionalTitle: "Professional Experience",
       summary: "(summary)",
       skills: "Skills",
       skillsToAdd: "Skills to add",
-      serviceTitle: "Baha'i service",
+      serviceTitle: "Baha'i Service",
+      voluntaryTitle: "Voluntary Experience",
       serviceSubtitle: "(community building)",
     },
     notFound: {
@@ -107,6 +108,7 @@ export const translations = {
       skillsToAdd: "追加予定のスキル",
       serviceTitle: "バハイ奉仕活動",
       serviceSubtitle: "（コミュニティづくり）",
+      voluntaryTitle: "奉仕活動",
     },
     notFound: {
       title: "現在開発中です。",

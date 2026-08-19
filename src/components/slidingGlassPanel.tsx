@@ -6,6 +6,7 @@ interface SlidingGlassPanelProps {
   offset: number;
   height: number;
   width: { xs: string; md: number };
+  left?: string;
   top?: number;
   yOffset?: number;
   rotate?: number;
@@ -18,6 +19,7 @@ export const SlidingGlassPanel = ({
   offset,
   height,
   width,
+  left = "50%",
   top = -50,
   yOffset = 0,
   rotate = 0,
@@ -29,8 +31,8 @@ export const SlidingGlassPanel = ({
     sx={{
       position: "absolute",
       top,
-      left: "50%",
-      transform: `translate(calc(-50% + ${offset}px), ${yOffset}px) rotate(${rotate}deg)`,
+      left,
+      transform: `translate(${offset}px, ${yOffset}px) translateX(-50%) rotate(${rotate}deg)`,
       zIndex: 0,
       height,
       width,

@@ -53,12 +53,44 @@ export const CurrentYear = ({
         width: 170,
         maxHeight: 170,
         overflowY: "auto",
-        px: 1.5,
-        py: 1,
-        background: `linear-gradient(270deg, rgba(56,116,120,0.82) 0%, rgba(56,116,120,0.62) 45%, rgba(56,116,120,0) 100%)`,
-        borderRadius: "8px 0 0 8px",
+        px: 1.25,
+        py: 1.25,
+        background:
+          "linear-gradient(270deg, rgba(36, 54, 66, 0.82) 0%, rgba(56, 116, 120, 0.5) 58%, rgba(36, 54, 66, 0.12) 100%)",
+        border: "1px solid rgba(226, 241, 231, 0.18)",
+        borderRight: "none",
+        borderRadius: "14px 0 0 14px",
+        boxShadow:
+          "0 18px 42px rgba(0, 0, 0, 0.24), inset 0 1px 0 rgba(255, 254, 249, 0.14)",
+        backdropFilter: "blur(9px)",
         scrollbarWidth: "none",
         msOverflowStyle: "none",
+        maskImage:
+          "linear-gradient(180deg, transparent 0%, black 16%, black 84%, transparent 100%)",
+        WebkitMaskImage:
+          "linear-gradient(180deg, transparent 0%, black 16%, black 84%, transparent 100%)",
+        "&::before": {
+          content: '""',
+          position: "absolute",
+          top: 18,
+          bottom: 18,
+          right: 0,
+          width: 3,
+          borderRadius: "999px 0 0 999px",
+          background: `linear-gradient(180deg, rgba(189, 172, 106, 0) 0%, ${colors.gold} 22%, ${colors.gold} 78%, rgba(189, 172, 106, 0) 100%)`,
+          boxShadow: `0 0 18px rgba(189, 172, 106, 0.42)`,
+          pointerEvents: "none",
+        },
+        "&::after": {
+          content: '""',
+          position: "absolute",
+          inset: -18,
+          background:
+            "radial-gradient(circle at 80% 50%, rgba(226, 241, 231, 0.16), transparent 42%)",
+          filter: "blur(14px)",
+          opacity: 0.75,
+          pointerEvents: "none",
+        },
         "&::-webkit-scrollbar": {
           display: "none",
         },
@@ -77,15 +109,19 @@ export const CurrentYear = ({
               onClick={() => handleClick(year)}
               sx={{
                 minWidth: 0,
-                px: 1,
-                py: 0.25,
+                px: 1.1,
+                py: 0.35,
+                borderRadius: "999px",
                 textDecoration: "none",
                 textTransform: "none",
                 color: colors.chalk,
                 transformOrigin: "right center",
                 transition:
-                  "transform 0.2s ease-in-out, opacity 0.2s ease-in-out",
-                opacity: isActive ? 1 : 0.76,
+                  "transform 0.2s ease-in-out, opacity 0.2s ease-in-out, background-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out",
+                opacity: isActive ? 1 : 0.68,
+                backgroundColor: "transparent",
+                border: "1px solid transparent",
+                boxShadow: "none",
                 "&:hover, &:focus-visible": {
                   backgroundColor: "transparent",
                   transform: "scale(1.08)",
@@ -98,7 +134,10 @@ export const CurrentYear = ({
                 sx={{
                   lineHeight: 1.05,
                   fontWeight: isActive ? 700 : 500,
-                  textShadow: "1px 1px 2px #000",
+                  color: isActive ? colors.gold : colors.chalk,
+                  textShadow: isActive
+                    ? "1px 1px 3px #000, 0 0 12px rgba(189, 172, 106, 0.28)"
+                    : "1px 1px 2px #000",
                 }}
               >
                 {year}

@@ -30,6 +30,7 @@ export const LeftButton = ({
           top: 0,
           left: 0,
           bottom: 0,
+          zIndex: 3,
           paddingLeft: { xs: 1, md: 2 },
           width: "18%",
           display: "flex",

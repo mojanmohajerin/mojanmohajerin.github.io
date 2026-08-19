@@ -56,6 +56,10 @@ export const ProjectModal = ({ open, setOpen, project }: ProjectModalProps) => {
       slotProps={{
         backdrop: {
           timeout: 500,
+          sx: {
+            backgroundColor: "rgba(10, 18, 22, 0.74)",
+            backdropFilter: "blur(3px)",
+          },
         },
       }}
     >
@@ -68,10 +72,13 @@ export const ProjectModal = ({ open, setOpen, project }: ProjectModalProps) => {
             transform: "translate(-50%, -50%)",
             width: { xs: "94vw", md: "min(1040px, 90vw)" },
             maxHeight: "88vh",
-            backgroundColor: "rgba(226, 241, 231, 0.92)",
-            border: `1px solid rgba(36, 54, 66, 0.35)`,
-            borderRadius: 2,
-            boxShadow: "0 24px 80px rgba(0, 0, 0, 0.45)",
+            background:
+              "linear-gradient(145deg, rgba(36, 54, 66, 0.88) 0%, rgba(56, 116, 120, 0.7) 58%, rgba(36, 54, 66, 0.86) 100%)",
+            border: `1px solid rgba(226, 241, 231, 0.22)`,
+            borderRadius: 3,
+            boxShadow:
+              "0 30px 90px rgba(0, 0, 0, 0.58), inset 0 1px 0 rgba(255, 254, 249, 0.18)",
+            backdropFilter: "blur(12px)",
             overflow: "auto",
             p: { xs: 1.25, md: 2 },
           }}
@@ -86,12 +93,36 @@ export const ProjectModal = ({ open, setOpen, project }: ProjectModalProps) => {
                 width: "100%",
                 height: { xs: "36vh", md: "min(52vh, 520px)" },
                 minHeight: { xs: 220, md: 360 },
-                backgroundColor: colors.charcoal,
-                borderRadius: 1.5,
+                backgroundColor: "rgba(20, 29, 35, 0.84)",
+                borderRadius: 2,
                 overflow: "hidden",
-                border: `1px solid rgba(36, 54, 66, 0.45)`,
+                border: `1px solid rgba(226, 241, 231, 0.2)`,
+                boxShadow:
+                  "0 18px 50px rgba(0, 0, 0, 0.42), inset 0 1px 0 rgba(255, 254, 249, 0.12)",
               }}
             >
+              <Image
+                src={project.otherImages[displayImageIndex]}
+                alt=""
+                fill
+                sizes="(min-width: 900px) 900px, 94vw"
+                aria-hidden="true"
+                style={{
+                  objectFit: "cover",
+                  transform: "scale(1.18)",
+                  filter: "blur(18px)",
+                  opacity: 0.28,
+                }}
+              />
+              <Box
+                sx={{
+                  position: "absolute",
+                  inset: 0,
+                  background:
+                    "linear-gradient(135deg, rgba(20, 29, 35, 0.42), rgba(20, 29, 35, 0.16))",
+                  zIndex: 1,
+                }}
+              />
               <Image
                 src={project.otherImages[displayImageIndex]}
                 alt={project.name}
@@ -100,6 +131,7 @@ export const ProjectModal = ({ open, setOpen, project }: ProjectModalProps) => {
                 style={{
                   objectFit: "contain",
                   padding: md ? 16 : 8,
+                  zIndex: 2,
                 }}
               />
 
@@ -119,6 +151,7 @@ export const ProjectModal = ({ open, setOpen, project }: ProjectModalProps) => {
                   position: "absolute",
                   right: 16,
                   bottom: 10,
+                  zIndex: 3,
                   color: colors.chalk,
                   backgroundColor: "rgba(0, 0, 0, 0.45)",
                   borderRadius: "999px",
@@ -135,7 +168,7 @@ export const ProjectModal = ({ open, setOpen, project }: ProjectModalProps) => {
               justifyContent="flex-start"
               alignItems="flex-start"
               sx={{
-                color: colors.charcoal,
+                color: colors.chalk,
                 px: { xs: 0.5, md: 1 },
                 pb: { xs: 0.5, md: 1 },
               }}
@@ -145,16 +178,30 @@ export const ProjectModal = ({ open, setOpen, project }: ProjectModalProps) => {
                 spacing={{ xs: 0.5, md: 2 }}
                 alignItems={{ xs: "flex-start", md: "baseline" }}
               >
-                <Typography variant={md ? "h4" : "h5"} sx={{ fontWeight: 700 }}>
+                <Typography
+                  variant={md ? "h4" : "h5"}
+                  sx={{ fontWeight: 700, textShadow: "1px 1px 2px #000000" }}
+                >
                   {project.name}
                 </Typography>
-                <Typography variant="overline" sx={{ color: colors.base.dark }}>
+                <Typography
+                  variant="overline"
+                  sx={{
+                    color: colors.gold,
+                    textShadow: "1px 1px 2px #000000",
+                  }}
+                >
                   {date}
                 </Typography>
               </Stack>
               <Typography
                 variant="body1"
-                sx={{ maxWidth: "72rem", lineHeight: 1.65 }}
+                sx={{
+                  maxWidth: "72rem",
+                  lineHeight: 1.65,
+                  color: colors.base.lightest,
+                  textShadow: "1px 1px 2px rgba(0, 0, 0, 0.55)",
+                }}
               >
                 {description}
               </Typography>
@@ -164,7 +211,7 @@ export const ProjectModal = ({ open, setOpen, project }: ProjectModalProps) => {
                   target="_blank"
                   rel="noopener noreferrer"
                   style={{
-                    color: colors.base.dark,
+                    color: colors.gold,
                     fontWeight: 700,
                     overflowWrap: "anywhere",
                   }}
@@ -176,22 +223,36 @@ export const ProjectModal = ({ open, setOpen, project }: ProjectModalProps) => {
                 direction="row"
                 spacing={1}
                 useFlexGap
-                flexWrap="wrap"
+                flexWrap="nowrap"
                 justifyContent="flex-start"
+                sx={{ minWidth: 0, maxWidth: "100%", overflow: "hidden" }}
               >
-                {project.technologies.map((tech) => {
+                {project.technologies.map((tech, index) => {
+                  const isLastTech = index === project.technologies.length - 1;
+
                   return (
                     <Box
                       key={`${project.name}-${tech}`}
                       sx={{
-                        backgroundColor: "rgba(98, 149, 132, 0.22)",
+                        minWidth: 0,
+                        flex: isLastTech ? "0 1 auto" : "0 0 auto",
+                        backgroundColor: "rgba(226, 241, 231, 0.14)",
                         borderRadius: "999px",
-                        border: `1px solid rgba(36, 54, 66, 0.28)`,
+                        border: `1px solid rgba(226, 241, 231, 0.28)`,
                         px: 1.25,
                         py: 0.5,
+                        boxShadow: "inset 0 1px 0 rgba(255, 254, 249, 0.1)",
                       }}
                     >
-                      <Typography variant="body2" sx={{ color: colors.charcoal }}>
+                      <Typography
+                        variant="body2"
+                        sx={{
+                          color: colors.chalk,
+                          overflow: "hidden",
+                          textOverflow: "ellipsis",
+                          whiteSpace: "nowrap",
+                        }}
+                      >
                         {tech}
                       </Typography>
                     </Box>

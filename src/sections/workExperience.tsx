@@ -6,6 +6,7 @@ import Image from "next/image";
 import { workExperience } from "@/data/workExperience";
 import { useLanguage } from "@/i18n/language";
 import { translations } from "@/i18n/translations";
+import { Title } from "@/sections/title";
 import { colors } from "@/styles/colors";
 
 const servicePrograms = [
@@ -49,31 +50,10 @@ export const WorkExperience = () => {
         pb: { xs: 8, md: 12 },
       }}
     >
-      <Box
-        sx={{
-          background:
-            "linear-gradient(90deg, rgba(98,149,132,0.58) 0%, rgba(98,149,132,0.18) 42%, rgba(0,212,255,0) 100%)",
-          width: { xs: "100%", md: "50%" },
-          zIndex: -1,
-          paddingTop: "1rem",
-          paddingLeft: { xs: "1.5rem", md: "2rem" },
-          paddingBottom: "4rem",
-          mb: { xs: 4, md: 6 },
-        }}
-      >
-        <Typography
-          variant="h3"
-          sx={{ textShadow: "2px 2px 4px #000000", paddingTop: "1rem" }}
-        >
-          {t.timeline.professionalTitle}
-        </Typography>
-        <Typography
-          variant="body1"
-          sx={{ paddingLeft: "1rem", textShadow: "2px 2px 4px #000000" }}
-        >
-          {t.timeline.summary}
-        </Typography>
-      </Box>
+      <Title
+        title={t.timeline.professionalTitle}
+        bottomSpacing="3rem"
+      />
 
       <Stack spacing={2.5} sx={{ px: { xs: 2, md: 8 } }}>
         {workExperience.map((experience) => {
@@ -103,6 +83,24 @@ export const WorkExperience = () => {
               : experience.summary;
           const skills =
             language === "ja" ? experience.skillsJa ?? experience.skills : experience.skills;
+          const roleSections =
+            experience.roles?.map((roleItem) => ({
+              role:
+                language === "ja" ? roleItem.roleJa ?? roleItem.role : roleItem.role,
+              start:
+                language === "ja" ? roleItem.startJa ?? roleItem.start : roleItem.start,
+              end: language === "ja" ? roleItem.endJa ?? roleItem.end : roleItem.end,
+              duration:
+                language === "ja"
+                  ? roleItem.durationJa ?? roleItem.duration
+                  : roleItem.duration,
+              summary:
+                language === "ja"
+                  ? roleItem.summaryJa ?? roleItem.summary
+                  : roleItem.summary,
+              skills:
+                language === "ja" ? roleItem.skillsJa ?? roleItem.skills : roleItem.skills,
+            })) ?? [];
           const cardTone = isService
             ? {
               background: "rgba(45, 58, 62, 0.58)",
@@ -149,37 +147,36 @@ export const WorkExperience = () => {
                 cursor: isService ? "pointer" : "default",
                 opacity: isService ? 0.88 : 1,
                 transition:
-                  "transform 180ms ease, opacity 180ms ease, border-color 180ms ease",
-                "&:hover": isService
-                  ? {
-                    opacity: 1,
-                    transform: "translateY(-2px)",
-                    borderColor: "rgba(226, 241, 231, 0.58)",
-                  }
-                  : undefined,
-              }}
-            >
+                  "transform 180ms ease, opacity 180ms ease, border-color 180ms ease, box-shadow 180ms ease",
+                "&:hover": {
+                  opacity: 1,
+                  transform: "translateY(-5px)",
+                  borderColor: "rgba(226, 241, 231, 0.74)",
+                  boxShadow:
+                    "0 24px 54px rgba(0, 0, 0, 0.34), 0 0 0 1px rgba(189, 172, 106, 0.16), inset 0 1px 0 rgba(255, 254, 249, 0.14)",
+                }}}
+              >
               <Stack spacing={1.25} alignItems="flex-start">
-                <Box
-                  sx={{
-                    position: "relative",
-                    width: 60,
-                    height: 60,
-                    flexShrink: 0,
-                    borderRadius: 1.5,
-                    overflow: "hidden",
-                    backgroundColor: colors.chalk,
-                    border: `1px solid rgba(226, 241, 231, 0.55)`,
-                    "& .logo-zoom": {
-                      transform: "scale(1.65)",
-                      transition: "transform 320ms ease",
-                    },
-                    "&:hover .logo-zoom": {
-                      transform: "scale(1)",
-                    },
-                  }}
-                >
-                  {experience.image ? (
+                {experience.image ? (
+                  <Box
+                    sx={{
+                      position: "relative",
+                      width: 60,
+                      height: 60,
+                      flexShrink: 0,
+                      borderRadius: 1.5,
+                      overflow: "hidden",
+                      backgroundColor: colors.chalk,
+                      border: `1px solid rgba(226, 241, 231, 0.55)`,
+                      "& .logo-zoom": {
+                        transform: "scale(1.65)",
+                        transition: "transform 320ms ease",
+                      },
+                      "&:hover .logo-zoom": {
+                        transform: "scale(1)",
+                      },
+                    }}
+                  >
                     <Image
                       className="logo-zoom"
                       src={experience.image}
@@ -188,25 +185,8 @@ export const WorkExperience = () => {
                       sizes="60px"
                       style={{ objectFit: "contain", padding: 3 }}
                     />
-                  ) : (
-                    <Stack
-                      alignItems="center"
-                      justifyContent="center"
-                      sx={{ width: "100%", height: "100%" }}
-                    >
-                      <Typography
-                        variant="caption"
-                        sx={{
-                          color: colors.base.dark,
-                          fontWeight: 700,
-                          lineHeight: 1,
-                        }}
-                      >
-                        Baha'i
-                      </Typography>
-                    </Stack>
-                  )}
-                </Box>
+                  </Box>
+                ) : null}
                 <Typography
                   variant="overline"
                   sx={{
@@ -230,35 +210,134 @@ export const WorkExperience = () => {
               </Stack>
 
               <Stack spacing={1.5}>
-                <Stack spacing={0.35} sx={{ minWidth: 0 }}>
-                  <Typography
-                    variant="h5"
-                    sx={{
-                      color: colors.chalk,
-                      lineHeight: 1.15,
-                      textShadow: "2px 2px 4px #000000",
-                    }}
-                  >
-                    {role}
-                  </Typography>
+                {roleSections.length === 0 ? (
+                  <>
+                    <Stack spacing={0.35} sx={{ minWidth: 0 }}>
+                      <Typography
+                        variant="h5"
+                        sx={{
+                          color: colors.chalk,
+                          lineHeight: 1.15,
+                          textShadow: "2px 2px 4px #000000",
+                        }}
+                      >
+                        {role}
+                      </Typography>
+                      <Typography
+                        variant="body2"
+                        sx={{ color: colors.base.lightest, opacity: 0.88 }}
+                      >
+                        {`${company}, ${location}`}
+                      </Typography>
+                    </Stack>
+
+                    <Typography
+                      variant="body2"
+                      sx={{
+                        color: colors.chalk,
+                        lineHeight: 1.55,
+                        textShadow: "1px 1px 2px #000000",
+                      }}
+                    >
+                      {summary}
+                    </Typography>
+                  </>
+                ) : (
                   <Typography
                     variant="body2"
                     sx={{ color: colors.base.lightest, opacity: 0.88 }}
                   >
                     {`${company}, ${location}`}
                   </Typography>
-                </Stack>
+                )}
 
-                <Typography
-                  variant="body2"
-                  sx={{
-                    color: colors.chalk,
-                    lineHeight: 1.55,
-                    textShadow: "1px 1px 2px #000000",
-                  }}
-                >
-                  {summary}
-                </Typography>
+                {roleSections.length > 0 ? (
+                  <Stack
+                    spacing={2}
+                    sx={{
+                      mt: 0.5,
+                      pl: { xs: 2.5, sm: 3 },
+                      position: "relative",
+                      "&::before": {
+                        content: '""',
+                        position: "absolute",
+                        left: { xs: 6, sm: 8 },
+                        top: 8,
+                        bottom: 8,
+                        width: 2,
+                        borderRadius: "999px",
+                        background:
+                          "linear-gradient(180deg, rgba(189, 172, 106, 0.18), rgba(189, 172, 106, 0.9), rgba(189, 172, 106, 0.18))",
+                        boxShadow: "0 0 18px rgba(189, 172, 106, 0.34)",
+                      },
+                    }}
+                  >
+                    {roleSections.map((roleSection) => (
+                      <Box
+                        key={`${experience.company}-${roleSection.role}`}
+                        sx={{
+                          position: "relative",
+                          py: 0.25,
+                          pl: 1.5,
+                          "&::before": {
+                            content: '""',
+                            position: "absolute",
+                            left: { xs: -25, sm: -29 },
+                            top: 20,
+                            width: 12,
+                            height: 12,
+                            borderRadius: "999px",
+                            backgroundColor: colors.gold,
+                            border: "2px solid rgba(36, 54, 66, 0.95)",
+                            boxShadow: "0 0 16px rgba(189, 172, 106, 0.46)",
+                          },
+                        }}
+                      >
+                        <Stack spacing={0.75}>
+                          <Stack
+                            direction={{ xs: "column", sm: "row" }}
+                            justifyContent="space-between"
+                            alignItems={{ xs: "flex-start", sm: "baseline" }}
+                            gap={0.75}
+                          >
+                            <Typography
+                              variant="subtitle1"
+                              sx={{
+                                color: colors.chalk,
+                                lineHeight: 1.2,
+                                fontWeight: 700,
+                                textShadow: "1px 1px 2px #000000",
+                              }}
+                            >
+                              {roleSection.role}
+                            </Typography>
+                            <Typography
+                              variant="caption"
+                              sx={{
+                                color: colors.gold,
+                                lineHeight: 1.2,
+                                whiteSpace: "nowrap",
+                                textShadow: "1px 1px 2px #000",
+                              }}
+                            >
+                              {`${roleSection.start} - ${roleSection.end} · ${roleSection.duration}`}
+                            </Typography>
+                          </Stack>
+                          <Typography
+                            variant="body2"
+                            sx={{
+                              color: colors.chalk,
+                              lineHeight: 1.52,
+                              textShadow: "1px 1px 2px #000000",
+                            }}
+                          >
+                            {roleSection.summary}
+                          </Typography>
+                        </Stack>
+                      </Box>
+                    ))}
+                  </Stack>
+                ) : null}
               </Stack>
 
               <Stack
@@ -283,48 +362,102 @@ export const WorkExperience = () => {
                 >
                   {t.timeline.skills}
                 </Typography>
-                <Stack
-                  direction="row"
-                  spacing={1}
-                  useFlexGap
-                  flexWrap="wrap"
-                  justifyContent={{ xs: "flex-start", md: "flex-end" }}
-                >
-                  {skills.length > 0 ? (
-                    skills.map((skill) => (
-                      <Box
-                        key={`${experience.company}-${skill}`}
+                {roleSections.length > 0 ? (
+                  <Stack
+                    sx={{
+                      flex: 1,
+                      width: "100%",
+                      minHeight: { md: 210 },
+                    }}
+                  >
+                    {roleSections.map((roleSection, roleIndex) => (
+                      <Stack
+                        key={`${experience.company}-${roleSection.role}-skills`}
+                        spacing={0.65}
+                        justifyContent="flex-start"
+                        alignItems={{ xs: "flex-start", md: "flex-end" }}
                         sx={{
-                          border: `1px solid rgba(226, 241, 231, 0.42)`,
-                          backgroundColor: cardTone.skillBackground,
+                          flex: 1,
+                          width: "100%",
+                          pt: roleIndex === 0 ? 0.25 : 1.75,
+                          pb: roleIndex === 0 ? 1.75 : 0.25,
+                          borderTop:
+                            roleIndex > 0
+                              ? "1px solid rgba(226, 241, 231, 0.18)"
+                              : "none",
+                        }}
+                      >
+                        <Stack
+                          direction="row"
+                          spacing={1}
+                          useFlexGap
+                          flexWrap="wrap"
+                          justifyContent={{ xs: "flex-start", md: "flex-end" }}
+                        >
+                          {roleSection.skills.map((skill) => (
+                            <Box
+                              key={`${experience.company}-${roleSection.role}-${skill}`}
+                              sx={{
+                                border: `1px solid rgba(226, 241, 231, 0.42)`,
+                                backgroundColor: cardTone.skillBackground,
+                                borderRadius: "999px",
+                                px: 1.25,
+                                py: 0.45,
+                              }}
+                            >
+                              <Typography variant="caption" sx={{ color: colors.chalk }}>
+                                {skill}
+                              </Typography>
+                            </Box>
+                          ))}
+                        </Stack>
+                      </Stack>
+                    ))}
+                  </Stack>
+                ) : (
+                  <Stack
+                    direction="row"
+                    spacing={1}
+                    useFlexGap
+                    flexWrap="wrap"
+                    justifyContent={{ xs: "flex-start", md: "flex-end" }}
+                  >
+                    {skills.length > 0 ? (
+                      skills.map((skill) => (
+                        <Box
+                          key={`${experience.company}-${skill}`}
+                          sx={{
+                            border: `1px solid rgba(226, 241, 231, 0.42)`,
+                            backgroundColor: cardTone.skillBackground,
+                            borderRadius: "999px",
+                            px: 1.25,
+                            py: 0.45,
+                          }}
+                        >
+                          <Typography variant="caption" sx={{ color: colors.chalk }}>
+                            {skill}
+                          </Typography>
+                        </Box>
+                      ))
+                    ) : (
+                      <Box
+                        sx={{
+                          border: `1px dashed rgba(226, 241, 231, 0.5)`,
                           borderRadius: "999px",
                           px: 1.25,
                           py: 0.45,
                         }}
                       >
-                        <Typography variant="caption" sx={{ color: colors.chalk }}>
-                          {skill}
+                        <Typography
+                          variant="caption"
+                          sx={{ color: colors.base.lightest, opacity: 0.78 }}
+                        >
+                          {t.timeline.skillsToAdd}
                         </Typography>
                       </Box>
-                    ))
-                  ) : (
-                    <Box
-                      sx={{
-                        border: `1px dashed rgba(226, 241, 231, 0.5)`,
-                        borderRadius: "999px",
-                        px: 1.25,
-                        py: 0.45,
-                      }}
-                    >
-                      <Typography
-                        variant="caption"
-                        sx={{ color: colors.base.lightest, opacity: 0.78 }}
-                      >
-                        {t.timeline.skillsToAdd}
-                      </Typography>
-                    </Box>
-                  )}
-                </Stack>
+                    )}
+                  </Stack>
+                )}
               </Stack>
             </Box>
           );
@@ -339,30 +472,10 @@ export const WorkExperience = () => {
           scrollMarginTop: { xs: "2rem", md: "4rem" },
         }}
       >
-        <Box
-          sx={{
-            background:
-              "linear-gradient(90deg, rgba(214,184,104,0.42) 0%, rgba(98,149,132,0.2) 48%, rgba(0,212,255,0) 100%)",
-            width: { xs: "100%", md: "50%" },
-            paddingTop: "1rem",
-            paddingLeft: { xs: "1.5rem", md: "2rem" },
-            paddingBottom: "3.5rem",
-            mb: { xs: 4, md: 6 },
-          }}
-        >
-          <Typography
-            variant="h3"
-            sx={{ textShadow: "2px 2px 4px #000000", paddingTop: "1rem" }}
-          >
-            {language === "ja" ? "奉仕活動" : "Voluntary experience"}
-          </Typography>
-          <Typography
-            variant="body1"
-            sx={{ paddingLeft: "1rem", textShadow: "2px 2px 4px #000000" }}
-          >
-            {t.timeline.summary}
-          </Typography>
-        </Box>
+        <Title
+          title={t.timeline.voluntaryTitle}
+          bottomSpacing="3rem"
+        />
 
         <Stack
           direction={{ xs: "column", md: "row" }}
@@ -380,6 +493,14 @@ export const WorkExperience = () => {
                 border: "1px solid rgba(214, 184, 104, 0.58)",
                 borderRadius: 2,
                 boxShadow: "0 14px 34px rgba(0, 0, 0, 0.2)",
+                transition:
+                  "transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease",
+                "&:hover": {
+                  transform: "translateY(-5px)",
+                  borderColor: "rgba(226, 241, 231, 0.74)",
+                  boxShadow:
+                    "0 24px 54px rgba(0, 0, 0, 0.34), 0 0 0 1px rgba(189, 172, 106, 0.16), inset 0 1px 0 rgba(255, 254, 249, 0.14)",
+                },
               }}
             >
               <Stack spacing={1.5}>
