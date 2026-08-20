@@ -29,9 +29,9 @@ export const projects = [
     outline: "An app used to operate the Mobile Mover robot.",
     outlineJa: "Mobile Mover ロボットを操作するためのアプリ。",
     description:
-      "MM Navi is a work project supporting Mobile Mover operations across a Flutter mobile app, backend APIs, device integration, test assets, and documentation. From the mobile app, users can manage machines, operate routes, perform BLE initial setup, review logs, and trigger OTA updates while coordinating with backend APIs and ESP32-S3 device firmware.",
+      "MM Navi is an application used to operate the Mobile Mover - an agricultural assist robot. The app is designed on a Flutter codebase while utilising a Python backend and AWS to interact with a SQL database. Using this app, users can perform actions such as manage and control their Mover manually, create routes for a range of different work modules, run these routes autonomously integrating the Mover's Autodrive module and RTK GPS tracking, and review previous run results and logs.",
     descriptionJa:
-      "MM Navi は、Mobile Mover の運用を支える業務プロジェクトで、Flutter 製モバイルアプリ、バックエンド API、デバイス連携、テスト資産、関連ドキュメントを含みます。モバイルアプリから機体管理、ルート操作、BLE 初期設定、ログ確認、OTA 更新を行い、バックエンド API や ESP32-S3 デバイスファームウェアと連携します。",
+      "MM Navi は、農業支援ロボットである Mobile Mover を操作するためのアプリケーションです。Flutter のコードベースで設計されており、Python バックエンドと AWS を利用して SQL データベースと連携します。このアプリを使うことで、ユーザーは Mover の管理や手動操作、さまざまな作業モジュール向けのルート作成、Mover の Autodrive モジュールと RTK GPS トラッキングを統合した自律走行、過去の実行結果やログの確認などを行うことができます。",
     date: "Mar 2025 - Aug 2026",
     dateJa: "2025年3月 - 2026年8月",
     technologies: [
@@ -42,20 +42,22 @@ export const projects = [
       "SQL",
       "Google Play Console",
     ],
+    url: "https://mobilemover.jp/"
   },
   {
     thumbnailImage: ShoppingList1,
     otherImages: [ShoppingList1, ShoppingList2, ShoppingList3],
     name: "Shopping List",
-    outline: "A simple mobile shopping list app for everyday errands.",
-    outlineJa: "日々の買い物に使うシンプルなモバイル買い物リストアプリ。",
+    outline: "A simple mobile shopping list app.",
+    outlineJa: "シンプルなモバイル買い物リストアプリ。",
     description:
-      "Shopping List is a personal mobile app built to make everyday grocery trips easier to manage. It focuses on a clean checklist flow: quickly add items, mark them off while shopping, review completed items, and keep the interface light enough to use one-handed while moving around a store.",
+      "This was a simple project with the intention of becoming familiar with Flutter code. It incorporates a simple storage feature to remember data between app closures, as well as item entry, cross off, delete, history, and restore features. The code is open to download and use from my GitHub if this feels like something you need ;).",
     descriptionJa:
-      "Shopping List は、日々の食料品の買い物を管理しやすくするために作った個人用のモバイルアプリです。素早く商品を追加し、買い物中にチェックを入れ、完了した商品を確認でき、店内を移動しながら片手でも使いやすい軽い操作感を重視しています。",
+      "これは Flutter のコードに慣れることを目的として作ったシンプルなプロジェクトです。アプリを閉じてもデータを保持する簡単な保存機能に加え、アイテムの入力、チェック、削除、履歴、復元機能を備えています。必要そうだと感じる方は、GitHub からコードを自由にダウンロードして使うことができます ;)。",
     date: "Mar 2025 - Apr 2025",
     dateJa: "2025年3月 - 2025年4月",
     technologies: ["Dart", "Flutter"],
+    url: "https://github.com/mojanmohajerin/shopping-app"
   },
   {
     thumbnailImage: GithubToolImage,
@@ -65,12 +67,12 @@ export const projects = [
       GithubToolImage4,
     ],
     name: "GitHub Tool",
-    outline: "An application to optimise GitHub PR efficiency.",
-    outlineJa: "GitHub の PR 作業効率を高めるためのアプリケーション。",
+    outline: "An application to optimise GitHub pull request efficiency.",
+    outlineJa: "GitHub のプルリクエスト作業効率を高めるためのアプリケーション。",
     description:
-      "The tool was originally developed for use at SquareKicker. It is a quick way to view GitHub repositories and pull request information. It also includes functionality such as filtering by dependabots, and by owner or reviewer.",
+      "This tool was originally developed for use at SquareKicker. It is a quick way to view GitHub repositories and pull request information. It also includes functionality such as filtering by dependabots, and by owner or reviewer. During periods experiencing large volumes of pull requests, this tool simplifies the process of summarising what is currently at what stage of review.",
     descriptionJa:
-      "このツールはもともと SquareKicker での利用を目的として開発しました。GitHub のリポジトリやプルリクエスト情報を素早く確認できるツールです。Dependabot による絞り込みや、担当者・レビュアーによるフィルタリングなどの機能も含まれています。",
+      "このツールはもともと SquareKicker での利用を目的として開発しました。GitHub のリポジトリやプルリクエスト情報を素早く確認できるツールです。Dependabot、担当者、レビュアーによる絞り込み機能も含まれています。大量のプルリクエストが発生している時期に、現在どのレビュー段階に何があるのかを整理しやすくします。",
     date: "Jul 2024 - Oct 2024",
     dateJa: "2024年7月 - 2024年10月",
     technologies: ["Typescript", "React", "GitHub API"],
@@ -100,8 +102,8 @@ export const projects = [
     thumbnailImage: HiveImage9,
     otherImages: [HiveImage9, HiveImage17],
     name: "Hive",
-    outline: "A board game.",
-    outlineJa: "ボードゲーム。",
+    outline: "An online board game.",
+    outlineJa: "オンラインボードゲーム。",
     description:
       "There was a board game that a friend and I used to play together in Australia. One day she moved to the other side of Australia, which made playing together difficult. So I programmed the board game.\nHive is a strategy-based board game, similar to chess, but played on hexagonal tiles. The objective is to surround your opponent's queen bee.",
     descriptionJa:
@@ -109,5 +111,6 @@ export const projects = [
     date: "May 2020 - Aug 2020",
     dateJa: "2020年5月 - 2020年8月",
     technologies: ["Python"],
+    url: "https://boardgamegeek.com/boardgame/2655/hive"
   },
 ];

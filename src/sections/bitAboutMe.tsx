@@ -8,6 +8,7 @@ import { SlidingGlassPanel } from "@/components/slidingGlassPanel";
 import { useScrollIntoViewProgress } from "@/hooks/useScrollIntoViewProgress";
 import { useLanguage } from "@/i18n/language";
 import { translations } from "@/i18n/translations";
+import { Title } from "@/sections/title";
 import { colors } from "@/styles/colors";
 import "../styles/effects.css";
 
@@ -24,10 +25,10 @@ export const BitAboutMe = () => {
   return (
     <Stack
       ref={sectionRef}
-      direction="row"
-      spacing={5}
+      direction="column"
+      spacing={0}
       justifyContent="center"
-      alignItems="center"
+      alignItems="stretch"
       sx={{
         color: colors.chalk,
         position: "relative",
@@ -76,7 +77,14 @@ export const BitAboutMe = () => {
         accentSide="left"
         blur={2}
       />
-      <HomeTextBlock title={t.home.aboutTitle}>{t.home.aboutBody}</HomeTextBlock>
+      <Title
+        title={t.home.aboutTitle}
+        additionalText={t.home.aboutSubtitle}
+        bottomSpacing="2.5rem"
+      />
+      <Stack alignItems="center" sx={{ px: { xs: 2, md: 0 } }}>
+        <HomeTextBlock>{t.home.aboutBody}</HomeTextBlock>
+      </Stack>
     </Stack>
   );
 };

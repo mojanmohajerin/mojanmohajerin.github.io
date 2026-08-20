@@ -299,8 +299,8 @@ const MilestoneCard = ({
         const country =
           language === "ja"
             ? milestone.countryJa ??
-              timelinePlaceJa[milestone.country] ??
-              milestone.country
+            timelinePlaceJa[milestone.country] ??
+            milestone.country
             : milestone.country;
         const event =
           language === "ja"
@@ -579,13 +579,13 @@ const TimelineBlock = ({
             <Typography
               color={colors.chalk}
               variant="h5"
-            sx={{
+              sx={{
                 color: isActive || isHighlighted ? colors.gold : colors.chalk,
                 textShadow: isActive || isHighlighted
                   ? "2px 2px 4px #000000, 0 0 14px rgba(189, 172, 106, 0.36)"
                   : "2px 2px 4px #000000",
                 fontWeight: isActive || isHighlighted ? 700 : 500,
-            }}
+              }}
             >
               {year}
             </Typography>
@@ -802,14 +802,14 @@ const HorizontalTimelineBlock = ({
         <Typography
           color={colors.chalk}
           variant="h5"
-        sx={{
+          sx={{
             color: isActive || isHighlighted ? colors.gold : colors.chalk,
             textShadow: isActive || isHighlighted
               ? "2px 2px 4px #000000, 0 0 14px rgba(189, 172, 106, 0.36)"
               : "2px 2px 4px #000000",
             fontWeight: isActive || isHighlighted ? 700 : 500,
-        }}
-      >
+          }}
+        >
           {year}
         </Typography>
       </Button>

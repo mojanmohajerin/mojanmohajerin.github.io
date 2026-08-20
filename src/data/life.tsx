@@ -35,7 +35,7 @@ export const years = [
 export const life: Life = {
   2026: [
     {
-      date: "Sept",
+      date: "Aug",
       place: "M2Labo",
       country: "Japan",
       image: m2laboLogo,

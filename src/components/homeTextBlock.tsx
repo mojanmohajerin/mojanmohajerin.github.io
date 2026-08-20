@@ -4,7 +4,7 @@ import type { ReactNode } from "react";
 import { colors } from "@/styles/colors";
 
 interface HomeTextBlockProps {
-  title: ReactNode;
+  title?: ReactNode;
   children: ReactNode;
 }
 
@@ -19,15 +19,17 @@ export const HomeTextBlock = ({ title, children }: HomeTextBlockProps) => (
       boxShadow: `inset 8px 0 18px -18px ${colors.gold}`,
     }}
   >
-    <Typography
-      variant="h2"
-      sx={{
-        lineHeight: 1.04,
-        textShadow: "2px 2px 5px #000000",
-      }}
-    >
-      {title}
-    </Typography>
+    {title ? (
+      <Typography
+        variant="h2"
+        sx={{
+          lineHeight: 1.04,
+          textShadow: "2px 2px 5px #000000",
+        }}
+      >
+        {title}
+      </Typography>
+    ) : null}
     <Stack spacing={2.25}>
       {Array.isArray(children) ? (
         children.map((child, index) => (

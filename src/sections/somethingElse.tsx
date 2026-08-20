@@ -8,6 +8,7 @@ import { SlidingGlassPanel } from "@/components/slidingGlassPanel";
 import { useScrollIntoViewProgress } from "@/hooks/useScrollIntoViewProgress";
 import { useLanguage } from "@/i18n/language";
 import { translations } from "@/i18n/translations";
+import { Title } from "@/sections/title";
 import { colors } from "@/styles/colors";
 
 export const SomethingElse = () => {
@@ -23,10 +24,10 @@ export const SomethingElse = () => {
   return (
     <Stack
       ref={sectionRef}
-      direction="row"
-      spacing={5}
+      direction="column"
+      spacing={0}
       justifyContent="center"
-      alignItems="center"
+      alignItems="stretch"
       sx={{
         color: colors.chalk,
         position: "relative",
@@ -75,9 +76,14 @@ export const SomethingElse = () => {
         accentSide="right"
         blur={2}
       />
-      <HomeTextBlock title={t.home.languageTitle}>
-        {t.home.languageBody}
-      </HomeTextBlock>
+      <Title
+        title={t.home.languageTitle}
+        additionalText={t.home.languageSubtitle}
+        bottomSpacing="2.5rem"
+      />
+      <Stack alignItems="center" sx={{ px: { xs: 2, md: 0 } }}>
+        <HomeTextBlock>{t.home.languageBody}</HomeTextBlock>
+      </Stack>
     </Stack>
   );
 };

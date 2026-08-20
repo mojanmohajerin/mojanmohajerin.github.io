@@ -10,16 +10,20 @@ export const translations = {
     },
     home: {
       introTitle: "Hi, I'm Mo!",
-      introSubtitle: "I'm an Australian software engineer.",
+      introSubtitle: "I'm an Australian mechatronics/software engineer.",
       introBody:
-        "I was recently living in New Zealand, but now I'm starting my life afresh in Japan!",
+        "At present, I have been living in Japan for about 2 years in the trending city of Fukuoka. As life is, there have been ups and downs, but I have found contentment and joy here, and wish to live out the rest of my days in this beautiful country - but I can be persuaded ;).",
       hoverPrompt: "Hover over me!",
-      aboutTitle: "A bit about me...",
-      aboutBody:
-        "I graduated with a degree in Mechatronic Engineering in 2019. I recently joined a small start-up in New Zealand as a Software Engineer and loved every moment of it - company culture, the people, the work itself. I felt being able to write programmical solutions to tangible problems was an intellectually stimulating and fulfilling challenge, like piecing together an intricate riddle until everything locks into place and clarifies into a simple, errorless execution. At this company, I gained front-end development experience using technologies such as React, Next.js and Typescript. I also had the opportunity to play with API queries with GraphQL and GitHub API.",
-      languageTitle: "Going off topic...",
+      aboutTitle: "A Bit About Me",
+      aboutSubtitle: "(professionally)",
+      aboutBody: [
+        "I graduated with a degree in Mechatronic Engineering in 2019. I have been between engineering roles, odd jobs, and voluntary work in Australia and New Zealand. Especially in New Zealand and recently in Japan, I was able to find work in software which filled a void somewhere deep inside. I felt being able to write programmical solutions to tangible problems was an intellectually stimulating and fulfilling challenge, like meticulously piecing together an intricate riddle, often utterly refusing to cooperate, until the moment where everything clarifies into a simple, errorless execution.",
+        "With the recent developments in AI, however, although programming has become more convenient - not necessarily requiring coding knowledge to execute changes - the challenge has lost it's flair, and I'm not entirely sure where I sit in this situation.",
+      ],
+      languageTitle: "Going Off Topic",
+      languageSubtitle: "(languages)",
       languageBody:
-        "I've always been facinated by foreign langauges. I got entrapped in this dark forest about 10 years ago with my (then) girlfriend who happened to be German, and have since been trying to find my way out - slowly acquiring toddler-grade venacular in one regard while letting the other previously memorised aspects deteriorate beyond intelligible disrepair. The most recent project is Japanese, having started learning around early 2023, excited to see where this journey takes me!",
+        "I've always been facinated by foreign langauges. I got entrapped in this dark forest about 10 years ago with my (then) girlfriend who happened to be German, and have since been trying to find my way out - slowly acquiring toddler-grade venacular in one language while letting the all other previously memorised aspects deteriorate beyond intelligible disrepair. The most recent project is Japanese, having started learning around early 2023, excited to see where this journey takes me!",
     },
     pages: {
       projectsTitle: "Some Personal Projects",
@@ -28,7 +32,7 @@ export const translations = {
       timelineSubtitle: "(in a nutshell)",
     },
     contact: {
-      heading: "Send me a message!*",
+      heading: "Send me a message!",
       name: "Name",
       email: "Email",
       message: "Message",
@@ -38,8 +42,9 @@ export const translations = {
       errorTitle: "Oops...",
       errorText: "Something went wrong! 🙄",
       direct:
-        "*Or you can contact me directly with one of the social media links below, or at:",
-      feelFree: "Feel free to reach out for any inquiries or just to say hi!",
+        "Prefer not to use the form? You can reach me directly at:",
+      feelFree:
+        "I'm happy to hear from you about work, projects, language learning, or just to say hi.",
       placeholder: (type: string) => `Please enter your ${type}`,
     },
     timeline: {
@@ -54,7 +59,7 @@ export const translations = {
     },
     footer: {
       builtWith: "Website developed with Next.js and React. Hosted on GitHub.",
-      lastUpdated: "Last updated: 19 Aug 2026",
+      lastUpdated: "Last updated: 20 Aug 2026",
       copyright: "© 2025 Mo's Website. All rights reserved.",
     },
     notFound: {
@@ -73,25 +78,29 @@ export const translations = {
     },
     home: {
       introTitle: "こんにちは、Moです！",
-      introSubtitle: "オーストラリア出身のソフトウェアエンジニアです。",
+      introSubtitle: "オーストラリア出身のメカトロニクス／ソフトウェアエンジニアです。",
       introBody:
-        "最近までニュージーランドで暮らしていましたが、今は日本で新しい生活を始めています！",
+        "現在は、注目を集めている福岡という街で、日本での生活を始めてから約2年になります。人生なので良い時も悪い時もありましたが、ここで充実感と喜びを見つけることができ、この美しい国でこれからの人生を過ごしたいと思っています。とはいえ、説得される余地はあります ;)。",
       hoverPrompt: "ホバーしてみて！",
-      aboutTitle: "私について少し...",
-      aboutBody:
-        "2019年にメカトロニクス工学の学位を取得しました。最近はニュージーランドの小さなスタートアップにソフトウェアエンジニアとして参加し、会社の文化、人々、仕事そのものまで、すべての瞬間を心から楽しみました。具体的な課題に対してプログラムによる解決策を書けることは、知的な刺激と充実感のある挑戦でした。複雑な謎を一つずつ組み立て、すべてがかみ合って、シンプルでエラーのない実行へと明確になっていくような感覚でした。この会社では、React、Next.js、TypeScript などの技術を使ったフロントエンド開発の経験を積みました。また、GraphQL と GitHub API を使った API クエリにも触れる機会がありました。",
-      languageTitle: "少し話がそれますが...",
+      aboutTitle: "私について少し",
+      aboutSubtitle: "（仕事について）",
+      aboutBody: [
+        "2019年にメカトロニクス工学の学位を取得しました。その後はオーストラリアとニュージーランドで、エンジニア職、さまざまな仕事、そして自主的な奉仕活動の間を行き来してきました。特にニュージーランド、そして最近では日本で、ソフトウェアの仕事に携わることができ、自分の奥深くにあった空白を満たしてくれるように感じました。具体的な課題に対してプログラムによる解決策を書けることは、知的な刺激と充実感のある挑戦でした。時にはまったく言うことを聞かない複雑な謎を、細かく丁寧に組み立てていき、すべてが明確になってシンプルでエラーのない実行へとたどり着くような感覚でした。",
+        "しかし、最近のAIの発展によって、プログラミングはより便利になり、必ずしもコーディングの知識がなくても変更を実行できるようになりました。その一方で、その挑戦の魅力が少し失われてしまったようにも感じていて、この状況の中で自分がどこに立っているのか、まだはっきりとは分かっていません。",
+      ],
+      languageTitle: "少し話がそれますが",
+      languageSubtitle: "（言語）",
       languageBody:
-        "私は昔から外国語に強く惹かれてきました。約10年前、当時の恋人がドイツ人だったことをきっかけに、この深い森に迷い込み、それ以来ずっと出口を探し続けています。ある言語では幼児レベルの語彙を少しずつ身につける一方で、以前覚えた別の言語は、理解できないほど崩れていくという具合です。最近のプロジェクトは日本語で、2023年初め頃から学び始めました。この旅がどこへ連れて行ってくれるのか、とても楽しみです！",
+        "私は昔から外国語に強く惹かれてきました。約10年前、当時の恋人がたまたまドイツ人だったことをきっかけに、この深い森に迷い込み、それ以来ずっと出口を探し続けています。ある言語では幼児レベルの語彙を少しずつ身につける一方で、以前覚えた他の言語の知識は、理解できないほど崩れていくという具合です。最近のプロジェクトは日本語で、2023年初め頃から学び始めました。この旅がどこへ連れて行ってくれるのか、とても楽しみです！",
     },
     pages: {
-      projectsTitle: "個人プロジェクト",
+      projectsTitle: "いくつかの個人プロジェクト",
       contactTitle: "連絡先",
       timelineTitle: "私の人生の歩み",
       timelineSubtitle: "（ざっくりまとめ）",
     },
     contact: {
-      heading: "メッセージを送ってください！*",
+      heading: "メッセージを送ってください！",
       name: "名前",
       email: "メール",
       message: "メッセージ",
@@ -101,8 +110,9 @@ export const translations = {
       errorTitle: "おっと...",
       errorText: "問題が発生しました！🙄",
       direct:
-        "*または、下のソーシャルメディアリンク、もしくは次のメールアドレスから直接ご連絡いただけます：",
-      feelFree: "お問い合わせでも、ただのご挨拶でも、お気軽にご連絡ください！",
+        "フォームを使わない場合は、こちらのメールアドレスから直接ご連絡いただけます：",
+      feelFree:
+        "仕事、プロジェクト、語学学習についてでも、ただのご挨拶でも、お気軽にご連絡ください。",
       placeholder: (type: string) => `${type}を入力してください`,
     },
     timeline: {
@@ -117,7 +127,7 @@ export const translations = {
     },
     footer: {
       builtWith: "Next.js と React で開発し、GitHub でホストしています。",
-      lastUpdated: "最終更新：2026年8月19日",
+      lastUpdated: "最終更新：2026年8月20日",
       copyright: "© 2025 Mo's Website. All rights reserved.",
     },
     notFound: {

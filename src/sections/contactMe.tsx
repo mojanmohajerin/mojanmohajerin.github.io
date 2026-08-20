@@ -56,16 +56,51 @@ export const ContactMe = () => {
 
   return (
     <Stack
-      spacing={5}
+      spacing={3.5}
       sx={{
-        backgroundColor: "rgba(98, 149, 132, 0.5)",
-        border: `3px solid ${colors.charcoal}`,
-        borderRadius: "10px",
-        minWidth: "350px",
-        padding: "2em",
+        position: "relative",
+        width: "min(100%, 720px)",
+        overflow: "hidden",
+        background:
+          "linear-gradient(145deg, rgba(36, 54, 66, 0.62) 0%, rgba(56, 116, 120, 0.38) 62%, rgba(36, 54, 66, 0.58) 100%)",
+        border: `1px solid rgba(226, 241, 231, 0.24)`,
+        borderRadius: 2,
+        boxShadow:
+          "0 22px 54px rgba(0, 0, 0, 0.34), inset 0 1px 0 rgba(255, 254, 249, 0.14)",
+        backdropFilter: "blur(10px)",
+        px: { xs: 2.25, sm: 3.5, md: 4 },
+        py: { xs: 2.5, md: 3.5 },
+        "&::before": {
+          content: '""',
+          position: "absolute",
+          top: 20,
+          bottom: 20,
+          left: 0,
+          width: 4,
+          borderRadius: "0 999px 999px 0",
+          background: `linear-gradient(180deg, rgba(189, 172, 106, 0) 0%, ${colors.gold} 20%, ${colors.gold} 80%, rgba(189, 172, 106, 0) 100%)`,
+          boxShadow: "0 0 20px rgba(189, 172, 106, 0.42)",
+        },
+        "&::after": {
+          content: '""',
+          position: "absolute",
+          inset: -50,
+          background:
+            "radial-gradient(circle at 18% 14%, rgba(226, 241, 231, 0.18), transparent 34%), radial-gradient(circle at 86% 72%, rgba(189, 172, 106, 0.14), transparent 38%)",
+          filter: "blur(18px)",
+          pointerEvents: "none",
+        },
       }}
     >
-      <Typography variant="h3" sx={{ textShadow: "2px 2px 4px #000" }}>
+      <Typography
+        variant="h3"
+        sx={{
+          position: "relative",
+          zIndex: 1,
+          lineHeight: 1.05,
+          textShadow: "2px 2px 5px #000",
+        }}
+      >
         {t.contact.heading}
       </Typography>
       <Formik
@@ -81,7 +116,14 @@ export const ContactMe = () => {
       >
         {() => (
           <Form>
-            <Stack spacing={2} sx={{ paddingX: 5 }}>
+            <Stack
+              spacing={3}
+              sx={{
+                position: "relative",
+                zIndex: 1,
+                px: { xs: 0, md: 2 },
+              }}
+            >
               <InputField
                 name={t.contact.name}
                 type="name"
@@ -96,13 +138,13 @@ export const ContactMe = () => {
                 name={t.contact.message}
                 type="message"
                 as="textarea"
-                styleProps={{ height: 250 }}
+                styleProps={{ height: { xs: 210, md: 250 }, mb: 1 }}
                 placeholder={t.contact.placeholder(t.contact.message)}
               />
               <Stack
-                justifyContent="center"
-                alignItems="center"
-                sx={{ paddingTop: 5 }}
+                justifyContent="flex-end"
+                alignItems="flex-end"
+                sx={{ pt: 1.5 }}
               >
                 <LoadingButton
                   type="submit"
@@ -115,14 +157,28 @@ export const ContactMe = () => {
                     </SvgIcon>
                   }
                   sx={{
-                    border: `1px solid ${colors.base.darkest}`,
-                    backgroundColor: "rgb(56, 116, 120, 0.7)",
-                    color: colors.base.lightest,
-                    paddingX: 5,
+                    minWidth: 150,
+                    border: `1px solid rgba(189, 172, 106, 0.78)`,
+                    borderRadius: "999px",
+                    backgroundColor: "rgba(36, 54, 66, 0.56)",
+                    color: colors.chalk,
+                    px: 4,
+                    py: 1.1,
                     textTransform: "capitalize",
                     textShadow: duringSubmission ? null : "1px 1px 1px #000",
+                    boxShadow:
+                      "0 12px 26px rgba(0, 0, 0, 0.24), inset 0 1px 0 rgba(255, 254, 249, 0.14)",
+                    transition:
+                      "transform 180ms ease, background-color 180ms ease, border-color 180ms ease, box-shadow 180ms ease",
                     "&:hover": {
-                      backgroundColor: colors.base.dark,
+                      transform: "translateY(-2px)",
+                      borderColor: colors.gold,
+                      backgroundColor: "rgba(98, 149, 132, 0.52)",
+                      boxShadow:
+                        "0 18px 34px rgba(0, 0, 0, 0.3), 0 0 0 3px rgba(189, 172, 106, 0.12), inset 0 1px 0 rgba(255, 254, 249, 0.18)",
+                    },
+                    "&:active": {
+                      transform: "translateY(0)",
                     },
                   }}
                 >
