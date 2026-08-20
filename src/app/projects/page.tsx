@@ -19,8 +19,11 @@ export default function ProjectsPage() {
         sx={{
           display: "grid",
           gap: "2rem",
-          gridTemplateColumns: "repeat(auto-fit, minmax(325px, 1fr))",
-          padding: { xs: "1em", md: "5em" },
+          gridTemplateColumns: {
+            xs: "minmax(0, 1fr)",
+            sm: "repeat(auto-fit, minmax(325px, 1fr))",
+          },
+          padding: { xs: "1rem", md: "5em" },
         }}
       >
         {projects.map((project) => {

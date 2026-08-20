@@ -2,6 +2,7 @@
 
 import { Box, Stack, Typography } from "@mui/material";
 import Image from "next/image";
+import type { MouseEvent } from "react";
 
 import { workExperience } from "@/data/workExperience";
 import { useLanguage } from "@/i18n/language";
@@ -36,10 +37,14 @@ export const WorkExperience = () => {
   const { language } = useLanguage();
   const t = translations[language];
 
-  const scrollToService = () => {
-    document
-      .getElementById("bahai-service")
-      ?.scrollIntoView({ behavior: "smooth", block: "start" });
+  const scrollToService = (trigger?: HTMLElement) => {
+    trigger?.blur();
+
+    window.requestAnimationFrame(() => {
+      document
+        .getElementById("bahai-service")
+        ?.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
   };
 
   return (
@@ -103,10 +108,10 @@ export const WorkExperience = () => {
             })) ?? [];
           const cardTone = isService
             ? {
-              background: "rgba(45, 58, 62, 0.58)",
-              border: "rgba(226, 241, 231, 0.34)",
-              shadow: "0 12px 30px rgba(0, 0, 0, 0.16)",
-              skillBackground: "rgba(226, 241, 231, 0.14)",
+              background: "rgba(45, 58, 62, 0.76)",
+              border: "rgba(214, 184, 104, 0.58)",
+              shadow: "0 14px 34px rgba(0, 0, 0, 0.2)",
+              skillBackground: "rgba(214, 184, 104, 0.18)",
             }
             : isEducation
               ? {
@@ -125,7 +130,13 @@ export const WorkExperience = () => {
           return (
             <Box
               component={isService ? "button" : "article"}
-              onClick={isService ? scrollToService : undefined}
+              type={isService ? "button" : undefined}
+              onClick={
+                isService
+                  ? (event: MouseEvent<HTMLButtonElement>) =>
+                    scrollToService(event.currentTarget)
+                  : undefined
+              }
               key={`${experience.company}-${experience.start}`}
               sx={{
                 appearance: "none",
@@ -145,17 +156,35 @@ export const WorkExperience = () => {
                 borderRadius: 2,
                 boxShadow: cardTone.shadow,
                 cursor: isService ? "pointer" : "default",
-                opacity: isService ? 0.88 : 1,
+                opacity: 1,
+                WebkitTapHighlightColor: "transparent",
+                touchAction: "manipulation",
                 transition:
                   "transform 180ms ease, opacity 180ms ease, border-color 180ms ease, box-shadow 180ms ease",
+                "&:focus": {
+                  outline: "none",
+                },
+                "&:focus-visible": {
+                  borderColor: "rgba(214, 184, 104, 0.9)",
+                  boxShadow:
+                    "0 0 0 3px rgba(214, 184, 104, 0.24), 0 14px 34px rgba(0, 0, 0, 0.22)",
+                },
+                "&:active": {
+                  opacity: 1,
+                  transform: "translateY(-5px)",
+                  borderColor: "rgba(226, 241, 231, 0.74)",
+                  boxShadow:
+                    "0 24px 54px rgba(0, 0, 0, 0.34), 0 0 0 1px rgba(189, 172, 106, 0.16), inset 0 1px 0 rgba(255, 254, 249, 0.14)",
+                },
                 "&:hover": {
                   opacity: 1,
                   transform: "translateY(-5px)",
                   borderColor: "rgba(226, 241, 231, 0.74)",
                   boxShadow:
                     "0 24px 54px rgba(0, 0, 0, 0.34), 0 0 0 1px rgba(189, 172, 106, 0.16), inset 0 1px 0 rgba(255, 254, 249, 0.14)",
-                }}}
-              >
+                },
+              }}
+            >
               <Stack spacing={1.25} alignItems="flex-start">
                 {experience.image ? (
                   <Box

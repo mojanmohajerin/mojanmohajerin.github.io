@@ -34,7 +34,7 @@ export const Intro = () => {
       alignItems="center"
       sx={{
         color: colors.chalk,
-        padding: "1em",
+        padding: { xs: "0.75em", md: "1em" },
         position: "relative",
         zIndex: 0,
       }}
@@ -84,23 +84,39 @@ export const Intro = () => {
       <Grid2 size={{ xs: 12, md: 4 }} sx={{ position: "relative", zIndex: 1 }}>
         <Box
           sx={{
-            borderRadius: "50%",
-            border: `4px solid ${colors.gold}`,
-            overflow: "hidden",
-            width: profileImageSize,
-            height: profileImageSize,
+            position: "relative",
+            width: { xs: "min(78vw, 320px)", md: profileImageSize },
+            height: { xs: "min(78vw, 320px)", md: profileImageSize },
+            mx: "auto",
             flexShrink: 0,
             zIndex: 1,
+            "& .home-hover-prompt": {
+              display: { xs: "none", md: "block" },
+            },
           }}
         >
-          <HoverOverMe />
-          <Image
-            className="image-hover-scale"
-            src={profileImage}
-            alt="profile image"
-            width={profileImageSize}
-            height={profileImageSize}
-          />
+          <Box className="home-hover-prompt">
+            <HoverOverMe />
+          </Box>
+          <Box
+            sx={{
+              position: "relative",
+              width: "100%",
+              height: "100%",
+              borderRadius: "50%",
+              border: `4px solid ${colors.gold}`,
+              overflow: "hidden",
+            }}
+          >
+            <Image
+              className="image-hover-scale"
+              src={profileImage}
+              alt="profile image"
+              fill
+              sizes="(min-width: 900px) 400px, 78vw"
+              style={{ objectFit: "cover" }}
+            />
+          </Box>
         </Box>
       </Grid2>
       <Grid2 size={{ xs: 12, md: 8 }} sx={{ position: "relative", zIndex: 1 }}>

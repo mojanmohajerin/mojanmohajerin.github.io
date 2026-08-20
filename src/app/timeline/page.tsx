@@ -17,7 +17,7 @@ export default function ExperiencePage() {
       <Title
         title={t.pages.timelineTitle}
         additionalText={t.pages.timelineSubtitle}
-        bottomSpacing="0"
+        bottomSpacing={{ xs: "2rem", md: "3.5rem" }}
       />
       <ExperiencePageBody />
       <WorkExperience />

@@ -28,10 +28,13 @@ export const Header = () => {
   const { language } = useLanguage();
   const t = translations[language];
 
+  const [hydrated, setHydrated] = useState(false);
   const [scrollPosition, setScrollPosition] = useState(0);
   const [open, setOpen] = useState<boolean>(false);
 
   useEffect(() => {
+    setHydrated(true);
+
     const handleScroll = () => {
       setScrollPosition(window.scrollY);
     };
@@ -43,7 +46,9 @@ export const Header = () => {
     };
   }, []);
 
-  const cartoonImageSize = scrollPosition < 50 ? 100 : 50;
+  const showName = hydrated && xs;
+  const showDesktopNav = hydrated && md;
+  const cartoonImageSize = scrollPosition < 50 ? (showDesktopNav ? 100 : 76) : 50;
 
   const handleClick = () => {
     setOpen(true);
@@ -81,10 +86,10 @@ export const Header = () => {
         sx={{
           position: "relative",
           overflow: "visible",
-          paddingLeft: { xs: "7.75rem", md: "8.5rem" },
-          paddingRight: "5rem",
+          paddingLeft: { xs: "5.75rem", sm: "7.75rem", md: "8.5rem" },
+          paddingRight: { xs: "1.5rem", md: "5rem" },
           paddingY: "1rem",
-          minHeight: "8rem",
+          minHeight: { xs: "6.25rem", md: "8rem" },
           background:
             "linear-gradient(to bottom, rgba(36, 54, 66, 0.62) 0%, rgba(36, 54, 66, 0.24) 58%, rgba(36, 54, 66, 0) 100%)",
           backdropFilter: "blur(3px)",
@@ -101,7 +106,7 @@ export const Header = () => {
             justifyContent="center"
             alignItems="center"
           >
-            {xs ? (
+            {showName ? (
               <Typography
                 variant="h4"
                 sx={{ color: colors.chalk, textShadow: "1px 1px 1px #000000" }}
@@ -111,7 +116,7 @@ export const Header = () => {
             ) : null}
           </Stack>
         </Link>
-        {md ? (
+        {showDesktopNav ? (
           <Stack
             direction="row"
             spacing={1.25}

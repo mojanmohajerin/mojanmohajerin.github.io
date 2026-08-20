@@ -10,7 +10,7 @@ interface HomeTextBlockProps {
 
 export const HomeTextBlock = ({ title, children }: HomeTextBlockProps) => (
   <Stack
-    spacing={3}
+    spacing={{ xs: 2, md: 3 }}
     sx={{
       zIndex: 1,
       maxWidth: "62rem",
@@ -23,6 +23,7 @@ export const HomeTextBlock = ({ title, children }: HomeTextBlockProps) => (
       <Typography
         variant="h2"
         sx={{
+          fontSize: { xs: "3.15rem", sm: "3.8rem", md: "3.75rem" },
           lineHeight: 1.04,
           textShadow: "2px 2px 5px #000000",
         }}
@@ -30,15 +31,17 @@ export const HomeTextBlock = ({ title, children }: HomeTextBlockProps) => (
         {title}
       </Typography>
     ) : null}
-    <Stack spacing={2.25}>
+    <Stack spacing={{ xs: 1.5, md: 2.25 }}>
       {Array.isArray(children) ? (
         children.map((child, index) => (
           <Typography
             key={index}
             variant="h4"
             sx={{
+              fontSize: { xs: "1.65rem", sm: "1.95rem", md: "2.125rem" },
               lineHeight: 1.32,
               textShadow: "2px 2px 5px #000000",
+              overflowWrap: "anywhere",
             }}
           >
             {child}
@@ -48,8 +51,10 @@ export const HomeTextBlock = ({ title, children }: HomeTextBlockProps) => (
         <Typography
           variant="h4"
           sx={{
+            fontSize: { xs: "1.65rem", sm: "1.95rem", md: "2.125rem" },
             lineHeight: 1.32,
             textShadow: "2px 2px 5px #000000",
+            overflowWrap: "anywhere",
           }}
         >
           {children}

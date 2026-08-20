@@ -7,6 +7,7 @@ import {
   CardContent,
   Stack,
   Typography,
+  useMediaQuery,
 } from "@mui/material";
 import Image, { StaticImageData } from "next/image";
 import { useLayoutEffect, useRef, useState } from "react";
@@ -45,16 +46,28 @@ export const CardUnit = ({ project }: CardUnitProps) => {
   );
   const technologyRowRef = useRef<HTMLDivElement | null>(null);
   const technologyMeasureRef = useRef<HTMLDivElement | null>(null);
+  const sm = useMediaQuery("(min-width:600px)");
   const { language } = useLanguage();
   const outline =
     language === "ja" ? project.outlineJa ?? project.outline : project.outline;
   const date = language === "ja" ? project.dateJa ?? project.date : project.date;
+  const renderedTechnologies: VisibleTechnology[] =
+    visibleTechnologies.length > 0
+      ? visibleTechnologies
+      : project.technologies.map((technology) => ({ label: technology }));
 
   const handleClick = () => {
     setOpen(true);
   };
 
   useLayoutEffect(() => {
+    if (!sm) {
+      setVisibleTechnologies(
+        project.technologies.map((technology) => ({ label: technology }))
+      );
+      return;
+    }
+
     const calculateVisibleTechnologies = () => {
       const row = technologyRowRef.current;
       const measure = technologyMeasureRef.current;
@@ -133,7 +146,7 @@ export const CardUnit = ({ project }: CardUnitProps) => {
     return () => {
       resizeObserver.disconnect();
     };
-  }, [project.technologies]);
+  }, [project.technologies, sm]);
 
   return (
     <>
@@ -146,8 +159,10 @@ export const CardUnit = ({ project }: CardUnitProps) => {
           boxShadow: "0 0 0 0",
           height: "100%",
           transition: "transform 0.3s",
-          "&:hover": {
-            transform: "scale(1.05)",
+          "@media (min-width: 900px)": {
+            "&:hover": {
+              transform: "scale(1.05)",
+            },
           },
           "&:hover .project-thumbnail-frame": {
             borderColor: "rgba(189, 172, 106, 0.95)",
@@ -205,9 +220,10 @@ export const CardUnit = ({ project }: CardUnitProps) => {
               className="project-thumbnail-image"
               src={project.thumbnailImage}
               alt={project.name}
-              layout="fill"
-              objectFit="cover"
+              fill
+              sizes="(min-width: 900px) 500px, calc(100vw - 2rem)"
               style={{
+                objectFit: "cover",
                 transform: "scale(1)",
                 transition: "transform 320ms ease",
               }}
@@ -277,17 +293,22 @@ export const CardUnit = ({ project }: CardUnitProps) => {
                 justifyContent="flex-start"
                 sx={{
                   minWidth: 0,
-                  overflow: "hidden",
+                  overflow: { xs: "visible", sm: "hidden" },
+                  flexWrap: { xs: "wrap", sm: "nowrap" },
+                  rowGap: { xs: 1, sm: 0 },
                   pr: 0.5,
                 }}
               >
-                {visibleTechnologies.map((tech, index) => (
+                {renderedTechnologies.map((tech, index) => (
                   <Box
                     key={`${project.name}-${tech.label}-${index}`}
                     sx={{
                       minWidth: 0,
                       flex: "0 0 auto",
-                      maxWidth: tech.maxWidth ? `${tech.maxWidth}px` : "max-content",
+                      maxWidth: {
+                        xs: "100%",
+                        sm: tech.maxWidth ? `${tech.maxWidth}px` : "max-content",
+                      },
                       backgroundColor: "rgba(36, 54, 66, 0.72)",
                       borderRadius: "100px",
                       border: `1px solid rgba(226, 241, 231, 0.42)`,
